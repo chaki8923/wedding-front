@@ -14,7 +14,7 @@ export function Presenter(props: Props) {
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className={styles.formWrapper}>
-          <div>Sample App</div>
+          <div>Wedding Net Gateway</div>
           <div className={styles.error}>
             {props.errors.email && <span>※Email is required</span>}
             {props.errors.password && <span>※Password is required</span>}

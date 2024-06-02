@@ -23,7 +23,7 @@ export const useLogin = () => {
       params.append('email', Inputs.email);
       params.append('password', Inputs.password);
 
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
         headers: {
           'X-CSRF-TOKEN': cookies._csrf,
         },

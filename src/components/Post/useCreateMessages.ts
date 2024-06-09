@@ -1,24 +1,31 @@
-import { client } from '@/graphql/client';
-import { create } from '@/graphql/document';
-import { Create } from '@/types/form';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+// hooks/useCreateMessages.js
+import { useMutation, useApolloClient } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { useCookies } from 'react-cookie';
+import { POST_MESSAGE, GET_MESSAGES } from '@/graphql/document';
+import { Create } from '@/types/form';
 
 export const useCreateMessages = () => {
   const router = useRouter();
   const [cookies] = useCookies(['_csrf']);
-  const requestQuery = async (input: Create) =>
-    client(cookies._csrf).request(create, { userId: input.userId, text: input.text });
-  const queryClient = useQueryClient();
-  const mutation = useMutation({
-    mutationFn: requestQuery,
-    onSuccess: async () => {
-      await queryClient.invalidateQueries({ queryKey: ['messages'] });
+  const client = useApolloClient();
+
+  const [postMessage, { loading, error }] = useMutation(POST_MESSAGE, {
+    onCompleted: () => {
+      client.refetchQueries({ include: [GET_MESSAGES] });
       router.push('/timeLine');
     },
-    onError: (error, variables) => console.error(`error: ${error} variables: ${variables}`),
+    onError: (error: Error) => console.error(`error!!: ${error.message}`),
   });
 
-  return { mutation };
+  const createMessage = (input: Create) => {
+    postMessage({
+      variables: {
+        userId: input.userId,
+        text: input.text,
+      },
+    });
+  };
+
+  return { createMessage, loading, error };
 };

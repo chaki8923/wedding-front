@@ -1,7 +1,7 @@
-import { graphql } from '@/graphql/generated/gql';
+import { gql } from '@apollo/client';
 
-export const query = graphql(/* GraphQL */ `
-  query getMessagesQueryDocument {
+export const GET_MESSAGES = gql`
+  query GetMessages {
     getMessages {
       id
       text
@@ -11,9 +11,22 @@ export const query = graphql(/* GraphQL */ `
       }
     }
   }
-`);
+`;
 
-export const create = graphql(/* GraphQL */ `
+export const POST_MESSAGE = gql`
+  mutation Create_Message($userId: String!, $text: String!) {
+    createMessage(userId: $userId, text: $text) {
+      id
+      text
+      user {
+        id
+      }
+      created_at
+    }
+  }
+`;
+
+export const create = gql(/* GraphQL */ `
   mutation createMessage($userId: String!, $text: String!) {
     createMessage(input: { userId: $userId, text: $text }) {
       id

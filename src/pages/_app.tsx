@@ -1,12 +1,10 @@
 import '@/styles/globals.scss';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { CookiesProvider } from 'react-cookie';
 import { RecoilRoot } from 'recoil';
-
-const queryClient = new QueryClient();
+import ApolloClientProvider from '../lib/application';
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => ReactNode;
@@ -22,9 +20,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <CookiesProvider>
       <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
+        <ApolloClientProvider>
           <Component {...pageProps} />
-        </QueryClientProvider>
+        </ApolloClientProvider>
       </RecoilRoot>
       ,
     </CookiesProvider>,

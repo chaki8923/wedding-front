@@ -11,6 +11,7 @@ export const useLogin = () => {
   const router = useRouter();
   const params = useMemo(() => new URLSearchParams(), []);
   const [cookies, setUseCookies] = useCookies(['_csrf']);
+ 
 
   useEffect(() => {
     setUseCookies('_csrf', cookies._csrf);
@@ -19,11 +20,10 @@ export const useLogin = () => {
   const login = useCallback(
     async (Inputs: Login) => {
       await setCsrf();
-
       params.append('email', Inputs.email);
       params.append('password', Inputs.password);
-
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+    
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         headers: {
           'X-CSRF-TOKEN': cookies._csrf,
         },

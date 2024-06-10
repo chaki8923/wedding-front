@@ -22,7 +22,7 @@ export const useCreateMessages = () => {
     postMessage({
       variables: {
         userId: input.userId,
-        text: input.text,
+        text: input.text
       },
     });
   };

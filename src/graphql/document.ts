@@ -14,20 +14,7 @@ export const GET_MESSAGES = gql`
 `;
 
 export const POST_MESSAGE = gql`
-  mutation Create_Message($userId: String!, $text: String!) {
-    createMessage(userId: $userId, text: $text) {
-      id
-      text
-      user {
-        id
-      }
-      created_at
-    }
-  }
-`;
-
-export const create = gql(/* GraphQL */ `
-  mutation createMessage($userId: String!, $text: String!) {
+  mutation CreateMessage($userId: String!, $text: String!) {
     createMessage(input: { userId: $userId, text: $text }) {
       id
       text
@@ -37,4 +24,4 @@ export const create = gql(/* GraphQL */ `
       created_at
     }
   }
-`);
+`;

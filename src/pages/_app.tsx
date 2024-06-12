@@ -17,13 +17,12 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
-
+  const getLayout = Component.getLayout ?? ((page) => page);  
   return getLayout(
     <CookiesProvider>
       <RecoilRoot>
         <QueryClientProvider client={queryClient}>
-          <ApolloClientProvider>
+          <ApolloClientProvider children={undefined}>
             <Component {...pageProps} />
           </ApolloClientProvider>
         </QueryClientProvider>

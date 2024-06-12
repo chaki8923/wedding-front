@@ -7,9 +7,9 @@ export const useSetCsrf = () => {
       mode: 'cors',
       credentials: 'include',
     }).catch((error) => {
-      console.error('Error:', error);
+      console.error('NoToken!!:', error);
       router.push('/');
     });
-
+  
   return { setCsrf };
 };

@@ -2,3 +2,7 @@ input NewMessage {
     text: String!
     userId: String!
 }
+input NewUser {
+    email: String!
+    password: String!
+}

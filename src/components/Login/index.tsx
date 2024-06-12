@@ -1,6 +1,6 @@
 import { Presenter } from '@/components/Login/presenter';
 import { useLogin } from '@/components/Login/useLogin';
-import { Login } from '@/types/form';
+import { Login as LoginForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 export function Login() {
@@ -8,10 +8,15 @@ export function Login() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Login>();
-  const { login } = useLogin();
-  const onSubmit: SubmitHandler<Login> = async (data) => login(data);
+  } = useForm<LoginForm>();
+  const { userLogin, loading, error } = useLogin();
+  // const { login } = useLogin();
+  const onSubmit: SubmitHandler<LoginForm> = async (data: any) => {
 
+    
+    userLogin(data);
+    // login(data);
+  }
   return (
     <>
       <Presenter

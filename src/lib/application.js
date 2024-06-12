@@ -6,7 +6,7 @@ const createApolloClient = (csrfToken) => {
     link: new HttpLink({
       uri: `${process.env.NEXT_PUBLIC_API_URL}/query`,
       headers: {
-        'X-CSRF-TOKEN': csrfToken
+        'X-CSRF-TOKEN': csrfToken,
       },
       mode: 'cors',
       credentials: 'include',
@@ -18,7 +18,6 @@ const createApolloClient = (csrfToken) => {
 const ApolloClientProvider = ({ children }) => {
   const [cookies] = useCookies(['_csrf']);
   const client = createApolloClient(cookies._csrf);
-
   return (
     <ApolloProvider client={client}>
       {children}

@@ -7,13 +7,13 @@ import React from 'react';
 export function List() {
   const { setUser } = useUserState();
   const router = useRouter();
-  const { isLoading, isError, data, error } = useGetMessages();
+  const { loading, data, error } = useGetMessages();
 
-  if (isLoading) <span>Loading...</span>;
-  if (isError) {
-    console.error('Error: useGetMessages', error);
+  if (loading) <span>Loading...</span>;
+  if (error) {
+    console.error('メッセージ取得エラー: useGetMessages', error);
     setUser(null);
-    router.push('/');
+    router.push('/timeline');
   }
 
   return <>{data && <Presenter data={data} router={router} />}</>;

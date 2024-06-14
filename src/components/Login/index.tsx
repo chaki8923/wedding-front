@@ -9,13 +9,11 @@ export function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
-  const { userLogin, loading, error } = useLogin();
-  // const { login } = useLogin();
+  const { login } = useLogin();
   const onSubmit: SubmitHandler<LoginForm> = async (data: any) => {
-
+    console.log("userId", data);
     
-    userLogin(data);
-    // login(data);
+    login(data);
   }
   return (
     <>

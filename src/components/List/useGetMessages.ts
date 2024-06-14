@@ -1,15 +1,14 @@
 
 import { GET_MESSAGES } from '@/graphql/document';
 import { useQuery } from '@apollo/client';
-import { useCookies } from 'react-cookie';
 
 export const useGetMessages = () => {
-  const [cookies] = useCookies(['_csrf']);
-  const { isLoading, error, data } = useQuery(GET_MESSAGES);
+  const { loading, error, data } = useQuery(GET_MESSAGES);
+  console.error("エラー発生", error);
+  console.error("data", data);
   
   return { 
-    isLoading,
-    // isError,
+    loading,
     data,
     error,
   };

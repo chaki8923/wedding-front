@@ -33,6 +33,8 @@ export const useLogin = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          console.log("data", data);
+          
           setUser(data);
           router.push('/timeLine');
         })

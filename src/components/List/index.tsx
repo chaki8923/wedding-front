@@ -11,9 +11,8 @@ export function List() {
 
   if (loading) <span>Loading...</span>;
   if (error) {
-    console.error('メッセージ取得エラー: useGetMessages', error);
     setUser(null);
-    router.push('/timeline');
+    router.push('/');
   }
 
   return <>{data && <Presenter data={data} router={router} />}</>;

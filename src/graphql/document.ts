@@ -25,3 +25,18 @@ export const POST_MESSAGE = gql`
     }
   }
 `;
+
+export const CREATE_INVITATION = gql`
+  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {
+    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {
+      id
+      title
+      event_date
+      place
+      user {
+        id
+      }
+      created_at
+    }
+  }
+`;

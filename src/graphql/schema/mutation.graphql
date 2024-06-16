@@ -1,3 +1,4 @@
 type Mutation {
     createMessage(input: NewMessage!): Message!
+    createInvitation(input: NewInvitation!): Invitation!
 }

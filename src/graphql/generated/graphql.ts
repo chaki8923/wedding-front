@@ -14,6 +14,17 @@ export type Scalars = {
   Float: number;
 };
 
+export type Invitation = {
+  __typename?: 'Invitation';
+  created_at: Scalars['String'];
+  event_date: Scalars['String'];
+  id: Scalars['ID'];
+  place: Scalars['String'];
+  title: Scalars['String'];
+  updated_at: Scalars['String'];
+  user: User;
+};
+
 export type Message = {
   __typename?: 'Message';
   created_at: Scalars['String'];
@@ -25,16 +36,33 @@ export type Message = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  createInvitation: Invitation;
   createMessage: Message;
+};
+
+export type MutationCreateInvitationArgs = {
+  input: NewInvitation;
 };
 
 export type MutationCreateMessageArgs = {
   input: NewMessage;
 };
 
+export type NewInvitation = {
+  event_date: Scalars['String'];
+  place: Scalars['String'];
+  title: Scalars['String'];
+  userId: Scalars['String'];
+};
+
 export type NewMessage = {
   text: Scalars['String'];
   userId: Scalars['String'];
+};
+
+export type NewUser = {
+  email: Scalars['String'];
+  password: Scalars['String'];
 };
 
 export type Query = {
@@ -50,9 +78,9 @@ export type User = {
   password: Scalars['String'];
 };
 
-export type GetMessagesQueryDocumentQueryVariables = Exact<{ [key: string]: never }>;
+export type GetMessagesQueryVariables = Exact<{ [key: string]: never }>;
 
-export type GetMessagesQueryDocumentQuery = {
+export type GetMessagesQuery = {
   __typename?: 'Query';
   getMessages: Array<{
     __typename?: 'Message';
@@ -79,13 +107,33 @@ export type CreateMessageMutation = {
   };
 };
 
-export const GetMessagesQueryDocumentDocument = {
+export type CreateInvitationMutationVariables = Exact<{
+  userId: Scalars['String'];
+  title: Scalars['String'];
+  event_date: Scalars['String'];
+  place: Scalars['String'];
+}>;
+
+export type CreateInvitationMutation = {
+  __typename?: 'Mutation';
+  createInvitation: {
+    __typename?: 'Invitation';
+    id: string;
+    title: string;
+    event_date: string;
+    place: string;
+    created_at: string;
+    user: { __typename?: 'User'; id: string };
+  };
+};
+
+export const GetMessagesDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'query',
-      name: { kind: 'Name', value: 'getMessagesQueryDocument' },
+      name: { kind: 'Name', value: 'GetMessages' },
       selectionSet: {
         kind: 'SelectionSet',
         selections: [
@@ -113,14 +161,14 @@ export const GetMessagesQueryDocumentDocument = {
       },
     },
   ],
-} as unknown as DocumentNode<GetMessagesQueryDocumentQuery, GetMessagesQueryDocumentQueryVariables>;
+} as unknown as DocumentNode<GetMessagesQuery, GetMessagesQueryVariables>;
 export const CreateMessageDocument = {
   kind: 'Document',
   definitions: [
     {
       kind: 'OperationDefinition',
       operation: 'mutation',
-      name: { kind: 'Name', value: 'createMessage' },
+      name: { kind: 'Name', value: 'CreateMessage' },
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
@@ -188,3 +236,105 @@ export const CreateMessageDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateMessageMutation, CreateMessageMutationVariables>;
+export const CreateInvitationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'CreateInvitation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'event_date' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'place' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'createInvitation' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'userId' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'userId' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'title' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'title' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'event_date' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'event_date' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'place' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'place' } },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'event_date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'place' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<CreateInvitationMutation, CreateInvitationMutationVariables>;

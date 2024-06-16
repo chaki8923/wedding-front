@@ -1,26 +1,25 @@
 import { useUserState } from '@/atoms/userAtom';
-import { Presenter } from '@/components/Post/presenter';
-import { useCreateMessages } from '@/components/Post/useCreateMessages';
-import { Create } from '@/types/form';
-import { useRouter } from 'next/router';
+import { Presenter } from '@/components/Invitation/presenter';
+import { useCreateInvitation } from '@/components/Invitation/useCreateInvitation';
+import { Invitation as InvForm } from '@/types/form';
 import React from 'react';
+import { useRouter } from 'next/router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-export function Post() {
+export function Invitation() {
   const router = useRouter();
   const { user, setUser } = useUserState();
-  // const { mutation } = useCreateMessages();
-  const { createMessage, loading, error } = useCreateMessages();
+  const { postInvitation, loading, error } = useCreateInvitation();
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<Create>();
+  } = useForm<InvForm>();
 
-  const onSubmit: SubmitHandler<Create> = async (data: any) => {
-    console.log("送信data!!", data);
+  const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
+    console.log("送信data", data);
     
-    createMessage(data);
+    postInvitation(data);
   }
 
   if (!user) {
@@ -29,8 +28,8 @@ export function Post() {
 
   if (loading) <span>Adding Messages...</span>;
   if (error) {
-    console.error('Errorだよ: useCreateMessages', error);
-    setUser(null);
+    console.error('Errorだよ: 招待状登録', error);
+    // setUser(null);
     router.push('/timeLine');
   }
 

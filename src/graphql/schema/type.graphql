@@ -11,3 +11,13 @@ type User {
   email: String!
   password: String!
 }
+
+type Invitation {
+  id: ID!
+  title: String!
+  event_date: String!
+  place: String!
+  user: User!
+  created_at: String!
+  updated_at: String!
+}

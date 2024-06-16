@@ -13,10 +13,12 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-  '\n  query getMessagesQueryDocument {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
-    types.GetMessagesQueryDocumentDocument,
-  '\n  mutation createMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n':
+  '\n  query GetMessages {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
+    types.GetMessagesDocument,
+  '\n  mutation CreateMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n':
     types.CreateMessageDocument,
+  '\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n':
+    types.CreateInvitationDocument,
 };
 
 /**
@@ -37,14 +39,20 @@ export function graphql(source: string): unknown;
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query getMessagesQueryDocument {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query getMessagesQueryDocument {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
+  source: '\n  query GetMessages {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query GetMessages {\n    getMessages {\n      id\n      text\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  mutation createMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n',
-): (typeof documents)['\n  mutation createMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n'];
+  source: '\n  mutation CreateMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n',
+): (typeof documents)['\n  mutation CreateMessage($userId: String!, $text: String!) {\n    createMessage(input: { userId: $userId, text: $text }) {\n      id\n      text\n      user {\n        id\n      }\n      created_at\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n',
+): (typeof documents)['\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

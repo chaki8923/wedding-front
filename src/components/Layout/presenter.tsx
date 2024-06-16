@@ -1,7 +1,9 @@
 import styles from './index.module.scss';
+import { NextRouter } from 'next/router';
 
 type Props = {
   logout: () => void;
+  router: NextRouter
 };
 
 export function Presenter(props: Props) {
@@ -12,6 +14,8 @@ export function Presenter(props: Props) {
           <button className={styles.btnLogOut} onClick={() => props.logout()}>
             Logout
           </button>
+          <button onClick={() => props.router.push('/invitation')}>招待状</button>
+          <button onClick={() => props.router.push('/timeLine')}>投稿</button>
         </nav>
       </header>
     </>

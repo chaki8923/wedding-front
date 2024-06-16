@@ -20,7 +20,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <CookiesProvider>
       <RecoilRoot>
-        <ApolloClientProvider children={undefined}>
+        <ApolloClientProvider>
           <Component {...pageProps} />
         </ApolloClientProvider>
       </RecoilRoot>

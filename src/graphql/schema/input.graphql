@@ -6,3 +6,10 @@ input NewUser {
     email: String!
     password: String!
 }
+
+input NewInvitation {
+    title: String!
+    event_date: String!
+    place: String!
+    userId: String!
+}

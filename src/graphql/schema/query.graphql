@@ -1,3 +1,4 @@
 type Query {
     getMessages: [Message!]!
+    getInvitation: [Invitation!]!
 }

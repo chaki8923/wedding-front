@@ -1,31 +1,52 @@
 // hooks/useCreateMessages.js
 
-import { CREATE_INVITATION } from '@/graphql/document';
+import { CREATE_INVITATION, GET_INVITATION } from '@/graphql/document';
 import { Invitation } from '@/types/form';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
+
+export const useGetInvitation = () => {
+  const { loading, error, data } = useQuery(GET_INVITATION);
+  console.log("data!!", data);
+  
+  return { 
+    loading,
+    error,
+    data,
+  };
+};
+
 
 export const useCreateInvitation = () => {
   const router = useRouter();
 
-  const [createInvitation, { loading, error }] = useMutation(CREATE_INVITATION, {
+  const [postInvitation, { loading, error }] = useMutation(CREATE_INVITATION, {
     onCompleted: () => {
-      // client.refetchQueries({ include: [GET_MESSAGES] });
-      router.push('/timeline');
+      router.push('/timeLine');
     },
-    onError: (error: Error) => console.error(`error!!: ${error.message}`),
+    onError: (error: any) => {
+      console.error('Error posting invitation:', error);
+      if (error.graphQLErrors) {
+        error.graphQLErrors.forEach(({ message, locations, path }) => {
+          console.error(`GraphQL error: ${message}`);
+        });
+      }
+      if (error.networkError) {
+        console.error('Network error:', error.networkError.message);
+      }
+    },
   });
 
-  const postInvitation = (input: Invitation) => {
-    createInvitation({
+  const createInvitation = (input: Invitation) => {
+    postInvitation({
       variables: {
         userId: input.userId,
-        text: input.title,
+        title: input.title,
         event_date: input.event_date,
         place: input.place,
       },
     });
   };
 
-  return { postInvitation, loading, error };
+  return { createInvitation, loading, error };
 };

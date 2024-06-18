@@ -1,6 +1,6 @@
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/Invitation/presenter';
-import { useCreateInvitation } from '@/components/Invitation/useCreateInvitation';
+import { useCreateInvitation, useGetInvitation } from '@/components/Invitation/useCreateInvitation';
 import { Invitation as InvForm } from '@/types/form';
 import React from 'react';
 import { useRouter } from 'next/router';
@@ -9,7 +9,10 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 export function Invitation() {
   const router = useRouter();
   const { user, setUser } = useUserState();
-  const { postInvitation, loading, error } = useCreateInvitation();
+  const { createInvitation } = useCreateInvitation();
+  const { loading, data, error } = useGetInvitation();
+  console.log("招待状リスト", data);
+  
   const {
     register,
     handleSubmit,
@@ -19,7 +22,7 @@ export function Invitation() {
   const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
     console.log("送信data", data);
     
-    postInvitation(data);
+    createInvitation(data);
   }
 
   if (!user) {

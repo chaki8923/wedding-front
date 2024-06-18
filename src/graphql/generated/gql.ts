@@ -19,6 +19,8 @@ const documents = {
     types.CreateMessageDocument,
   '\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n':
     types.CreateInvitationDocument,
+  '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
+    types.GetInvitationDocument,
 };
 
 /**
@@ -53,6 +55,12 @@ export function graphql(
 export function graphql(
   source: '\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n',
 ): (typeof documents)['\n  mutation CreateInvitation($userId: String!, $title: String!, $event_date: String!, $place: String!) {\n    createInvitation(input: { userId: $userId, title: $title, event_date: $event_date, place: $place }) {\n      id\n      title\n      event_date\n      place\n      user {\n        id\n      }\n      created_at\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

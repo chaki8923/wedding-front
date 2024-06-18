@@ -40,3 +40,19 @@ export const CREATE_INVITATION = gql`
     }
   }
 `;
+
+
+export const GET_INVITATION = gql`
+  query GetInvitation {
+    getInvitation {
+      id
+      title
+      event_date
+      place
+      created_at
+      user {
+        name
+      }
+    }
+  }
+`;

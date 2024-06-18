@@ -8,6 +8,8 @@ export function List() {
   const { setUser } = useUserState();
   const router = useRouter();
   const { loading, data, error } = useGetMessages();
+  console.log("メッセージデータ", data);
+  
 
   if (loading) <span>Loading...</span>;
   if (error) {

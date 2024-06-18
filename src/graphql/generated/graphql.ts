@@ -67,6 +67,7 @@ export type NewUser = {
 
 export type Query = {
   __typename?: 'Query';
+  getInvitation: Array<Invitation>;
   getMessages: Array<Message>;
 };
 
@@ -125,6 +126,21 @@ export type CreateInvitationMutation = {
     created_at: string;
     user: { __typename?: 'User'; id: string };
   };
+};
+
+export type GetInvitationQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetInvitationQuery = {
+  __typename?: 'Query';
+  getInvitation: Array<{
+    __typename?: 'Invitation';
+    id: string;
+    title: string;
+    event_date: string;
+    place: string;
+    created_at: string;
+    user: { __typename?: 'User'; name: string };
+  }>;
 };
 
 export const GetMessagesDocument = {
@@ -338,3 +354,40 @@ export const CreateInvitationDocument = {
     },
   ],
 } as unknown as DocumentNode<CreateInvitationMutation, CreateInvitationMutationVariables>;
+export const GetInvitationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetInvitation' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getInvitation' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'event_date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'place' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetInvitationQuery, GetInvitationQueryVariables>;

@@ -18,6 +18,7 @@ type Invitation {
   event_date: String!
   place: String!
   user: User!
+  file: String!
   created_at: String!
   updated_at: String!
 }

@@ -1,4 +1,6 @@
 type Mutation {
     createMessage(input: NewMessage!): Message!
     createInvitation(input: NewInvitation!): Invitation!
+    updateInvitation(input: UpdateInvitation!): Invitation!
+    uploadFile(file: Upload!): String!
 }

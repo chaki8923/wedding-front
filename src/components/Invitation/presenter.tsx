@@ -30,6 +30,8 @@ export function Presenter(props: Props) {
             })} />
             <input type='date' placeholder='開催日' {...props.register('event_date', { required: true })} />
             <input type='text' placeholder='開催場所' {...props.register('place', { required: true })} />
+            <input type='text' placeholder='コメント' {...props.register('comment', { required: true })} />
+            <input type='file'  {...props.register('file', { required: true })} />
             <input
               type='hidden'
               defaultValue={props.userId}

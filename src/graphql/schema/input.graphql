@@ -12,4 +12,5 @@ input NewInvitation {
     event_date: String!
     place: String!
     userId: String!
+    file: Upload!
 }

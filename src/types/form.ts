@@ -14,4 +14,6 @@ export type Invitation = {
   title: string;
   event_date: string;
   place: string;
+  comment: string;
+  file: string;
 };

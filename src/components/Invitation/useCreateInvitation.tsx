@@ -44,6 +44,8 @@ export const useCreateInvitation = () => {
         title: input.title,
         event_date: input.event_date,
         place: input.place,
+        comment: input.comment,
+        file: input.file,
       },
     });
   };

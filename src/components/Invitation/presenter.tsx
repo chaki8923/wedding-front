@@ -18,7 +18,7 @@ type Props = {
 
 export function Presenter(props: Props) {
   console.log("props", props.data);
-  if (props.data === 'undefined') <span>Loading...</span>;
+  if (props.data === undefined) return <span>Loading...</span>;
   return (
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>

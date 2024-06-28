@@ -24,6 +24,7 @@
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "@typescript-eslint/parser": "^5.54.1",
     "@yarnpkg/pnpify": "^4.0.0-rc.40",
+    "apollo-upload-client": "^18.0.1",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
     "graphql": "^16.8.1",

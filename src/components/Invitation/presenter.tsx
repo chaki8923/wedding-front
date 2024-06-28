@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import { Invitation } from '@/types/form';
 import { NextRouter } from 'next/router';
+import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
@@ -8,11 +9,16 @@ type Props = {
   onSubmit: SubmitHandler<Invitation>;
   register: UseFormRegister<Invitation>;
   errors: FieldErrors<Invitation>;
+  data: GetInvitationQuery
   userId: string;
   router: NextRouter;
 };
 
+
+
 export function Presenter(props: Props) {
+  console.log("props", props.data);
+  if (props.data === 'undefined') <span>Loading...</span>;
   return (
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
@@ -31,7 +37,7 @@ export function Presenter(props: Props) {
             <input type='date' placeholder='開催日' {...props.register('event_date', { required: true })} />
             <input type='text' placeholder='開催場所' {...props.register('place', { required: true })} />
             <input type='text' placeholder='コメント' {...props.register('comment', { required: true })} />
-            <input type='file'  {...props.register('file', { required: true })} />
+            <input type='file'  {...props.register('file_url', { required: true })} />
             <input
               type='hidden'
               defaultValue={props.userId}
@@ -43,6 +49,18 @@ export function Presenter(props: Props) {
           </button>
         </div>
       </form>
+
+      {props.data.getInvitation.map((invitation) => (
+        <div key={invitation.id} className={styles.contentWrapper}>
+          <div className={styles.card}>
+            <img src={invitation.file_url} alt="" />
+            <p>タイトル:{invitation.title}</p>
+            <p>開催日:{invitation.event_date}</p>
+            <p>開催日:{invitation.comment}</p>
+
+          </div>
+        </div>
+      ))}
     </>
   );
 }

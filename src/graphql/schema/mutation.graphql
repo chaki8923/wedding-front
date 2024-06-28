@@ -1,6 +1,7 @@
+scalar Upload
 type Mutation {
     createMessage(input: NewMessage!): Message!
     createInvitation(input: NewInvitation!): Invitation!
     updateInvitation(input: UpdateInvitation!): Invitation!
-    uploadFile(file: Upload!): String!
+    uploadFile(file_url: Upload!): String!
 }

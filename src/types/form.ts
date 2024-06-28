@@ -15,5 +15,5 @@ export type Invitation = {
   event_date: string;
   place: string;
   comment: string;
-  file: string;
+  file_url: string;
 };

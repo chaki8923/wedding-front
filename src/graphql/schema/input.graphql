@@ -12,5 +12,15 @@ input NewInvitation {
     event_date: String!
     place: String!
     userId: String!
-    file: Upload!
+    comment: String!
+    file_url: Upload!
+}
+
+input UpdateInvitation {
+  id: String!
+  title: String
+  event_date: String
+  place: String
+  comment: String
+  file_url: Upload
 }

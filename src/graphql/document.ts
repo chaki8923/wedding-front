@@ -33,6 +33,7 @@ export const CREATE_INVITATION = gql`
     $event_date: String!
     $place: String!
     $comment: String!
+    $file_url: Upload!
   ) {
     createInvitation(
       input: {
@@ -41,6 +42,7 @@ export const CREATE_INVITATION = gql`
         event_date: $event_date
         place: $place
         comment: $comment
+        file_url: $file_url
       }
     ) {
       id
@@ -48,6 +50,7 @@ export const CREATE_INVITATION = gql`
       event_date
       place
       comment
+      file_url
       user {
         id
       }
@@ -83,6 +86,8 @@ export const GET_INVITATION = gql`
       title
       event_date
       place
+      comment
+      file_url
       created_at
       user {
         name
@@ -92,7 +97,7 @@ export const GET_INVITATION = gql`
 `;
 
 export const SHOW_INVITATION = gql`
-  query ShowInvitation($id: string) {
+  query ShowInvitation($id: String) {
     showInvitation(id: $id) {
       id
       title

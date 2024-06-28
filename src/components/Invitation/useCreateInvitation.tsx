@@ -7,7 +7,6 @@ import { useRouter } from 'next/router';
 
 export const useGetInvitation = () => {
   const { loading, error, data } = useQuery(GET_INVITATION);
-  console.log("data!!", data);
   
   return { 
     loading,
@@ -45,7 +44,7 @@ export const useCreateInvitation = () => {
         event_date: input.event_date,
         place: input.place,
         comment: input.comment,
-        file: input.file,
+        file_url: input.file_url[0],
       },
     });
   };

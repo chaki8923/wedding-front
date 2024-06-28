@@ -20,9 +20,8 @@ export function Invitation() {
   } = useForm<InvForm>();
 
   const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
-    console.log("送信data", data);
-    
-    createInvitation(data);
+
+      createInvitation(data);
   }
 
   if (!user) {
@@ -43,6 +42,7 @@ export function Invitation() {
         onSubmit={onSubmit}
         register={register}
         errors={errors}
+        data={data}
         userId={user.userId}
         router={router}
       />

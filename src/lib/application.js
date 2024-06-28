@@ -1,6 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 import { useCookies } from 'react-cookie';
+import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
@@ -15,17 +16,19 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 });
 
 const createApolloClient = (csrfToken) => {
+  const uploadLink = createUploadLink({
+    uri: `${process.env.NEXT_PUBLIC_API_URL}/query`,
+    headers: {
+      'X-CSRF-TOKEN': csrfToken,
+    },
+    mode: 'cors',
+    credentials: 'include',
+  });
+
   return new ApolloClient({
     link: from([
       errorLink,
-      new HttpLink({
-        uri: `${process.env.NEXT_PUBLIC_API_URL}/query`,
-        headers: {
-          'X-CSRF-TOKEN': csrfToken,
-        },
-        mode: 'cors',
-        credentials: 'include',
-      }),
+      uploadLink,
     ]),
     cache: new InMemoryCache(),
   });

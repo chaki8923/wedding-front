@@ -110,3 +110,90 @@ export const SHOW_INVITATION = gql`
     }
   }
 `;
+
+
+export const CREATE_INVITEE = gql`
+  mutation CreateInvitee(
+    $family_kj: String!
+    $first_kj: String!
+    $family_kn: String!
+    $first_kn: String!
+    $zip_code: String!
+    $address_text: String!
+    $email: String!
+    $allergy: String!
+    $userId: String!
+    $file_url: Upload!
+  ) {
+    createInvitee(
+      input: {
+        family_kj: $family_kj
+        first_kj: $first_kj
+        family_kn: $family_kn
+        first_kn: $first_kn
+        zip_code: $zip_code
+        address_text: $address_text
+        email: $email
+        allergy: $allergy
+        userId: $userId
+        file_url: $file_url
+      }
+    ) {
+      family_kj
+      first_kj
+      family_kn
+      first_kn
+      zip_code
+      address_text
+      email
+      allergy
+      user {
+        id
+      }
+      file_url
+      created_at
+    }
+  }
+`;
+
+
+export const GET_INVITEE = gql`
+  query GetInvitee {
+    getInvitee {
+      id
+      family_kj
+      first_kj
+      family_kn
+      first_kn
+      zip_code
+      address_text
+      email
+      allergy
+      file_url
+      user {
+        name
+      }
+    }
+  }
+`;
+
+
+export const SHOW_INVITEE = gql`
+  query ShowInvitee($id: String) {
+    showInvitee(id: $id) {
+      id
+      family_kj
+      first_kj
+      family_kn
+      first_kn
+      zip_code
+      address_text
+      email
+      allergy
+      file_url
+      user {
+        name
+      }
+    }
+  }
+`;

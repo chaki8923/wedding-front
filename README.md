@@ -26,3 +26,7 @@ $ trivy image --severity CRITICAL --ignore-unfixed front-dev-repo
 $ brew install hadolint
 $ hadolint --ignore DL3018 .docker/front/Dockerfile
 ```
+
+
+Figma
+https://www.figma.com/design/cs0yTYUcxO8CGsbErJkgAD/Wireframe?node-id=43-194&t=kaxZBlaQZyn4oSJp-0

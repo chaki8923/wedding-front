@@ -17,3 +17,16 @@ export type Invitation = {
   comment: string;
   file_url: string;
 };
+
+export type Invitee = {
+  userId: string;
+  family_kj: string;
+  first_kj: string;
+  family_kn: string;
+  first_kn: string;
+  email: string;
+  zip_code: string;
+  address_text: string;
+  allergy: string;
+  file_url: string;
+};

@@ -14,6 +14,7 @@ export function Presenter(props: Props) {
           <button className={styles.btnLogOut} onClick={() => props.logout()}>
             Logout
           </button>
+          <button onClick={() => props.router.push('/invitee')}>招待者</button>
           <button onClick={() => props.router.push('/invitation')}>招待状</button>
           <button onClick={() => props.router.push('/timeLine')}>投稿</button>
         </nav>

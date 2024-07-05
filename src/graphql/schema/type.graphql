@@ -23,3 +23,20 @@ type Invitation {
   created_at: String!
   updated_at: String!
 }
+
+
+type Invitee {
+  id: ID!
+  family_kj: String!
+  first_kj: String!
+  family_kn: String!
+  first_kn: String!
+  email: String!
+  zip_code: String!
+  address_text: String!
+  file_url: String!
+  allergy: String!
+  user: User!
+  created_at: String!
+  updated_at: String!
+}

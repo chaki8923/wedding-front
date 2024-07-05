@@ -24,3 +24,16 @@ input UpdateInvitation {
   comment: String
   file_url: Upload
 }
+
+input NewInvitee {
+  family_kj: String!
+  first_kj: String!
+  family_kn: String!
+  first_kn: String!
+  email: String!
+  zip_code: String!
+  address_text: String!
+  allergy: String!
+  userId: String!
+  file_url: Upload!
+}

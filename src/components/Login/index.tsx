@@ -11,7 +11,6 @@ export function Login() {
   } = useForm<LoginForm>();
   const { login } = useLogin();
   const onSubmit: SubmitHandler<LoginForm> = async (data: any) => {
-    console.log("userId", data);
     
     login(data);
   }

@@ -18,7 +18,6 @@ export function Post() {
   } = useForm<Create>();
 
   const onSubmit: SubmitHandler<Create> = async (data: any) => {
-    console.log("送信data!!", data);
     
     createMessage(data);
   }

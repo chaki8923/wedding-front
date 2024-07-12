@@ -11,7 +11,6 @@ export function Invitation() {
   const { user, setUser } = useUserState();
   const { createInvitation } = useCreateInvitation();
   const { loading, data, error } = useGetInvitation();
-  console.log("招待状リスト", data);
   
   const {
     register,

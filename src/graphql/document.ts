@@ -197,3 +197,21 @@ export const SHOW_INVITEE = gql`
     }
   }
 `;
+
+export const UPLOAD_FILE = gql`
+  mutation UploadFile(
+    $comment: String!
+    $file_url: Upload!
+  ) {
+    uploadFile(
+      input: {
+        comment: $comment
+        file_url: $file_url
+      }
+    ) {
+      comment
+      file_url
+      created_at
+    }
+  }
+`;

@@ -30,3 +30,15 @@ export type Invitee = {
   allergy: string;
   file_url: string;
 };
+
+export type SendMail = {
+  subject: string;
+  to: string;
+  from: string;
+  body: string;
+};
+
+export type Upload = {
+  comment: string;
+  file_url: string;
+};

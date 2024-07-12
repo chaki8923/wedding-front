@@ -6,7 +6,7 @@ import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Invitee>;
-  onSubmit: SubmitHandler<Invitation>;
+  onSubmit: SubmitHandler<Invitee>;
   register: UseFormRegister<Invitee>;
   errors: FieldErrors<Invitee>;
   userId: string;

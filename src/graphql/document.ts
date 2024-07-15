@@ -97,7 +97,7 @@ export const GET_INVITATION = gql`
 `;
 
 export const SHOW_INVITATION = gql`
-  query ShowInvitation($id: String) {
+  query ShowInvitation($id: String!) {
     showInvitation(id: $id) {
       id
       title
@@ -177,10 +177,39 @@ export const GET_INVITEE = gql`
   }
 `;
 
+export const UPLOAD_FILE = gql`
+  mutation UploadFile(
+    $comment: String!
+    $file_url: Upload!
+  ) {
+    uploadFile(
+      input: {
+        comment: $comment
+        file_url: $file_url
+      }
+    ) {
+      comment
+      file_url
+      created_at
+    }
+  }
+`;
 
-export const SHOW_INVITEE = gql`
-  query ShowInvitee($id: String) {
-    showInvitee(id: $id) {
+export const GET_IMAGES = gql`
+  query GetImages {
+    getImages {
+      id
+      comment
+      file_url
+      created_at
+    }
+  }
+`;
+
+
+export const DELETE_INVITEE = gql`
+  mutation DeleteInvitee($id: String!) {
+    deleteInvitee(id: $id) {
       id
       family_kj
       first_kj
@@ -198,20 +227,18 @@ export const SHOW_INVITEE = gql`
   }
 `;
 
-export const UPLOAD_FILE = gql`
-  mutation UploadFile(
-    $comment: String!
-    $file_url: Upload!
-  ) {
-    uploadFile(
-      input: {
-        comment: $comment
-        file_url: $file_url
-      }
-    ) {
-      comment
+export const DELETE_INVITATION = gql`
+  mutation DeleteInvitation($id: String!) {
+    deleteInvitation(id: $id) {
+      id
+      title
+      event_date
+      place
       file_url
       created_at
+      user {
+        name
+      }
     }
   }
 `;

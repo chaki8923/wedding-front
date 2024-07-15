@@ -40,3 +40,11 @@ type Invitee {
   created_at: String!
   updated_at: String!
 }
+
+type UploadImage {
+  id: ID!
+  comment: String!
+  file_url: String!
+  created_at: String!
+  updated_at: String!
+}

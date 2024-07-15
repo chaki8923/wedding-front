@@ -1,8 +1,11 @@
 import styles from './index.module.scss';
-import { Invitation } from '@/types/form';
+import { Invitation, Delete } from '@/types/form';
+import { useMutation } from '@apollo/client';
 import { NextRouter } from 'next/router';
+import { DELETE_INVITATION } from '@/graphql/document';
 import { GetInvitationQuery } from '@/graphql/generated/graphql';
-import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormDelete } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Invitation>;
@@ -15,8 +18,34 @@ type Props = {
 };
 
 
-
 export function Presenter(props: Props) {
+  const router = useRouter();
+  const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
+    onCompleted: () => {
+      router.push('/invitation');
+    },
+    onError: (error: any) => {
+      console.error('Error posting invitation:', error);
+      if (error.graphQLErrors) {
+        error.graphQLErrors.forEach(({ message, locations, path }) => {
+          console.error(`GraphQL error: ${message}`);
+        });
+      }
+      if (error.networkError) {
+        console.error('Network error:', error.networkError.message);
+      }
+    },
+  });
+  
+  
+  const handleDelete = async (id: string) => {
+    try {
+      const response = await delInvitation({ variables: { id } });
+      console.log('Deleted invitee:', response.data);
+    } catch (err) {
+      console.error('Error deleting invitee:', err);
+    }
+  };
   if (props.data === undefined) return <span>Loading...</span>;
   return (
     <>
@@ -56,7 +85,11 @@ export function Presenter(props: Props) {
             <p>タイトル:{invitation.title}</p>
             <p>開催日:{invitation.event_date}</p>
             <p>開催日:{invitation.comment}</p>
-
+         
+              <button onClick={() => handleDelete(invitation.id)}>
+                削除
+              </button>
+       
           </div>
         </div>
       ))}

@@ -37,3 +37,8 @@ input NewInvitee {
   userId: String!
   file_url: Upload!
 }
+
+input NewUpload {
+  comment: String!
+  file_url: Upload!
+}

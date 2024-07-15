@@ -10,6 +10,7 @@ export type Create = {
 };
 
 export type Invitation = {
+  id: string;
   userId: string;
   title: string;
   event_date: string;
@@ -17,6 +18,10 @@ export type Invitation = {
   comment: string;
   file_url: string;
 };
+
+export type Delete = {
+  id: string;
+}
 
 export type Invitee = {
   userId: string;

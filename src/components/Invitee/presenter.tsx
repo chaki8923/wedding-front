@@ -1,7 +1,6 @@
 import styles from './index.module.scss';
 import { Invitee } from '@/types/form';
 import { NextRouter } from 'next/router';
-import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {

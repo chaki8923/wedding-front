@@ -1,14 +1,12 @@
 // hooks/useCreateMessages.js
 
-import { CREATE_INVITEE } from '@/graphql/document';
+import { CREATE_INVITEE, GET_INVITEE } from '@/graphql/document';
 import { Invitee } from '@/types/form';
 import { useMutation, useQuery } from '@apollo/client';
 import { useRouter } from 'next/router';
 
-
 export const useCreateInvitee = () => {
   const router = useRouter();
-
   const [postInvitee, { loading, error }] = useMutation(CREATE_INVITEE, {
     onCompleted: () => {
       router.push('/timeLine');

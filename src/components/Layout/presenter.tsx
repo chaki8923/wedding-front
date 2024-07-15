@@ -19,6 +19,8 @@ export function Presenter(props: Props) {
           <button onClick={() => props.router.push('/timeLine')}>投稿</button>
           <button onClick={() => props.router.push('/send_mail')}>メール送信</button>
           <button onClick={() => props.router.push('/upload')}>画像アップロード</button>
+          <button onClick={() => props.router.push('/images')}>フォトギャラリー</button>
+          <button onClick={() => props.router.push('/invitee_list')}>招待者一覧</button>
         </nav>
       </header>
     </>

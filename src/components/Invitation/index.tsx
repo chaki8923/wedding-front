@@ -18,8 +18,7 @@ export function Invitation() {
     formState: { errors },
   } = useForm<InvForm>();
 
-  const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
-
+  const onSubmit: SubmitHandler<InvForm> = async (data: any) => { 
       createInvitation(data);
   }
 

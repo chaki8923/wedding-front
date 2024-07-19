@@ -170,6 +170,7 @@ export const GET_INVITEE = gql`
       email
       allergy
       file_url
+      join_flag
       user {
         name
       }
@@ -239,6 +240,55 @@ export const DELETE_INVITATION = gql`
       user {
         name
       }
+    }
+  }
+`;
+
+
+export const UPDATE_INVITEE = gql`
+  mutation UpdateInvitee(
+    $id: String!
+    $family_kj: String
+    $first_kj: String
+    $family_kn: String
+    $first_kn: String
+    $zip_code: String
+    $address_text: String
+    $email: String
+    $allergy: String
+    $file_url: Upload
+    $join_flag: Boolean
+  ) {
+    updateInvitee(
+      input: { 
+        id: $id, 
+        family_kj: $family_kj
+        first_kj: $first_kj
+        family_kn: $family_kn
+        first_kn: $first_kn
+        zip_code: $zip_code
+        address_text: $address_text
+        email: $email
+        allergy: $allergy
+        file_url: $file_url
+        join_flag: $join_flag
+       }
+    ) {
+      id
+      family_kj
+      first_kj
+      family_kn
+      first_kn
+      zip_code
+      address_text
+      email
+      allergy
+      user {
+        id
+      }
+      file_url
+      join_flag
+      created_at
     }
   }
 `;

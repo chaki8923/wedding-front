@@ -1,10 +1,11 @@
 import styles from './index.module.scss';
-import { Invitation, Delete } from '@/types/form';
+import { Invitation } from '@/types/form';
 import { useMutation } from '@apollo/client';
 import { NextRouter } from 'next/router';
 import { DELETE_INVITATION } from '@/graphql/document';
 import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormDelete } from 'react-hook-form';
+import useImagePreview from '@/hooks/useImagePreview';
 import { useRouter } from 'next/router';
 
 type Props = {
@@ -19,6 +20,8 @@ type Props = {
 
 
 export function Presenter(props: Props) {
+  // カスタムフックを使用して画像プレビュー機能を追加
+  useImagePreview('imageInput', 'imagePreview');
   const router = useRouter();
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
@@ -65,7 +68,8 @@ export function Presenter(props: Props) {
             <input type='date' placeholder='開催日' {...props.register('event_date', { required: true })} />
             <input type='text' placeholder='開催場所' {...props.register('place', { required: true })} />
             <input type='text' placeholder='コメント' {...props.register('comment', { required: true })} />
-            <input type='file'  {...props.register('file_url', { required: true })} />
+            <input id="imageInput" type='file'  {...props.register('file_url', { required: true })} />
+            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview}/>
             <input
               type='hidden'
               defaultValue={props.userId}

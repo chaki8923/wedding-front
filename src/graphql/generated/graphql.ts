@@ -40,6 +40,7 @@ export type Invitee = {
   first_kj: Scalars['String'];
   first_kn: Scalars['String'];
   id: Scalars['ID'];
+  join_flag: Scalars['Boolean'];
   updated_at: Scalars['String'];
   user: User;
   zip_code: Scalars['String'];
@@ -59,7 +60,10 @@ export type Mutation = {
   createInvitation: Invitation;
   createInvitee: Invitee;
   createMessage: Message;
+  deleteInvitation: Invitation;
+  deleteInvitee: Invitee;
   updateInvitation: Invitation;
+  updateInvitee: Invitee;
   uploadFile: UploadImage;
 };
 
@@ -75,8 +79,20 @@ export type MutationCreateMessageArgs = {
   input: NewMessage;
 };
 
+export type MutationDeleteInvitationArgs = {
+  id: Scalars['String'];
+};
+
+export type MutationDeleteInviteeArgs = {
+  id: Scalars['String'];
+};
+
 export type MutationUpdateInvitationArgs = {
   input: UpdateInvitation;
+};
+
+export type MutationUpdateInviteeArgs = {
+  input: UpdateInvitee;
 };
 
 export type MutationUploadFileArgs = {
@@ -140,6 +156,20 @@ export type UpdateInvitation = {
   id: Scalars['String'];
   place?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
+};
+
+export type UpdateInvitee = {
+  address_text?: InputMaybe<Scalars['String']>;
+  allergy?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  family_kj?: InputMaybe<Scalars['String']>;
+  family_kn?: InputMaybe<Scalars['String']>;
+  file_url?: InputMaybe<Scalars['Upload']>;
+  first_kj?: InputMaybe<Scalars['String']>;
+  first_kn?: InputMaybe<Scalars['String']>;
+  id: Scalars['String'];
+  join_flag?: InputMaybe<Scalars['Boolean']>;
+  zip_code?: InputMaybe<Scalars['String']>;
 };
 
 export type UploadImage = {
@@ -313,6 +343,7 @@ export type GetInviteeQuery = {
     email: string;
     allergy: string;
     file_url: string;
+    join_flag: boolean;
     user: { __typename?: 'User'; name: string };
   }>;
 };
@@ -338,6 +369,80 @@ export type GetImagesQuery = {
     file_url: string;
     created_at: string;
   }>;
+};
+
+export type DeleteInviteeMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+export type DeleteInviteeMutation = {
+  __typename?: 'Mutation';
+  deleteInvitee: {
+    __typename?: 'Invitee';
+    id: string;
+    family_kj: string;
+    first_kj: string;
+    family_kn: string;
+    first_kn: string;
+    zip_code: string;
+    address_text: string;
+    email: string;
+    allergy: string;
+    file_url: string;
+    user: { __typename?: 'User'; name: string };
+  };
+};
+
+export type DeleteInvitationMutationVariables = Exact<{
+  id: Scalars['String'];
+}>;
+
+export type DeleteInvitationMutation = {
+  __typename?: 'Mutation';
+  deleteInvitation: {
+    __typename?: 'Invitation';
+    id: string;
+    title: string;
+    event_date: string;
+    place: string;
+    file_url: string;
+    created_at: string;
+    user: { __typename?: 'User'; name: string };
+  };
+};
+
+export type UpdateInviteeMutationVariables = Exact<{
+  id: Scalars['String'];
+  family_kj?: InputMaybe<Scalars['String']>;
+  first_kj?: InputMaybe<Scalars['String']>;
+  family_kn?: InputMaybe<Scalars['String']>;
+  first_kn?: InputMaybe<Scalars['String']>;
+  zip_code?: InputMaybe<Scalars['String']>;
+  address_text?: InputMaybe<Scalars['String']>;
+  email?: InputMaybe<Scalars['String']>;
+  allergy?: InputMaybe<Scalars['String']>;
+  file_url?: InputMaybe<Scalars['Upload']>;
+  join_flag?: InputMaybe<Scalars['Boolean']>;
+}>;
+
+export type UpdateInviteeMutation = {
+  __typename?: 'Mutation';
+  updateInvitee: {
+    __typename?: 'Invitee';
+    id: string;
+    family_kj: string;
+    first_kj: string;
+    family_kn: string;
+    first_kn: string;
+    zip_code: string;
+    address_text: string;
+    email: string;
+    allergy: string;
+    file_url: string;
+    join_flag: boolean;
+    created_at: string;
+    user: { __typename?: 'User'; id: string };
+  };
 };
 
 export const GetMessagesDocument = {
@@ -978,6 +1083,7 @@ export const GetInviteeDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'allergy' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'join_flag' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'user' },
@@ -1088,3 +1194,287 @@ export const GetImagesDocument = {
     },
   ],
 } as unknown as DocumentNode<GetImagesQuery, GetImagesQueryVariables>;
+export const DeleteInviteeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'DeleteInvitee' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'deleteInvitee' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'zip_code' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'address_text' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'allergy' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteInviteeMutation, DeleteInviteeMutationVariables>;
+export const DeleteInvitationDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'DeleteInvitation' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'deleteInvitation' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'id' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'title' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'event_date' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'place' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<DeleteInvitationMutation, DeleteInvitationMutationVariables>;
+export const UpdateInviteeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'mutation',
+      name: { kind: 'Name', value: 'UpdateInvitee' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'family_kj' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'first_kj' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'family_kn' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'first_kn' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'zip_code' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'address_text' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'allergy' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'file_url' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Upload' } },
+        },
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'join_flag' } },
+          type: { kind: 'NamedType', name: { kind: 'Name', value: 'Boolean' } },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'updateInvitee' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'input' },
+                value: {
+                  kind: 'ObjectValue',
+                  fields: [
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'id' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'family_kj' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'family_kj' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'first_kj' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'first_kj' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'family_kn' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'family_kn' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'first_kn' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'first_kn' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'zip_code' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'zip_code' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'address_text' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'address_text' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'email' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'email' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'allergy' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'allergy' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'file_url' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'file_url' } },
+                    },
+                    {
+                      kind: 'ObjectField',
+                      name: { kind: 'Name', value: 'join_flag' },
+                      value: { kind: 'Variable', name: { kind: 'Name', value: 'join_flag' } },
+                    },
+                  ],
+                },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'zip_code' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'address_text' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'allergy' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'id' } }],
+                  },
+                },
+                { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'join_flag' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<UpdateInviteeMutation, UpdateInviteeMutationVariables>;

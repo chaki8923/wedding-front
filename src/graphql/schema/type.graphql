@@ -36,6 +36,7 @@ type Invitee {
   address_text: String!
   file_url: String!
   allergy: String!
+  join_flag: Boolean!
   user: User!
   created_at: String!
   updated_at: String!

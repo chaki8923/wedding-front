@@ -3,6 +3,9 @@ type Mutation {
     createMessage(input: NewMessage!): Message!
     createInvitation(input: NewInvitation!): Invitation!
     createInvitee(input: NewInvitee!): Invitee!
+    deleteInvitee(id: String!): Invitee!
+    deleteInvitation(id: String!): Invitation!
     updateInvitation(input: UpdateInvitation!): Invitation!
+    updateInvitee(input: UpdateInvitee!): Invitee!
     uploadFile(input: NewUpload!): UploadImage!
 }

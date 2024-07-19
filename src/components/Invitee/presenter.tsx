@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import { Invitee } from '@/types/form';
 import { NextRouter } from 'next/router';
+import useImagePreview from '@/hooks/useImagePreview';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
@@ -15,6 +16,7 @@ type Props = {
 
 
 export function Presenter(props: Props) {
+  useImagePreview('imageInput', 'imagePreview');
   return (
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
@@ -49,7 +51,8 @@ export function Presenter(props: Props) {
               required: true
             })} />
             <input type='text' placeholder='アレルギー' {...props.register('allergy', { required: true })} />
-            <input type='file'  {...props.register('file_url', { required: true })} />
+            <input type='file' id="imageInput"  {...props.register('file_url', { required: true })} />
+            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview}/>
           </div>
           <input
               type='hidden'

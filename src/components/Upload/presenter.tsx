@@ -1,6 +1,8 @@
+import React, { useEffect } from 'react';
 import styles from './index.module.scss';
 import { Upload} from '@/types/form';
 import { NextRouter } from 'next/router';
+import useImagePreview from '@/hooks/useImagePreview';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
@@ -14,8 +16,9 @@ type Props = {
 
 
 export function Presenter(props: Props) {
-  console.log("index");
-  
+  // カスタムフックを使用して画像プレビュー機能を追加
+  useImagePreview('imageInput', 'imagePreview');
+
   return (
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
@@ -29,7 +32,8 @@ export function Presenter(props: Props) {
             <input type='text' placeholder='コメント' {...props.register('comment', {
               required: true
             })} />
-            <input type='file'  {...props.register('file_url', { required: true })} />
+            <input id="imageInput" type='file'  {...props.register('file_url', { required: true })} />
+            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview}/>
           </div>
           <button className={styles.submitBtn} type='submit'>
             アップロード

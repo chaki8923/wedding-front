@@ -86,3 +86,17 @@
 .button:focus {
   outline: none; // フォーカス時のアウトラインを削除
 }
+
+.card{
+  width: 240px;
+  border: 1px solid #333;
+  margin-bottom: 10px;
+  img{
+    width: 100%;
+  }
+}
+
+.imagePreview{
+  display: none;
+  width: 320px;
+}

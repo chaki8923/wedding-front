@@ -27,12 +27,18 @@ const documents = {
     types.ShowInvitationDocument,
   '\n  mutation CreateInvitee(\n    $family_kj: String!\n    $first_kj: String!\n    $family_kn: String!\n    $first_kn: String!\n    $zip_code: String!\n    $address_text: String!\n    $email: String!\n    $allergy: String!\n    $userId: String!\n    $file_url: Upload!\n  ) {\n    createInvitee(\n      input: {\n        family_kj: $family_kj\n        first_kj: $first_kj\n        family_kn: $family_kn\n        first_kn: $first_kn\n        zip_code: $zip_code\n        address_text: $address_text\n        email: $email\n        allergy: $allergy\n        userId: $userId\n        file_url: $file_url\n      }\n    ) {\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      user {\n        id\n      }\n      file_url\n      created_at\n    }\n  }\n':
     types.CreateInviteeDocument,
-  '\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n':
+  '\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      join_flag\n      user {\n        name\n      }\n    }\n  }\n':
     types.GetInviteeDocument,
   '\n  mutation UploadFile(\n    $comment: String!\n    $file_url: Upload!\n  ) {\n    uploadFile(\n      input: {\n        comment: $comment\n        file_url: $file_url\n      }\n    ) {\n      comment\n      file_url\n      created_at\n    }\n  }\n':
     types.UploadFileDocument,
   '\n  query GetImages {\n    getImages {\n      id\n      comment\n      file_url\n      created_at\n    }\n  }\n':
     types.GetImagesDocument,
+  '\n  mutation DeleteInvitee($id: String!) {\n    deleteInvitee(id: $id) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n':
+    types.DeleteInviteeDocument,
+  '\n  mutation DeleteInvitation($id: String!) {\n    deleteInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
+    types.DeleteInvitationDocument,
+  '\n  mutation UpdateInvitee(\n    $id: String!\n    $family_kj: String\n    $first_kj: String\n    $family_kn: String\n    $first_kn: String\n    $zip_code: String\n    $address_text: String\n    $email: String\n    $allergy: String\n    $file_url: Upload\n    $join_flag: Boolean\n  ) {\n    updateInvitee(\n      input: { \n        id: $id, \n        family_kj: $family_kj\n        first_kj: $first_kj\n        family_kn: $family_kn\n        first_kn: $first_kn\n        zip_code: $zip_code\n        address_text: $address_text\n        email: $email\n        allergy: $allergy\n        file_url: $file_url\n        join_flag: $join_flag\n       }\n    ) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      user {\n        id\n      }\n      file_url\n      join_flag\n      created_at\n    }\n  }\n':
+    types.UpdateInviteeDocument,
 };
 
 /**
@@ -95,8 +101,8 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n'];
+  source: '\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      join_flag\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query GetInvitee {\n    getInvitee {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      join_flag\n      user {\n        name\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
@@ -109,6 +115,24 @@ export function graphql(
 export function graphql(
   source: '\n  query GetImages {\n    getImages {\n      id\n      comment\n      file_url\n      created_at\n    }\n  }\n',
 ): (typeof documents)['\n  query GetImages {\n    getImages {\n      id\n      comment\n      file_url\n      created_at\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation DeleteInvitee($id: String!) {\n    deleteInvitee(id: $id) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  mutation DeleteInvitee($id: String!) {\n    deleteInvitee(id: $id) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      user {\n        name\n      }\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation DeleteInvitation($id: String!) {\n    deleteInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  mutation DeleteInvitation($id: String!) {\n    deleteInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  mutation UpdateInvitee(\n    $id: String!\n    $family_kj: String\n    $first_kj: String\n    $family_kn: String\n    $first_kn: String\n    $zip_code: String\n    $address_text: String\n    $email: String\n    $allergy: String\n    $file_url: Upload\n    $join_flag: Boolean\n  ) {\n    updateInvitee(\n      input: { \n        id: $id, \n        family_kj: $family_kj\n        first_kj: $first_kj\n        family_kn: $family_kn\n        first_kn: $first_kn\n        zip_code: $zip_code\n        address_text: $address_text\n        email: $email\n        allergy: $allergy\n        file_url: $file_url\n        join_flag: $join_flag\n       }\n    ) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      user {\n        id\n      }\n      file_url\n      join_flag\n      created_at\n    }\n  }\n',
+): (typeof documents)['\n  mutation UpdateInvitee(\n    $id: String!\n    $family_kj: String\n    $first_kj: String\n    $family_kn: String\n    $first_kn: String\n    $zip_code: String\n    $address_text: String\n    $email: String\n    $allergy: String\n    $file_url: Upload\n    $join_flag: Boolean\n  ) {\n    updateInvitee(\n      input: { \n        id: $id, \n        family_kj: $family_kj\n        first_kj: $first_kj\n        family_kn: $family_kn\n        first_kn: $first_kn\n        zip_code: $zip_code\n        address_text: $address_text\n        email: $email\n        allergy: $allergy\n        file_url: $file_url\n        join_flag: $join_flag\n       }\n    ) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      user {\n        id\n      }\n      file_url\n      join_flag\n      created_at\n    }\n  }\n'];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};

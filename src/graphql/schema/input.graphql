@@ -38,6 +38,20 @@ input NewInvitee {
   file_url: Upload!
 }
 
+input UpdateInvitee {
+  id: String!
+  family_kj: String
+  first_kj: String
+  family_kn: String
+  first_kn: String
+  email: String
+  zip_code: String
+  address_text: String
+  allergy: String
+  join_flag: Boolean
+  file_url: Upload
+}
+
 input NewUpload {
   comment: String!
   file_url: Upload!

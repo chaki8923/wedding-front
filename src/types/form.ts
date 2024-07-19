@@ -24,6 +24,7 @@ export type Delete = {
 }
 
 export type Invitee = {
+  id: string;
   userId: string;
   family_kj: string;
   first_kj: string;
@@ -34,6 +35,7 @@ export type Invitee = {
   address_text: string;
   allergy: string;
   file_url: string;
+  join_flag: boolean;
 };
 
 export type SendMail = {

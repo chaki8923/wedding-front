@@ -88,7 +88,7 @@ export function Presenter(props: Props) {
             <img src={invitation.file_url} alt="" />
             <p>タイトル:{invitation.title}</p>
             <p>開催日:{invitation.event_date}</p>
-            <p>開催日:{invitation.comment}</p>
+            <p>コメント:{invitation.comment}</p>
          
               <button onClick={() => handleDelete(invitation.id)}>
                 削除

@@ -27,15 +27,14 @@ export function Presenter(props: Props) {
               type='text'
               placeholder='to'
               {...props.register('to', {
-                required: true,
-                pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                required: false
               })}
             />
             <input
               type='text'
               placeholder='from'
               {...props.register('from', {
-                required: true,
+                required: false,
                 pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
               })}
             />

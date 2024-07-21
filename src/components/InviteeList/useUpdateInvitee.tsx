@@ -2,13 +2,15 @@
 
 import { UPDATE_INVITEE } from '@/graphql/document';
 import { Invitee } from '@/types/form';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 
 export const useUpdateInvitee = () => {
   const router = useRouter();
+  console.log("update実行");
   const [updInvitee, { loading, error }] = useMutation(UPDATE_INVITEE, {
     onCompleted: () => {
+      console.log("更新完了！！");
       router.push('/timeLine');
     },
     onError: (error: any) => {

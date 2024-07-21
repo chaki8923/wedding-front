@@ -2,6 +2,6 @@ type Query {
     getMessages: [Message!]!
     getInvitee: [Invitee!]!
     getInvitation: [Invitation!]!
-    showInvitation(id: String!): Invitation!
+    showInvitation(uu_id: String!): Invitation!
     getImages: [UploadImage!]!
 }

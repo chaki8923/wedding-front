@@ -2,7 +2,7 @@ import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/InviteeList/presenter';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useGetInvitee } from './useGetInvitee';
+import { useGetInvitee } from './useShowInvitation';
 import { Invitation as InvForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useUpdateInvitee } from './useUpdateInvitee';

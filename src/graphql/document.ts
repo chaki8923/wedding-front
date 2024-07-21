@@ -97,13 +97,14 @@ export const GET_INVITATION = gql`
 `;
 
 export const SHOW_INVITATION = gql`
-  query ShowInvitation($id: String!) {
-    showInvitation(id: $id) {
+  query ShowInvitation($uu_id: String!) {
+    showInvitation(uu_id: $uu_id) {
       id
       title
       event_date
       place
       created_at
+      uu_id
       user {
         name
       }

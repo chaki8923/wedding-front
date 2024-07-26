@@ -26,6 +26,7 @@ export type Invitation = {
   title: Scalars['String'];
   updated_at: Scalars['String'];
   user: User;
+  uuid: Scalars['String'];
 };
 
 export type Invitee = {
@@ -146,7 +147,7 @@ export type Query = {
 };
 
 export type QueryShowInvitationArgs = {
-  id: Scalars['String'];
+  uuid: Scalars['String'];
 };
 
 export type UpdateInvitation = {
@@ -275,12 +276,13 @@ export type GetInvitationQuery = {
     comment: string;
     file_url: string;
     created_at: string;
+    uuid: string;
     user: { __typename?: 'User'; name: string };
   }>;
 };
 
 export type ShowInvitationQueryVariables = Exact<{
-  id: Scalars['String'];
+  uuid: Scalars['String'];
 }>;
 
 export type ShowInvitationQuery = {
@@ -292,6 +294,7 @@ export type ShowInvitationQuery = {
     event_date: string;
     place: string;
     created_at: string;
+    uuid: string;
     user: { __typename?: 'User'; name: string };
   };
 };
@@ -802,6 +805,7 @@ export const GetInvitationDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'user' },
@@ -828,7 +832,7 @@ export const ShowInvitationDocument = {
       variableDefinitions: [
         {
           kind: 'VariableDefinition',
-          variable: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
           type: {
             kind: 'NonNullType',
             type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
@@ -844,8 +848,8 @@ export const ShowInvitationDocument = {
             arguments: [
               {
                 kind: 'Argument',
-                name: { kind: 'Name', value: 'id' },
-                value: { kind: 'Variable', name: { kind: 'Name', value: 'id' } },
+                name: { kind: 'Name', value: 'uuid' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
               },
             ],
             selectionSet: {
@@ -856,6 +860,7 @@ export const ShowInvitationDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'event_date' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'place' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
                 {
                   kind: 'Field',
                   name: { kind: 'Name', value: 'user' },

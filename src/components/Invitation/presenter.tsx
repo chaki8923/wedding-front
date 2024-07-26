@@ -7,6 +7,7 @@ import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormDelete } from 'react-hook-form';
 import useImagePreview from '@/hooks/useImagePreview';
 import { useRouter } from 'next/router';
+import Link from "next/link";
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Invitation>;
@@ -39,8 +40,8 @@ export function Presenter(props: Props) {
       }
     },
   });
-  
-  
+
+
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitation({ variables: { id } });
@@ -69,7 +70,7 @@ export function Presenter(props: Props) {
             <input type='text' placeholder='開催場所' {...props.register('place', { required: true })} />
             <input type='text' placeholder='コメント' {...props.register('comment', { required: true })} />
             <input id="imageInput" type='file'  {...props.register('file_url', { required: true })} />
-            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview}/>
+            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview} />
             <input
               type='hidden'
               defaultValue={props.userId}
@@ -83,19 +84,22 @@ export function Presenter(props: Props) {
       </form>
 
       {props.data.getInvitation.map((invitation) => (
-        <div key={invitation.id} className={styles.contentWrapper}>
-          <div className={styles.card}>
-            <img src={invitation.file_url} alt="" />
-            <p>タイトル:{invitation.title}</p>
-            <p>開催日:{invitation.event_date}</p>
-            <p>コメント:{invitation.comment}</p>
-         
+        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id} >
+          <div className={styles.contentWrapper}>
+            <div className={styles.card}>
+              <img src={invitation.file_url} alt="" />
+              <p>タイトル:{invitation.title}</p>
+              <p>開催日:{invitation.event_date}</p>
+              <p>コメント:{invitation.comment}</p>
+              <p>uuid:{invitation.uuid}</p>
+
               <button onClick={() => handleDelete(invitation.id)}>
                 削除
               </button>
-       
+
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </>
   );

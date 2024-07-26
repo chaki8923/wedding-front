@@ -6,12 +6,12 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 
 export const useUpdateInvitee = () => {
-  const router = useRouter();
   console.log("update実行");
   const [updInvitee, { loading, error }] = useMutation(UPDATE_INVITEE, {
     onCompleted: () => {
+      const router = useRouter();
       console.log("更新完了！！");
-      router.push('/timeLine');
+      router.push('/invitee_list');
     },
     onError: (error: any) => {
       console.error('Error posting invitation:', error);

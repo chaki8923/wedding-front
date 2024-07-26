@@ -21,9 +21,9 @@ const documents = {
     types.CreateInvitationDocument,
   '\n  mutation UpdateInvitation(\n    $id: String!\n    $title: String\n    $event_date: String\n    $place: String\n    $comment: String\n  ) {\n    updateInvitation(\n      input: { id: $id, title: $title, event_date: $event_date, place: $place, comment: $comment }\n    ) {\n      id\n      title\n      event_date\n      place\n      comment\n    }\n  }\n':
     types.UpdateInvitationDocument,
-  '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
+  '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
     types.GetInvitationDocument,
-  '\n  query ShowInvitation($id: String!) {\n    showInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n':
+  '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
     types.ShowInvitationDocument,
   '\n  mutation CreateInvitee(\n    $family_kj: String!\n    $first_kj: String!\n    $family_kn: String!\n    $first_kn: String!\n    $zip_code: String!\n    $address_text: String!\n    $email: String!\n    $allergy: String!\n    $userId: String!\n    $file_url: Upload!\n  ) {\n    createInvitee(\n      input: {\n        family_kj: $family_kj\n        first_kj: $first_kj\n        family_kn: $family_kn\n        first_kn: $first_kn\n        zip_code: $zip_code\n        address_text: $address_text\n        email: $email\n        allergy: $allergy\n        userId: $userId\n        file_url: $file_url\n      }\n    ) {\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      user {\n        id\n      }\n      file_url\n      created_at\n    }\n  }\n':
     types.CreateInviteeDocument,
@@ -83,14 +83,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
+  source: '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query ShowInvitation($id: String!) {\n    showInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query ShowInvitation($id: String!) {\n    showInvitation(id: $id) {\n      id\n      title\n      event_date\n      place\n      created_at\n      user {\n        name\n      }\n    }\n  }\n'];
+  source: '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -89,6 +89,7 @@ export const GET_INVITATION = gql`
       comment
       file_url
       created_at
+      uuid
       user {
         name
       }
@@ -97,14 +98,14 @@ export const GET_INVITATION = gql`
 `;
 
 export const SHOW_INVITATION = gql`
-  query ShowInvitation($uu_id: String!) {
-    showInvitation(uu_id: $uu_id) {
+  query ShowInvitation($uuid: String!) {
+    showInvitation(uuid: $uuid) {
       id
       title
       event_date
       place
       created_at
-      uu_id
+      uuid
       user {
         name
       }

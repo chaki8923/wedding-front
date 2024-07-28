@@ -7,7 +7,7 @@ import { Invitation as InvForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useUpdateInvitee } from './useUpdateInvitee';
 
-export function ImageList() {
+export function InviteeList() {
   const { user, setUser } = useUserState();
   const router = useRouter();
   const { loading, data, error } = useGetInvitee();
@@ -21,7 +21,6 @@ export function ImageList() {
 
 
   const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {    
-    console.log("update_data!!",data);
     const processedData = {
       id: id,
       family_kj: data[`family_kj_${id}`],

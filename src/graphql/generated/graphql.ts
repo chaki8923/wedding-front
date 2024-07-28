@@ -44,6 +44,7 @@ export type Invitee = {
   join_flag: Scalars['Boolean'];
   updated_at: Scalars['String'];
   user: User;
+  uuid: Scalars['String'];
   zip_code: Scalars['String'];
 };
 
@@ -144,9 +145,14 @@ export type Query = {
   getInvitee: Array<Invitee>;
   getMessages: Array<Message>;
   showInvitation: Invitation;
+  showInvitee: Invitee;
 };
 
 export type QueryShowInvitationArgs = {
+  uuid: Scalars['String'];
+};
+
+export type QueryShowInviteeArgs = {
   uuid: Scalars['String'];
 };
 
@@ -299,6 +305,30 @@ export type ShowInvitationQuery = {
   };
 };
 
+export type ShowInviteeQueryVariables = Exact<{
+  uuid: Scalars['String'];
+}>;
+
+export type ShowInviteeQuery = {
+  __typename?: 'Query';
+  showInvitee: {
+    __typename?: 'Invitee';
+    id: string;
+    family_kj: string;
+    first_kj: string;
+    family_kn: string;
+    first_kn: string;
+    zip_code: string;
+    address_text: string;
+    email: string;
+    allergy: string;
+    file_url: string;
+    join_flag: boolean;
+    uuid: string;
+    user: { __typename?: 'User'; name: string };
+  };
+};
+
 export type CreateInviteeMutationVariables = Exact<{
   family_kj: Scalars['String'];
   first_kj: Scalars['String'];
@@ -346,6 +376,7 @@ export type GetInviteeQuery = {
     email: string;
     allergy: string;
     file_url: string;
+    uuid: string;
     join_flag: boolean;
     user: { __typename?: 'User'; name: string };
   }>;
@@ -877,6 +908,67 @@ export const ShowInvitationDocument = {
     },
   ],
 } as unknown as DocumentNode<ShowInvitationQuery, ShowInvitationQueryVariables>;
+export const ShowInviteeDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'ShowInvitee' },
+      variableDefinitions: [
+        {
+          kind: 'VariableDefinition',
+          variable: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
+          type: {
+            kind: 'NonNullType',
+            type: { kind: 'NamedType', name: { kind: 'Name', value: 'String' } },
+          },
+        },
+      ],
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'showInvitee' },
+            arguments: [
+              {
+                kind: 'Argument',
+                name: { kind: 'Name', value: 'uuid' },
+                value: { kind: 'Variable', name: { kind: 'Name', value: 'uuid' } },
+              },
+            ],
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kj' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'family_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'first_kn' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'zip_code' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'address_text' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'email' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'allergy' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'join_flag' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
+                {
+                  kind: 'Field',
+                  name: { kind: 'Name', value: 'user' },
+                  selectionSet: {
+                    kind: 'SelectionSet',
+                    selections: [{ kind: 'Field', name: { kind: 'Name', value: 'name' } }],
+                  },
+                },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<ShowInviteeQuery, ShowInviteeQueryVariables>;
 export const CreateInviteeDocument = {
   kind: 'Document',
   definitions: [
@@ -1088,6 +1180,7 @@ export const GetInviteeDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'email' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'allergy' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'join_flag' } },
                 {
                   kind: 'Field',

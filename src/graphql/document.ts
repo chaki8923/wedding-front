@@ -112,7 +112,27 @@ export const SHOW_INVITATION = gql`
     }
   }
 `;
-
+export const SHOW_INVITEE = gql`
+  query ShowInvitee($uuid: String!) {
+    showInvitee(uuid: $uuid) {
+      id
+      family_kj
+      first_kj
+      family_kn
+      first_kn
+      zip_code
+      address_text
+      email
+      allergy
+      file_url
+      join_flag
+      uuid
+      user {
+        name
+      }
+    }
+  }
+`;
 
 export const CREATE_INVITEE = gql`
   mutation CreateInvitee(
@@ -172,6 +192,7 @@ export const GET_INVITEE = gql`
       email
       allergy
       file_url
+      uuid
       join_flag
       user {
         name

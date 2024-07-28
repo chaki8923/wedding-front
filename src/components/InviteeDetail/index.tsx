@@ -1,12 +1,11 @@
 import { useUserState } from '@/atoms/userAtom';
-import { Presenter } from '@/components/InvitationDetail/presenter';
+import { Presenter } from '@/components/InviteeDetail/presenter';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useShowInvitation } from './useShowInvitation';
+import { useShowInvitee } from './useShowInvitee';
 import { Invitation as InvForm } from '@/types/form';
-import { useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useUpdateInvitee } from '../InviteeList/useUpdateInvitee';
+import { useUpdateInvitee } from './useUpdateInvitee';
 
 
 const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {    
@@ -14,24 +13,25 @@ const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {
   console.log("update_data!!",data);
   const processedData = {
     id: id,
-    family_kj: "",
-    first_kj: "",
-    family_kn: "",
-    first_kn: "",
-    zip_code: "",
-    address_text: "",
-    email: "",
-    file_url: "",
-    allergy: "",
-    join_flag: data[`join_flag`], 
-    userId: data[`userId`]
+    family_kj: data[`family_kj_${id}`],
+    first_kj: data[`first_kj_${id}`],
+    family_kn: data[`family_kn_${id}`],
+    first_kn: data[`first_kn_${id}`],
+    zip_code: data[`zip_code_${id}`],
+    address_text: data[`address_text_${id}`],
+    email: data[`email_${id}`],
+    file_url: data[`file_url_${id}`],
+    allergy: data[`allergy_${id}`],
+    join_flag: data[`join_flag_${id}`], 
+    userId: data[`userId_${id}`]
   };
+
   
   updateInvitee(processedData);
 }
 
 
-export function InvitationDetail() {
+export function InviteeDetail() {
   const router = useRouter();
   const { user, setUser } = useUserState();
   const { uuid } = router.query;
@@ -42,7 +42,7 @@ export function InvitationDetail() {
   } = useForm<InvForm>();
   
   
-  const { loading, data, error } = useShowInvitation({uuid});
+  const { loading, data, error } = useShowInvitee({uuid});
 
   if (loading) <span>Loading...</span>;
   if (error) {

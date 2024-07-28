@@ -1,4 +1,4 @@
-import { InviteeList } from '@/components/InviteeList';
+import { InviteeDetail } from '@/components/InviteeDetail';
 import { Layout } from '@/components/Layout';
 import type { NextPageWithLayout } from '@/pages/_app';
 import React from 'react';
@@ -6,7 +6,7 @@ import React from 'react';
 const Page: NextPageWithLayout = () => {
   return (
     <>
-      <InviteeList />
+      <InviteeDetail />
     </>
   );
 };

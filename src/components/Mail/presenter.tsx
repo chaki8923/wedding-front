@@ -9,6 +9,7 @@ type Props = {
   errors: FieldErrors<SendMail>;
 };
 
+
 export function Presenter(props: Props) {
 
   return (
@@ -47,7 +48,7 @@ export function Presenter(props: Props) {
             />
             <input
               type='text'
-              placeholder='body'
+              placeholder='招待状uuid'
               {...props.register('body', {
                 required: true
               })}

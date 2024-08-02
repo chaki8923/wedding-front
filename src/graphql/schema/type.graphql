@@ -51,3 +51,11 @@ type UploadImage {
   created_at: String!
   updated_at: String!
 }
+
+
+type Allergy {
+  id: ID!
+  name: String!
+  created_at: String!
+  updated_at: String!
+}

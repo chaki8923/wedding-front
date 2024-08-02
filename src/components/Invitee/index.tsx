@@ -5,12 +5,14 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useCreateInvitee } from './useCreateInvitee';
+import { useGetAllergy } from './useGetIAllergy';
 
 export function Invitee() {
   const router = useRouter();
   const { user, setUser } = useUserState();
   const { createInvitee } = useCreateInvitee();
-  
+  const { loading, data, error } = useGetAllergy();
+
   const {
     register,
     handleSubmit,
@@ -18,9 +20,8 @@ export function Invitee() {
   } = useForm<InvForm>();
 
   const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
-      console.log("data!!",data);
-      
-      createInvitee(data);
+    console.log("data!!",data);
+    createInvitee(data);
   }
 
   if (!user) {
@@ -30,6 +31,7 @@ export function Invitee() {
   return (
     <>
       <Presenter
+        data={data}
         handleSubmit={handleSubmit}
         onSubmit={onSubmit}
         register={register}

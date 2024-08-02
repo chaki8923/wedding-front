@@ -23,7 +23,9 @@ const documents = {
     types.UpdateInvitationDocument,
   '\n  query GetInvitation {\n    getInvitation {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
     types.GetInvitationDocument,
-  '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
+  '\n  query GetAllergy {\n    getAllergy {\n      id\n      name\n      created_at\n    }\n  }\n':
+    types.GetAllergyDocument,
+  '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
     types.ShowInvitationDocument,
   '\n  query ShowInvitee($uuid: String!) {\n    showInvitee(uuid: $uuid) {\n      id\n      family_kj\n      first_kj\n      family_kn\n      first_kn\n      zip_code\n      address_text\n      email\n      allergy\n      file_url\n      join_flag\n      uuid\n      user {\n        name\n      }\n    }\n  }\n':
     types.ShowInviteeDocument,
@@ -91,8 +93,14 @@ export function graphql(
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(
-  source: '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n',
-): (typeof documents)['\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      created_at\n      uuid\n      user {\n        name\n      }\n    }\n  }\n'];
+  source: '\n  query GetAllergy {\n    getAllergy {\n      id\n      name\n      created_at\n    }\n  }\n',
+): (typeof documents)['\n  query GetAllergy {\n    getAllergy {\n      id\n      name\n      created_at\n    }\n  }\n'];
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ */
+export function graphql(
+  source: '\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      uuid\n      user {\n        name\n      }\n    }\n  }\n',
+): (typeof documents)['\n  query ShowInvitation($uuid: String!) {\n    showInvitation(uuid: $uuid) {\n      id\n      title\n      event_date\n      place\n      comment\n      file_url\n      uuid\n      user {\n        name\n      }\n    }\n  }\n'];
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */

@@ -15,6 +15,14 @@ export type Scalars = {
   Upload: any;
 };
 
+export type Allergy = {
+  __typename?: 'Allergy';
+  created_at: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
 export type Invitation = {
   __typename?: 'Invitation';
   comment: Scalars['String'];
@@ -140,6 +148,7 @@ export type NewUser = {
 
 export type Query = {
   __typename?: 'Query';
+  getAllergy: Array<Allergy>;
   getImages: Array<UploadImage>;
   getInvitation: Array<Invitation>;
   getInvitee: Array<Invitee>;
@@ -287,6 +296,13 @@ export type GetInvitationQuery = {
   }>;
 };
 
+export type GetAllergyQueryVariables = Exact<{ [key: string]: never }>;
+
+export type GetAllergyQuery = {
+  __typename?: 'Query';
+  getAllergy: Array<{ __typename?: 'Allergy'; id: string; name: string; created_at: string }>;
+};
+
 export type ShowInvitationQueryVariables = Exact<{
   uuid: Scalars['String'];
 }>;
@@ -299,7 +315,8 @@ export type ShowInvitationQuery = {
     title: string;
     event_date: string;
     place: string;
-    created_at: string;
+    comment: string;
+    file_url: string;
     uuid: string;
     user: { __typename?: 'User'; name: string };
   };
@@ -853,6 +870,33 @@ export const GetInvitationDocument = {
     },
   ],
 } as unknown as DocumentNode<GetInvitationQuery, GetInvitationQueryVariables>;
+export const GetAllergyDocument = {
+  kind: 'Document',
+  definitions: [
+    {
+      kind: 'OperationDefinition',
+      operation: 'query',
+      name: { kind: 'Name', value: 'GetAllergy' },
+      selectionSet: {
+        kind: 'SelectionSet',
+        selections: [
+          {
+            kind: 'Field',
+            name: { kind: 'Name', value: 'getAllergy' },
+            selectionSet: {
+              kind: 'SelectionSet',
+              selections: [
+                { kind: 'Field', name: { kind: 'Name', value: 'id' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'name' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+              ],
+            },
+          },
+        ],
+      },
+    },
+  ],
+} as unknown as DocumentNode<GetAllergyQuery, GetAllergyQueryVariables>;
 export const ShowInvitationDocument = {
   kind: 'Document',
   definitions: [
@@ -890,7 +934,8 @@ export const ShowInvitationDocument = {
                 { kind: 'Field', name: { kind: 'Name', value: 'title' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'event_date' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'place' } },
-                { kind: 'Field', name: { kind: 'Name', value: 'created_at' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'comment' } },
+                { kind: 'Field', name: { kind: 'Name', value: 'file_url' } },
                 { kind: 'Field', name: { kind: 'Name', value: 'uuid' } },
                 {
                   kind: 'Field',

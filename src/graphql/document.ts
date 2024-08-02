@@ -97,6 +97,17 @@ export const GET_INVITATION = gql`
   }
 `;
 
+
+export const GET_ALLERGY = gql`
+  query GetAllergy {
+    getAllergy {
+      id
+      name
+      created_at
+    }
+  }
+`;
+
 export const SHOW_INVITATION = gql`
   query ShowInvitation($uuid: String!) {
     showInvitation(uuid: $uuid) {
@@ -104,7 +115,8 @@ export const SHOW_INVITATION = gql`
       title
       event_date
       place
-      created_at
+      comment
+      file_url
       uuid
       user {
         name

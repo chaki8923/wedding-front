@@ -1,10 +1,12 @@
 import styles from './index.module.scss';
 import { Invitee } from '@/types/form';
 import { NextRouter } from 'next/router';
+import { GetAllergyQuery } from '@/graphql/generated/graphql';
 import useImagePreview from '@/hooks/useImagePreview';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
+  data: GetAllergyQuery;
   handleSubmit: UseFormHandleSubmit<Invitee>;
   onSubmit: SubmitHandler<Invitee>;
   register: UseFormRegister<Invitee>;
@@ -17,6 +19,8 @@ type Props = {
 
 export function Presenter(props: Props) {
   useImagePreview('imageInput', 'imagePreview');
+  console.log(props.data);
+  
   return (
     <>
       <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>

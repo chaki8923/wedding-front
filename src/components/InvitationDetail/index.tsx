@@ -6,28 +6,13 @@ import { useShowInvitation } from './useShowInvitation';
 import { Invitation as InvForm } from '@/types/form';
 import { useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useUpdateInvitee } from '../InviteeList/useUpdateInvitee';
+
 
 
 const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {    
-  const {updateInvitee} = useUpdateInvitee();
+
   console.log("update_data!!",data);
-  const processedData = {
-    id: id,
-    family_kj: "",
-    first_kj: "",
-    family_kn: "",
-    first_kn: "",
-    zip_code: "",
-    address_text: "",
-    email: "",
-    file_url: "",
-    allergy: "",
-    join_flag: data[`join_flag`], 
-    userId: data[`userId`]
-  };
-  
-  updateInvitee(processedData);
+
 }
 
 
@@ -35,6 +20,7 @@ export function InvitationDetail() {
   const router = useRouter();
   const { user, setUser } = useUserState();
   const { uuid } = router.query;
+  
   const {
     register,
     handleSubmit,

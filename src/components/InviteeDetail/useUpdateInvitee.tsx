@@ -6,20 +6,22 @@ import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 
 export const useUpdateInvitee = () => {
+  const router = useRouter();
   const [updInvitee, { loading, error }] = useMutation(UPDATE_INVITEE, {
     onCompleted: () => {
-      const router = useRouter();
+      console.log("更新完了！！");
+      
       router.push('/invitee_list');
     },
     onError: (error: any) => {
-      console.error('Error posting invitation:', error);
+      console.error('招待者更新エラー', error);
       if (error.graphQLErrors) {
         error.graphQLErrors.forEach(({ message, locations, path }) => {
-          console.error(`GraphQL error: ${message}`);
+          console.error(`GraphQLエラー: ${message}`);
         });
       }
       if (error.networkError) {
-        console.error('Network error:', error.networkError.message);
+        console.error('Networkエラー:', error.networkError.message);
       }
     },
   });

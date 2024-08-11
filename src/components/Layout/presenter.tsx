@@ -1,7 +1,8 @@
 import styles from './index.module.scss';
 import { NextRouter } from 'next/router';
-import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt } from 'react-icons/fa';
+import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { GiDiamondRing } from 'react-icons/gi';
+import { useState } from 'react';
 
 type Props = {
   logout: () => void;
@@ -9,14 +10,20 @@ type Props = {
 };
 
 export function Presenter(props: Props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const handleToggleMenu = () => {
+    setMenuOpen(!menuOpen);
+  };
+
   return (
     <header className={styles.header}>
       <nav className={styles.nav}>
         <div className={styles.logo}>
           <GiDiamondRing className={styles.iconLogo} />
-          Wedding Net
+          <span className={styles.logoText}>Wedding Net</span>
         </div>
-        <div className={styles.navLinks}>
+        <div className={`${styles.navLinks} ${menuOpen ? styles.navLinksOpen : ''}`}>
           <button onClick={() => props.router.push('/invitee')}>
             <FaUsers className={styles.icon} />
             <div className={styles.title}>招待者</div>
@@ -45,10 +52,13 @@ export function Presenter(props: Props) {
             <FaThList className={styles.icon} />
             <div className={styles.title}>招待者一覧</div>
           </button>
+          <button className={styles.btnLogOut} onClick={() => props.logout()}>
+            <FaSignOutAlt className={styles.icon} />
+            <div className={styles.title}>ログアウト</div>
+          </button>
         </div>
-        <button className={styles.btnLogOut} onClick={() => props.logout()}>
-          <FaSignOutAlt className={styles.icon} />
-          <div className={styles.title}>ログアウト</div>
+        <button className={styles.hamburger} onClick={handleToggleMenu}>
+          <FaBars />
         </button>
       </nav>
     </header>

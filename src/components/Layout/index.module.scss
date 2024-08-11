@@ -1,26 +1,170 @@
 @import "../../styles/common.scss";
 
 .header {
-    position: fixed; // ナビゲーションバーを固定
-    top: 0; // 画面上部に配置
-    left: 0; // 画面左端に配置
-    width: 100%; // 画面幅いっぱいに広がる
-    z-index: 100; // 他の要素の上に表示されるようにする
-}
-  
-.nav {
-    background: #1D9BF0; // ナビゲーションバーの背景色
-    display: flex; // ナビゲーション要素を水平に並べる
-    justify-content: flex-start; // ナビゲーション要素を右側に寄せる
-    align-items: center;
-    height: 50px;
-    padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100;
+  background-color: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
 }
 
-.btnCreate {
-    @include button-main
-  }
-  
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%; 
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  font-family: 'Noto Sans JP', sans-serif; 
+}
+
+.iconLogo {
+  font-size: 2rem;
+  margin-right: 10px;
+  color: #39d353;
+}
+
+.navLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.navLinks button {
+  font-size: 16px;
+  color: #4a4a4a;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight: 500;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  background: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s ease;
+  padding: 10px 15px; 
+}
+
+.navLinks button:focus,
+.navLinks button:hover {
+  color: #333;
+}
+
+.navLinks button:focus:after,
+.navLinks button:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.navLinks button:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #39d353; 
+  transition: width 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), left 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.icon {
+  font-size: 1.2rem;
+  color: #39d353;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
 .btnLogOut {
-    @include button-tertiary
+  background-color: #fff; 
+  border: none;
+  padding: 10px 20px; 
+  color: #ff5c5c;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 15px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btnLogOut:hover {
+  background-color: #ff5c5c;
+  color: white; 
+}
+
+.custom-box {
+  position: relative;
+  display: block;
+  width: 140px;
+  height: auto;
+  overflow: hidden;
+  padding: 15px;
+  text-align: center;
+  margin: 0 5px;
+  background: transparent;
+  font-weight: 700;
+  transition: box-shadow 0.5s linear;
+}
+
+.custom-box::before,
+.custom-box::after {
+  position: absolute;
+  content: '';
+  box-sizing: border-box;
+  width: 100%;
+  height: 4px;
+  border-color: transparent;
+}
+
+.custom-box::before {
+  left: 0;
+  bottom: 0;
+  border-bottom: 4px solid transparent;
+  border-left: 4px solid transparent;
+  transform: translateX(100%);
+}
+
+.custom-box::after {
+  top: 0;
+  left: 0;
+  border-top: 4px solid transparent;
+  border-right: 4px solid transparent;
+  transform: translateX(-100%);
+}
+
+.custom-box:hover {
+  box-shadow: none;
+}
+
+.custom-box:hover::before {
+  border-color: #fcd894;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .3s;
+}
+
+.custom-box:hover::after {
+  border-color: #fcd894;
+  height: 100%;
+  transform: translateX(0);
+  transition: .3s transform linear, .3s height linear .5s;
 }

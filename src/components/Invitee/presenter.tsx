@@ -15,17 +15,14 @@ type Props = {
   router: NextRouter;
 };
 
-
-
 export function Presenter(props: Props) {
   useImagePreview('imageInput', 'imagePreview');
-  console.log(props.data);
-  
+
   return (
-    <>
-      <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
+    <div className={styles.backgroundWrapper}>
+      <form className={styles.inviteForm} onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className={styles.formWrapper}>
-          <div>招待者登録</div>
+          <h2 className={styles.title}>招待者登録</h2>
           <div className={styles.error}>
             {props.errors.family_kj && <span>苗字 is required</span>}
             {props.errors.first_kj && <span>名前 is required</span>}
@@ -33,42 +30,27 @@ export function Presenter(props: Props) {
             {props.errors.first_kn && <span>なまえ is required</span>}
           </div>
           <div className={styles.inputWrapper}>
-            <input type='text' placeholder='苗字' {...props.register('family_kj', {
-              required: true
-            })} />
-            <input type='text' placeholder='名前' {...props.register('first_kj', {
-              required: true
-            })} />
-            <input type='text' placeholder='みょうじ' {...props.register('family_kn', {
-              required: true
-            })} />
-            <input type='text' placeholder='なまえ' {...props.register('first_kn', {
-              required: true
-            })} />
-            <input type='text' placeholder='郵便番号' {...props.register('zip_code', {
-              required: true
-            })} />
-            <input type='text' placeholder='住所' {...props.register('address_text', {
-              required: true
-            })} />
-            <input type='email' placeholder='email' {...props.register('email', {
-              required: true
-            })} />
+            <input type='text' placeholder='苗字' {...props.register('family_kj', { required: true })} />
+            <input type='text' placeholder='名前' {...props.register('first_kj', { required: true })} />
+            <input type='text' placeholder='みょうじ' {...props.register('family_kn', { required: true })} />
+            <input type='text' placeholder='なまえ' {...props.register('first_kn', { required: true })} />
+            <input type='text' placeholder='郵便番号' {...props.register('zip_code', { required: true })} />
+            <input type='text' placeholder='住所' {...props.register('address_text', { required: true })} />
+            <input type='email' placeholder='email' {...props.register('email', { required: true })} />
             <input type='text' placeholder='アレルギー' {...props.register('allergy', { required: true })} />
             <input type='file' id="imageInput"  {...props.register('file_url', { required: true })} />
             <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview}/>
           </div>
           <input
-              type='hidden'
-              defaultValue={props.userId}
-              {...props.register('userId', { required: true })}
-            />
-          <button className={styles.submitBtn} type='submit'>
+            type='hidden'
+            defaultValue={props.userId}
+            {...props.register('userId', { required: true })}
+          />
+          <button className="bg-gray-800 hover:bg-gray-900 text-white font-bold py-2 px-4 rounded-full cursor-pointer" type='submit'>
             登録
           </button>
         </div>
       </form>
-
-    </>
+    </div>
   );
 }

@@ -1,6 +1,7 @@
 import { GetMessagesQuery } from '@/graphql/generated/graphql'
 import { NextRouter } from 'next/router'
-import { FiGift } from 'react-icons/fi'
+import { FaClock } from 'react-icons/fa';
+
 
 type Props = {
   data: GetMessagesQuery
@@ -23,8 +24,8 @@ export function Presenter(props: Props) {
     <>
       <div className="flex items-center justify-between px-5 md:px-8 mt-28 mb-4">
         <div className="flex items-center">
-          <FiGift className="text-2xl text-red-500 mr-2" />
-          <h2 className="text-2xl font-bold">お祝いのコメント</h2>
+          <FaClock className="text-2xl text-green-800 mr-2" />
+          <h2 className="text-2xl font-bold">タイムライン</h2>
         </div>
         <div>
           <button

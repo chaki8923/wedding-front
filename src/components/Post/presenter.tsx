@@ -28,12 +28,12 @@ export function Presenter(props: Props) {
           rows="4"
           name="comment"
           id="comment"
-          placeholder="ご結婚おめでとうございます！！"
+          placeholder="タイムラインを入力してください"
           className="p-3 block w-[600px] h-[200px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 outline-none"
           {...props.register('text', { required: true })}
         ></textarea>
         {props.errors.text && (
-          <span className="text-red-600">※お祝いのコメントを書きましょう！</span>
+          <span className="text-red-600">※タイムラインの入力は必須です</span>
         )}
       </div>
       <div className="mt-4">
@@ -49,7 +49,7 @@ export function Presenter(props: Props) {
           type="button"
           onClick={props.handleSubmit(props.onSubmit)}
         >
-          投稿する
+          作成
         </button>
       </div>
     </div>

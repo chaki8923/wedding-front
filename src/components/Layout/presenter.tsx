@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import { NextRouter } from 'next/router';
-import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaCommentAlt, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { GiDiamondRing } from 'react-icons/gi';
 import { useState } from 'react';
 
@@ -33,8 +33,8 @@ export function Presenter(props: Props) {
             <div className={styles.title}>招待状</div>
           </button>
           <button onClick={() => props.router.push('/timeLine')}>
-            <FaClock className={styles.icon} />
-            <div className={styles.title}>投稿</div>
+            <FaCommentAlt className={styles.icon} />
+            <div className={styles.title}>コメント</div>
           </button>
           <button onClick={() => props.router.push('/send_mail')}>
             <FaEnvelope className={styles.icon} />

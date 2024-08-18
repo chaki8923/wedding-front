@@ -36,7 +36,7 @@ export function Presenter(props: Props) {
           </button>
         </div>
       </div>
-      <div className="px-5 md:px-8 space-y-4">
+      <div className="px-5 md:px-8 mb-6 space-y-4">
         {props.data.getMessages.map((message, index) => (
           <div
             key={index}

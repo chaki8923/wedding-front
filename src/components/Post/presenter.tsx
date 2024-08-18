@@ -49,7 +49,7 @@ export function Presenter(props: Props) {
           type="button"
           onClick={props.handleSubmit(props.onSubmit)}
         >
-          作成
+          投稿
         </button>
       </div>
     </div>

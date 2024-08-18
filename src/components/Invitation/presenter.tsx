@@ -4,7 +4,7 @@ import { useMutation } from '@apollo/client';
 import { NextRouter } from 'next/router';
 import { DELETE_INVITATION } from '@/graphql/document';
 import { GetInvitationQuery } from '@/graphql/generated/graphql';
-import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormDelete } from 'react-hook-form';
+import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import useImagePreview from '@/hooks/useImagePreview';
 import { useRouter } from 'next/router';
 import Link from "next/link";

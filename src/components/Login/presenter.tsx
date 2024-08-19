@@ -13,7 +13,7 @@ type Props = {
 
 export function Presenter(props: Props) {
   return (
-    <div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf1.png')" }}>
+    <div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf19.png')" }}>
       <div className="absolute top-10 left-1/2 transform -translate-x-1/2 text-2xl text-black text-center">
         WEDDING GATE
       </div>

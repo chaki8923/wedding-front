@@ -34,7 +34,7 @@ export function Presenter(props: Props) {
           </button>
           <button onClick={() => props.router.push('/timeLine')}>
             <FaClock className={styles.icon} />
-            <div className={styles.title}>投稿</div>
+            <div className={styles.title}>タイムライン</div>
           </button>
           <button onClick={() => props.router.push('/send_mail')}>
             <FaEnvelope className={styles.icon} />

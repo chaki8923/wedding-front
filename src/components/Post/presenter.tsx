@@ -25,8 +25,7 @@ export function Presenter(props: Props) {
           {...props.register('userId', { required: true })}
         />
         <textarea
-          rows="4"
-          name="comment"
+          rows={4}
           id="comment"
           placeholder="タイムラインを入力してください"
           className="p-3 block w-[600px] h-[200px] rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6 outline-none"

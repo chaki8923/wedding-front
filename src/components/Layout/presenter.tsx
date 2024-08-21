@@ -1,8 +1,8 @@
 import styles from './index.module.scss';
 import { NextRouter } from 'next/router';
+import { useState } from 'react';
 import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { GiDiamondRing } from 'react-icons/gi';
-import { useState } from 'react';
 
 type Props = {
   logout: () => void;

@@ -1,7 +1,7 @@
 import { Presenter } from '@/components/Layout/presenter';
 import useLogout from '@/components/Layout/useLogout';
-import type { ReactNode } from 'react';
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
 type LayoutProps = {
   children: ReactNode;
 };

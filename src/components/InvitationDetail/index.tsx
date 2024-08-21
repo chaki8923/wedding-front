@@ -1,20 +1,18 @@
+import { useShowInvitation } from './useShowInvitation';
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/InvitationDetail/presenter';
+import { Invitee as InvForm } from '@/types/form';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useShowInvitation } from './useShowInvitation';
-import { Invitation as InvForm } from '@/types/form';
-import { useParams } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 
 
-const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {    
+const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
 
   console.log("update_data!!",data);
 
 }
-
 
 export function InvitationDetail() {
   const router = useRouter();
@@ -34,6 +32,10 @@ export function InvitationDetail() {
   if (error) {
     setUser(null);
     router.push('/');
+  }
+
+  if (!user) {
+    return <span>UserId is not set...</span>;
   }
 
   return <>{data && <Presenter

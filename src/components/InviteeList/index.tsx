@@ -1,9 +1,9 @@
+import { useGetInvitee } from './useGetInvitee';
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/InviteeList/presenter';
+import { Invitee as InvForm } from '@/types/form';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useGetInvitee } from './useGetInvitee';
-import { Invitation as InvForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 
@@ -25,6 +25,11 @@ export function InviteeList() {
     setUser(null);
     router.push('/');
   }
+
+  if (!user) {
+    return <span>UserId is not set...</span>;
+  }
+
 
   return <>{data && <Presenter
              data={data}

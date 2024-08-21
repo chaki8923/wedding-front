@@ -1,5 +1,5 @@
-import { UploadFile } from '@/components/Upload';
 import { Layout } from '@/components/Layout';
+import { UploadFile } from '@/components/Upload';
 import type { NextPageWithLayout } from '@/pages/_app';
 import React from 'react';
 

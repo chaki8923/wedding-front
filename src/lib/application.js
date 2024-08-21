@@ -1,7 +1,7 @@
 import { ApolloClient, InMemoryCache, HttpLink, ApolloProvider, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
-import { useCookies } from 'react-cookie';
 import createUploadLink from "apollo-upload-client/createUploadLink.mjs";
+import { useCookies } from 'react-cookie';
 
 const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {

@@ -1,10 +1,10 @@
 import styles from './index.module.scss';
 import { ShowInvitationQuery } from '@/graphql/generated/graphql';
-import React, { useState } from 'react';
-import { NextRouter } from 'next/router';
 import useImagePreview from '@/hooks/useImagePreview';
+import { Invitee, Invitation } from '@/types/form';
+import { NextRouter } from 'next/router';
+import React, { useState } from 'react';
 import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
-import { Invitee } from '@/types/form';
 
 type Props = {
   data: ShowInvitationQuery;
@@ -21,7 +21,7 @@ export function Presenter(props: Props) {
     <>
       <div className={styles.contentWrapper}>
         <h1>招待状詳細画面です</h1>
-        <form onSubmit={props.handleSubmit((data) => props.onSubmit(data, props.data.showInvitation.id))}>
+        <form onSubmit={props.handleSubmit((data) => props.onSubmit(data))}>
           <p>
             <label>
               出席:
@@ -30,7 +30,7 @@ export function Presenter(props: Props) {
           </p>
           <input
             type='hidden'
-            defaultValue={props.data.user_id}
+            defaultValue={props.userId}
             {...props.register(`id`, { required: true })}
           />
           <button className={styles.submitBtn} type='submit'>

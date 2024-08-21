@@ -1,5 +1,5 @@
-import { Mail } from '@/components/Mail';
 import { Layout } from '@/components/Layout';
+import { Mail } from '@/components/Mail';
 import type { NextPageWithLayout } from '@/pages/_app';
 import React from 'react';
 

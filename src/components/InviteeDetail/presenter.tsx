@@ -1,12 +1,12 @@
 import styles from './index.module.scss';
-import { ShowInviteeQuery, ShowInvitationQuery } from '@/graphql/generated/graphql';
-import React, { useState } from 'react';
-import { NextRouter, useRouter } from 'next/router';
-import { useMutation } from '@apollo/client';
-import useImagePreview from '@/hooks/useImagePreview';
 import { DELETE_INVITEE } from '@/graphql/document';
-import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { ShowInviteeQuery, ShowInvitationQuery } from '@/graphql/generated/graphql';
+import useImagePreview from '@/hooks/useImagePreview';
 import { Invitee } from '@/types/form';
+import { useMutation } from '@apollo/client';
+import { NextRouter, useRouter } from 'next/router';
+import React, { useState } from 'react';
+import { SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
   data: ShowInviteeQuery;
@@ -66,7 +66,7 @@ export function Presenter(props: Props) {
           <p>コメント:{props.inv.showInvitation.comment}</p>
         </div>
 
-        <form onSubmit={props.handleSubmit((data) => props.onSubmit(data, props.data.showInvitee.id))}>
+        <form onSubmit={props.handleSubmit((data) => props.onSubmit(data))}>
           <div className={styles.card}>
             {isEditing ? (
               <p>
@@ -74,13 +74,13 @@ export function Presenter(props: Props) {
                   出席:
                   <input
                     type='checkbox'
-                    {...props.register(`join_flag_${props.data.showInvitee.id}`)}
+                    {...props.register(`join_flag_${props.data.showInvitee.id}` as keyof Invitee)}
                     defaultChecked={props.data.showInvitee.join_flag}
                   />
                 </label>
               </p>
             ) : (
-              <p onClick={handleEditClick}>出席　{props.data.showInvitee.join_flag ? '出席' : '欠席'}</p>
+              <p onClick={handleEditClick}>出席 {props.data.showInvitee.join_flag ? '出席' : '欠席'}</p>
             )}
             {isEditing ? (
               <>
@@ -88,7 +88,7 @@ export function Presenter(props: Props) {
                   type='text'
                   placeholder='苗字'
                   defaultValue={props.data.showInvitee.family_kj}
-                  {...props.register(`family_kj_${props.data.showInvitee.id}`, {
+                  {...props.register(`family_kj_${props.data.showInvitee.id}` as keyof Invitee, {
                     required: false
                   })}
                 />
@@ -96,14 +96,14 @@ export function Presenter(props: Props) {
                   type='text'
                   placeholder='名前'
                   defaultValue={props.data.showInvitee.first_kj}
-                  {...props.register(`first_kj_${props.data.showInvitee.id}`, {
+                  {...props.register(`first_kj_${props.data.showInvitee.id}` as keyof Invitee, {
                     required: false
                   })}
                 />
               </>
             ) : (
               <p onClick={handleEditClick}>
-                氏名　{props.data.showInvitee.family_kj} {props.data.showInvitee.first_kj}
+                氏名 {props.data.showInvitee.family_kj} {props.data.showInvitee.first_kj}
               </p>
             )}
             {isEditing ? (
@@ -113,25 +113,25 @@ export function Presenter(props: Props) {
                   type='text'
                   placeholder='みょうじ'
                   defaultValue={props.data.showInvitee.family_kn}
-                  {...props.register(`family_kn_${props.data.showInvitee.id}`, {
+                  {...props.register(`family_kn_${props.data.showInvitee.id}` as keyof Invitee, {
                     required: false
                   })} />
                 <input type='text'
                   defaultValue={props.data.showInvitee.first_kn}
                   placeholder='なまえ'
-                  {...props.register(`first_kn_${props.data.showInvitee.id}`, {
+                  {...props.register(`first_kn_${props.data.showInvitee.id}` as keyof Invitee, {
                     required: false
                   })} />
 
               </>
             ) : (
               <p onClick={handleEditClick}>
-                しめい　{props.data.showInvitee.family_kn} {props.data.showInvitee.first_kn}
+                しめい {props.data.showInvitee.family_kn} {props.data.showInvitee.first_kn}
               </p>
             )}
             {isEditing ? (
               <>
-                <input type='email' placeholder='email' defaultValue={props.data.showInvitee.email} {...props.register(`email_${props.data.showInvitee.id}`, {
+                <input type='email' placeholder='email' defaultValue={props.data.showInvitee.email} {...props.register(`email_${props.data.showInvitee.id}` as keyof Invitee, {
                   required: false
                 })} />
               </>
@@ -140,29 +140,29 @@ export function Presenter(props: Props) {
             )}
             {isEditing ? (
               <>
-                <input type='text' placeholder='郵便番号' defaultValue={props.data.showInvitee.zip_code} {...props.register(`zip_code_${props.data.showInvitee.id}`, {
+                <input type='text' placeholder='郵便番号' defaultValue={props.data.showInvitee.zip_code} {...props.register(`zip_code_${props.data.showInvitee.id}` as keyof Invitee, {
                   required: false
                 })} />
 
               </>
             ) : (
-              <p onClick={handleEditClick}>〒　{props.data.showInvitee.zip_code}</p>
+              <p onClick={handleEditClick}>〒 {props.data.showInvitee.zip_code}</p>
             )}
             {isEditing ? (
               <>
-                <input type='text' placeholder='住所' defaultValue={props.data.showInvitee.address_text} {...props.register(`address_text_${props.data.showInvitee.id}`, {
+                <input type='text' placeholder='住所' defaultValue={props.data.showInvitee.address_text} {...props.register(`address_text_${props.data.showInvitee.id}` as keyof Invitee, {
                   required: false
                 })} />
               </>
             ) : (
-              <p onClick={handleEditClick}>住所　{props.data.showInvitee.address_text}</p>
+              <p onClick={handleEditClick}>住所 {props.data.showInvitee.address_text}</p>
             )}
             {isEditing ? (
               <>
-                <input type='text' placeholder='アレルギー' defaultValue={props.data.showInvitee.allergy} {...props.register(`allergy_${props.data.showInvitee.id}`, { required: false })} />
+                <input type='text' placeholder='アレルギー' defaultValue={props.data.showInvitee.allergy} {...props.register(`allergy_${props.data.showInvitee.id}` as keyof Invitee, { required: false })} />
               </>
             ) : (
-              <p onClick={handleEditClick}>アレルギー　{props.data.showInvitee.allergy}</p>
+              <p onClick={handleEditClick}>アレルギー {props.data.showInvitee.allergy}</p>
             )}
             <img src={props.data.showInvitee.file_url} alt="" />
             {isEditing ? (
@@ -174,17 +174,22 @@ export function Presenter(props: Props) {
                 削除
               </button>
             }
-            <input onClick={handleEditClick} type='file' id={`imageInput_${props.data.showInvitee.id}`} {...props.register(`file_url_${props.data.showInvitee.id}`, { required: false })} />
+            <input onClick={handleEditClick} type='file' id={`imageInput_${props.data.showInvitee.id}`} {...props.register(`file_url_${props.data.showInvitee.id}` as keyof Invitee, { required: false })} />
             <img id={`imagePreview_${props.data.showInvitee.id}`} src="" alt="Image Preview" className={styles.imagePreview} />
             <input
               type='hidden'
               defaultValue={props.userId}
-              {...props.register(`userId_${props.data.showInvitee.id}`, { required: true })}
+              {...props.register(`userId_${props.data.showInvitee.id}` as keyof Invitee, { required: true })}
             />
             <input
               type='hidden'
               defaultValue={props.data.showInvitee.id}
-              {...props.register(`id_${props.data.showInvitee.id}`, { required: true })}
+              {...props.register(`id_${props.data.showInvitee.id}` as keyof Invitee, { required: true })}
+            />
+            <input
+              type='hidden'
+              defaultValue={props.data.showInvitee.id}
+              {...props.register(`id`, { required: true })}
             />
             <button className={styles.submitBtn} type='submit'>
               更新

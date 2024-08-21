@@ -1,8 +1,8 @@
+import { useGetImages } from './useGetImages';
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/Images/presenter';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useGetImages } from './useGetImages';
 
 export function ImageList() {
   const { setUser } = useUserState();

@@ -1,7 +1,7 @@
-import React from 'react';
+import useImagePreview from '@/hooks/useImagePreview';
 import { Upload } from '@/types/form';
 import { NextRouter } from 'next/router';
-import useImagePreview from '@/hooks/useImagePreview';
+import React from 'react';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
 

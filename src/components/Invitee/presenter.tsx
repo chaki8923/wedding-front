@@ -1,8 +1,8 @@
 import styles from './index.module.scss';
-import { Invitee } from '@/types/form';
-import { NextRouter } from 'next/router';
 import { GetAllergyQuery } from '@/graphql/generated/graphql';
 import useImagePreview from '@/hooks/useImagePreview';
+import { Invitee } from '@/types/form';
+import { NextRouter } from 'next/router';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {

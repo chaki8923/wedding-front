@@ -1,12 +1,12 @@
+import { useShowInvitation } from '../InvitationDetail/useShowInvitation';
+import { useShowInvitee } from './useShowInvitee';
+import { useUpdateInvitee } from './useUpdateInvitee';
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/InviteeDetail/presenter';
+import { Invitee as InvForm } from '@/types/form';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { useShowInvitee } from './useShowInvitee';
-import { useShowInvitation } from '../InvitationDetail/useShowInvitation';
-import { Invitation as InvForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useUpdateInvitee } from './useUpdateInvitee';
 
 
 
@@ -18,8 +18,9 @@ export function InviteeDetail() {
   
   const { updateInvitee } = useUpdateInvitee();
 
-  const onSubmit: SubmitHandler<InvForm> = async (data: any, id: string) => {
+  const onSubmit: SubmitHandler<InvForm> = async (data: any) => {
     console.log("update_data!!", data);
+    const id = data.id; 
     const processedData = {
       id: id,
       family_kj: data[`family_kj_${id}`],
@@ -45,11 +46,12 @@ export function InviteeDetail() {
     formState: { errors },
   } = useForm<InvForm>();
 
+  const uuidString = Array.isArray(uuid) ? uuid[0] : uuid || "";
   const {
     loading: loadingInvitee,
     data: inviteeData,
     error: inviteeError,
-  } = useShowInvitee({ uuid });
+  } = useShowInvitee({ uuid: uuidString });
 
   const {
     loading: loadingInvitation,
@@ -60,8 +62,12 @@ export function InviteeDetail() {
 
   if (loadingInvitee || loadingInvitation) <span>Loading...</span>;
   if (inviteeError || invitationError) {
-    setUser(null);
-    router.push('/');
+    // setUser(null);
+    // router.push('/');
+  }
+
+  if (!user) {
+    return <span>UserId is not set...</span>;
   }
 
   return <>{inviteeData && <Presenter

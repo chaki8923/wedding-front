@@ -16,7 +16,7 @@ type Props = {
 
 export function Presenter(props: Props) {
   return (
-    <>
+    <><div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf24.png')" }}>
       <form className="mt-28" onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className="flex flex-col items-center">
           <div className="text-gray-600 text-xl pb-8 flex items-center">
@@ -89,6 +89,7 @@ export function Presenter(props: Props) {
           </button>
         </div>
       </form>
+      </div>
     </>
   )
 }

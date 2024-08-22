@@ -3,31 +3,31 @@ init:
 	@make up
 	@make install
 install:
-	docker-compose exec front yarn
+	docker compose exec front yarn
 build:
-	docker-compose build --no-cache
+	docker compose build --no-cache
 stop:
-	docker-compose stop
+	docker compose stop
 up:
-	docker-compose up -d
+	docker compose up -d
 down:
-	docker-compose down
+	docker compose down
 app:
-	docker-compose exec front sh
+	docker compose exec front sh
 generate:
-	docker-compose exec front yarn generate
+	docker compose exec front yarn generate
 dev:
-	docker-compose exec front yarn dev
+	docker compose exec front yarn dev
 build-app:
-	docker-compose exec front yarn build
+	docker compose exec front yarn build
 start-app:
-	docker-compose exec front yarn start
+	docker compose exec front yarn start
 fix:
 	@make lint
 	@make format
 lint:
-	docker-compose exec front yarn lint:fix
+	docker compose exec front yarn lint:fix
 format:
-	docker-compose exec front yarn prettier:fix
+	docker compose exec front yarn prettier:fix
 test:
-	docker-compose exec front yarn jest
+	docker compose exec front yarn jest

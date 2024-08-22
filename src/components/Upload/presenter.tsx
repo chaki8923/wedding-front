@@ -1,3 +1,4 @@
+import styles from './index.module.scss';
 import useImagePreview from '@/hooks/useImagePreview';
 import { Upload } from '@/types/form';
 import { NextRouter } from 'next/router';
@@ -18,7 +19,7 @@ export function Presenter(props: Props) {
   useImagePreview('dropzone-file', 'imagePreview');
 
   return (
-    <><div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf32.png')" }}>
+    <div className={styles.contentWrapper}>
       <form className="mt-28" onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className="flex flex-col items-center">
           <div className="text-gray-600 text-xl pb-8 flex items-center">
@@ -81,7 +82,6 @@ export function Presenter(props: Props) {
           </button>
         </div>
       </form>
-      </div>
-    </>
+    </div>
   );
 }

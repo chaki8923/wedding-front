@@ -1,143 +1,66 @@
 @import "../../styles/common.scss";
 
+.backgroundWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/leaf50.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw; 
+  height: 100vh; 
+}
+
 .loginForm {
-    margin-top: 150px;
+  background-color: transparent; 
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: none;
+  border: none;
 }
 
 .error {
-    @include common-error
-}
-
-.align-items {
-    display: flex;
-    flex-direction: column; /* 縦方向に並べる */
-    align-items: center; /* 中央寄せする場合 */
+  @include common-error;
+  margin-bottom: 20px;
+  color: #ff0000; 
 }
 
 .formWrapper {
-    &:first-child {
-        color:  #757575;
-      }
-
-    @extend .align-items
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .inputWrapper {
-    @extend .align-items;
-    
-    input {
-      color: #757575;
-      margin-bottom: 15px;
-      border: none;
-      border-bottom: 0.5px solid #c0c0c0;
-      width: 250px;
-    }
-  }
-
-.submitBtn {
-    margin-top: 15px;
-    width: 250px;
-    @include button-main
-}
-
-@import "../../styles/common.scss";
-
-.svg {
-  width: 32px;
-  height: 32px;
-}
-
-.contentWrapper {
-  padding-top: 60px;
-}
-
-.tweetContentWrapper {
-  display: flex;
-  padding-top: 5px;
-  margin-bottom: 25px;
-  position: relative;
-
-  // 擬似クラス作成
-  &:after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    margin-top: 20px;
-    background-color: #E0E0E0;
-  }
-}
-
-.tweet {
   display: flex;
   flex-direction: column;
-  margin-left: 8px;
-  }
-
-.tweetUser {
-  max-width: 560px;
-  span {
-    &:first-child {
-      color: #757575;
-      font-weight: bold;
-    }
-    &:nth-child(2) {
-      color: #757575;
-      font-size: 10px;
-      margin-left: 4px;
-    }
-  }
-}
-
-.tweetText {
-  display: inline-block;
-  max-width: 560px;
-  font-size: 15px;
-  white-space: pre-wrap;
-  overflow-wrap: break-word;
-  color: #757575;
-}
-
-.card{
-  border: 1px solid #333;
-  width: 50%;
-  img{
+  align-items: center;
+  input {
+    color: #757575;
+    margin-bottom: 15px;
+    border: none;
+    border-bottom: 0.5px solid #c0c0c0;
     width: 100%;
   }
 }
 
-.btnWrapper {
-  position: fixed;
-  max-width: 600px;
+.submitBtn {
+  margin-top: 15px;
   width: 100%;
-  right: calc(50% - 300px - 50px);
-  bottom: 100px;
-  display: flex;
-  justify-content: flex-end;
+  @include button-main;
+}
 
-  button {
-    width: 70px;
-    height: 70px;
-    background: #1D9BF0;
-    color: #FFF;
-    border: none;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 16px;
+.imagePreview {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  border: 1px solid #333;
+  img {
+    width: 100%;
+    height: auto;
   }
-}
-
-.button:focus {
-  outline: none; // フォーカス時のアウトラインを削除
-}
-
-.imagePreview{
-  display: none;
-  width: 320px;
 }

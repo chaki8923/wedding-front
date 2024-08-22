@@ -15,7 +15,7 @@ export function Presenter(props: Props) {
   return (
     <div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf19.png')" }}>
       <div className="absolute top-10 left-1/2 transform -translate-x-1/2 text-2xl text-black text-center">
-        WEDDING GATE
+        <img src="/Logo3.png" alt="Wedding Gate Title" className="w-auto h-auto" />
       </div>
       <form className="flex flex-col items-center p-8 max-w-sm w-full mt-16 text-center" onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className="w-full mb-4">
@@ -23,7 +23,7 @@ export function Presenter(props: Props) {
             id="email"
             type="text"
             className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            placeholder="Email"
+            placeholder="メール"
             {...props.register('email', {
               required: true,
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
@@ -36,15 +36,15 @@ export function Presenter(props: Props) {
             id="password"
             type="password"
             className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            placeholder="Password"
+            placeholder="パスワード"
             {...props.register('password', { required: true })}
           />
           {props.errors.password && <span className="text-red-500 text-xs">※パスワードが正しくありません。※</span>}
         </div>
         <button type="submit" className="p-3 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointe hover:bg-gray-300">
-          L O G I N
+          ログイン
         </button>
-        <div className="mt-4 text-xs text-black cursor-pointer hover:underline">FORGOT PASSWORD?</div>
+        <div className="mt-4 text-xs text-black cursor-pointer hover:underline">パスワードをお忘れですか？</div>
       </form>
     </div>
   );

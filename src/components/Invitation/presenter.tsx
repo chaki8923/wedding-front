@@ -6,7 +6,6 @@ import { Invitation } from '@/types/form';
 import { useMutation } from '@apollo/client';
 import Link from "next/link";
 import { NextRouter } from 'next/router';
-import { useRouter } from 'next/router';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
@@ -14,16 +13,22 @@ type Props = {
   onSubmit: SubmitHandler<Invitation>;
   register: UseFormRegister<Invitation>;
   errors: FieldErrors<Invitation>;
-  data: GetInvitationQuery
+  data: GetInvitationQuery;
   userId: string;
   router: NextRouter;
 };
 
-
-export function Presenter(props: Props) {
-  // カスタムフックを使用して画像プレビュー機能を追加
+export function Presenter({
+  handleSubmit,
+  onSubmit,
+  register,
+  errors,
+  data,
+  userId,
+  router,
+}: Props) {
   useImagePreview('imageInput', 'imagePreview');
-  const router = useRouter();
+  
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
       router.push('/invitation');
@@ -41,7 +46,6 @@ export function Presenter(props: Props) {
     },
   });
 
-
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitation({ variables: { id } });
@@ -50,57 +54,104 @@ export function Presenter(props: Props) {
       console.error('Error deleting invitee:', err);
     }
   };
-  if (props.data === undefined) return <span>Loading...</span>;
+
+  if (data === undefined) return <span>Loading...</span>;
+
   return (
-    <>
-      <form className={styles.loginForm} onSubmit={props.handleSubmit(props.onSubmit)}>
-        <div className={styles.formWrapper}>
-          <div>招待状作成</div>
-          <div className={styles.error}>
-            {props.errors.title && <span>※Title is required</span>}
-            {props.errors.event_date && <span>※開催日 is required</span>}
-            {props.errors.place && <span>※開催場所 is required</span>}
-            {props.errors.userId && <span>※Please login again</span>}
-          </div>
-          <div className={styles.inputWrapper}>
-            <input type='text' placeholder='タイトル' {...props.register('title', {
-              required: true
-            })} />
-            <input type='date' placeholder='開催日' {...props.register('event_date', { required: true })} />
-            <input type='text' placeholder='開催場所' {...props.register('place', { required: true })} />
-            <input type='text' placeholder='コメント' {...props.register('comment', { required: true })} />
-            <input id="imageInput" type='file'  {...props.register('file_url', { required: true })} />
-            <img id="imagePreview" src="" alt="Image Preview" className={styles.imagePreview} />
-            <input
-              type='hidden'
-              defaultValue={props.userId}
-              {...props.register('userId', { required: true })}
-            />
-          </div>
-          <button className={styles.submitBtn} type='submit'>
-            登録
-          </button>
+    <div className={styles.backgroundWrapper}>
+      <form className="flex flex-col items-center w-full max-w-sm mt-28" onSubmit={handleSubmit(onSubmit)}>
+        <h2 className="text-gray-600 text-xl pb-8">招待状作成</h2>
+        <div className="w-full text-red-500 text-xs mb-4">
+          {errors.title && <span>※Title is required</span>}
+          {errors.event_date && <span>※開催日 is required</span>}
+          {errors.place && <span>※開催場所 is required</span>}
+          {errors.comment && <span>※コメント is required</span>}
+          {errors.userId && <span>※Please login again</span>}
         </div>
+        <div className="flex flex-col items-center w-full">
+          <input
+            type='text'
+            placeholder='タイトル'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('title', { required: true })}
+          />
+          <input
+            type='date'
+            placeholder='開催日'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('event_date', { required: true })}
+          />
+          <input
+            type='text'
+            placeholder='開催場所'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('place', { required: true })}
+          />
+          <input
+            type='text'
+            placeholder='コメント'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('comment', { required: true })}
+          />
+          <div className="w-full">
+            <label
+              htmlFor="imageInput"
+              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+            >
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                  className="w-8 h-8 mb-4 text-gray-500"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+              </div>
+              <input
+                id="imageInput"
+                type="file"
+                className="hidden"
+                {...register('file_url', { required: true })}
+              />
+            </label>
+            {errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
+            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+          </div>
+        </div>
+        <input
+          type='hidden'
+          defaultValue={userId}
+          {...register('userId', { required: true })}
+        />
+        <button className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300" type='submit'>
+          登録
+        </button>
       </form>
 
-      {props.data.getInvitation.map((invitation) => (
-        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id} >
+      {data.getInvitation.map((invitation) => (
+        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
           <div className={styles.contentWrapper}>
             <div className={styles.card}>
               <img src={invitation.file_url} alt="" />
-              <p>タイトル:{invitation.title}</p>
-              <p>開催日:{invitation.event_date}</p>
-              <p>コメント:{invitation.comment}</p>
-              <p>uuid:{invitation.uuid}</p>
-
+              <p>タイトル: {invitation.title}</p>
+              <p>開催日: {invitation.event_date}</p>
+              <p>コメント: {invitation.comment}</p>
+              <p>uuid: {invitation.uuid}</p>
               <button onClick={() => handleDelete(invitation.id)}>
                 削除
               </button>
-
             </div>
           </div>
         </Link>
       ))}
-    </>
+    </div>
   );
 }

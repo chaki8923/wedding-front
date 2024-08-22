@@ -1,10 +1,10 @@
+import styles from './index.module.scss';
 import useImagePreview from '@/hooks/useImagePreview';
 import { Upload } from '@/types/form';
 import { NextRouter } from 'next/router';
 import React from 'react';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
-import styles from './index.module.scss';
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Upload>;

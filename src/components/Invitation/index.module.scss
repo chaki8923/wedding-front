@@ -4,11 +4,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-image: url('/leaf43.png');
-  background-size: contain;
+  background-image: url('/leaf50.png');
+  background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  width: 100vw; 
+  height: 100vh; 
 }
 
 .loginForm {

@@ -56,7 +56,7 @@ export function Presenter(props: Props) {
       <div className="flex items-center justify-between px-5 md:px-8 mt-28 mb-6">
         <div className="flex items-center">
           <FaClock className="text-2xl text-green-800 mr-2" />
-          <h2 className="text-2xl font-bold text-green-800">タイムライン</h2>
+          <h2 className="text-2xl font-bold text-green-800">お知らせ</h2>
         </div>
         <div>
           <button

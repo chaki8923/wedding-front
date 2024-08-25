@@ -1,7 +1,7 @@
 import { Presenter } from './presenter';
+import { useSignUp } from './useSignUp';
 import { SignUp as SignUpForm } from '@/types/form';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useSignUp } from './useSignUp';
 
 export function SignUp() {
   const {

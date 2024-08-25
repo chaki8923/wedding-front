@@ -1,6 +1,6 @@
 
-import Link from "next/link";
 import { Login } from '@/types/form';
+import Link from "next/link";
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {

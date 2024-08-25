@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Login } from '@/types/form';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister, UseFormWatch } from 'react-hook-form';
 

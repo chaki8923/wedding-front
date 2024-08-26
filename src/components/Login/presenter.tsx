@@ -1,5 +1,6 @@
 
 import { Login } from '@/types/form';
+import Link from "next/link";
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 
 type Props = {
@@ -29,7 +30,7 @@ export function Presenter(props: Props) {
               pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
             })}
           />
-          {props.errors.email && <span className="text-red-500 text-xs">※メールアドレスが正しくありません。※</span>}
+          {props.errors.email && <span className="text-red-500 text-xs">※メールアドレスの形式が正しくありません。※</span>}
         </div>
         <div className="w-full mb-4 border-bottom border-red-100">
           <input
@@ -39,12 +40,14 @@ export function Presenter(props: Props) {
             placeholder="パスワード"
             {...props.register('password', { required: true })}
           />
-          {props.errors.password && <span className="text-red-500 text-xs">※パスワードが正しくありません。※</span>}
+          {props.errors.password && <span className="text-red-500 text-xs">※パスワードを入力してください。※</span>}
         </div>
         <button type="submit" className="p-3 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointe hover:bg-gray-300">
           ログイン
         </button>
-        <div className="mt-4 text-xs text-black cursor-pointer hover:underline">パスワードをお忘れですか？</div>
+        <Link href='/sign_up'>
+          <div className="mt-4 text-xs text-black cursor-pointer hover:underline">新規登録はこちら</div>
+        </Link>
       </form>
     </div>
   );

@@ -136,9 +136,11 @@ export function Presenter({
         </button>
       </form>
 
-      {data.getInvitation.map((invitation) => (
-        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
-          <div className={styles.contentWrapper}>
+      <hr style={{ borderBottom: '4px solid #3b5a32' }} className="w-full my-8" />
+      
+      <div className={styles.invitationsContainer}>
+        {data.getInvitation.map((invitation) => (
+          <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
             <div className={styles.card}>
               <img src={invitation.file_url} alt="" />
               <p>タイトル: {invitation.title}</p>
@@ -149,9 +151,9 @@ export function Presenter({
                 削除
               </button>
             </div>
-          </div>
-        </Link>
-      ))}
+          </Link>
+        ))}
+      </div>
     </div>
   );
 }

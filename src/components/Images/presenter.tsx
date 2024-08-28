@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import { Slideshow } from './Slideshow';
 import styles from './index.module.scss';
 import { GetImagesQuery } from '@/graphql/generated/graphql';
 import { NextRouter } from 'next/router';
-import { Slideshow } from './Slideshow';
+import React, { useState } from 'react';
 
 type Props = {
   data: GetImagesQuery;

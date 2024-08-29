@@ -34,7 +34,7 @@ const getRandomAvatar = () => {
     <img
       src={randomAvatar}
       alt="User Icon"
-      className="w-24 h-24 rounded-full object-cover" 
+      className="w-24 h-24 rounded-full object-cover"
     />
   );
 };

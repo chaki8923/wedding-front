@@ -54,9 +54,8 @@ export const Slideshow: React.FC<SlideshowProps> = ({
               key={image.id}
               src={image.file_url}
               alt={image.comment}
-              className={`${styles.thumbnail} ${
-                index === currentIndex ? styles.activeThumbnail : ''
-              }`}
+              className={`${styles.thumbnail} ${index === currentIndex ? styles.activeThumbnail : ''
+                }`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}

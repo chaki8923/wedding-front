@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:00000000000:task-definition/front-dev-task-definition:1",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:492343355553:task-definition/front-dev-task-definition:3",
     "containerDefinitions": [
         {
             "name": "front-container",
@@ -29,7 +29,7 @@
             "secrets": [
                 {
                     "name": "NEXT_PUBLIC_API_URL",
-                    "valueFrom": "arn:aws:ssm:ap-northeast-1:00000000000:parameter/NEXT_PUBLIC_API_URL"
+                    "valueFrom": "arn:aws:ssm:ap-northeast-1:492343355553:parameter/NEXT_PUBLIC_API_URL"
                 }
             ],
             "readonlyRootFilesystem": false,
@@ -48,13 +48,14 @@
                 },
                 "secretOptions": []
             },
-            "systemControls": []
+            "systemControls": [],
+            "credentialSpecs": []
         }
     ],
     "family": "front-dev-task-definition",
-    "executionRoleArn": "arn:aws:iam::00000000000:role/front-dev-task-execution-role",
+    "executionRoleArn": "arn:aws:iam::492343355553:role/front-dev-task-execution-role",
     "networkMode": "awsvpc",
-    "revision": 7,
+    "revision": 3,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -105,8 +106,8 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2023-05-02T10:45:49.718Z",
-    "registeredBy": "arn:aws:iam::00000000000:user/admin-user",
+    "registeredAt": "2024-08-25T08:21:58.309Z",
+    "registeredBy": "arn:aws:iam::492343355553:user/hackathon-user",
     "tags": [
         {
             "key": "Environment",

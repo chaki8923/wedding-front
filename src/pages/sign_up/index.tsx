@@ -2,11 +2,11 @@ import { SignUp } from '@/components/SignUp';
 import type { NextPage } from 'next';
 
 const Page: NextPage = () => {
-  return (
-    <>
-      <SignUp />
-    </>
-  );
+    return (
+        <>
+            <SignUp />
+        </>
+    );
 };
 
 export default Page;

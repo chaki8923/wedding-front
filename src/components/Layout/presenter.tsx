@@ -52,6 +52,10 @@ export function Presenter(props: Props) {
             <FaThList className={styles.icon} />
             <div className={styles.title}>招待者一覧</div>
           </button>
+          <button onClick={() => props.router.push('/gift')}>
+            <FaThList className={styles.icon} />
+            <div className={styles.title}>ご祝儀</div>
+          </button>
           <button className={styles.btnLogOut} onClick={() => props.logout()}>
             <FaSignOutAlt className={styles.icon} />
             <div className={styles.title}>ログアウト</div>

@@ -11,9 +11,7 @@ export function Mail() {
     formState: { errors },
   } = useForm<SendMail>();
   const { sendMail } = useMail();
-  const onSubmit: SubmitHandler<SendMail> = async (data: any) => {
-    console.log("送信data", data);
-    
+  const onSubmit: SubmitHandler<SendMail> = async (data: any) => {    
     sendMail(data);
   }
   return (

@@ -1,7 +1,7 @@
 import styles from './index.module.scss';
 import { NextRouter } from 'next/router';
 import { useState } from 'react';
-import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaUsers, FaEnvelope, FaUpload, FaImages, FaThList, FaClock, FaSignOutAlt, FaBars, FaGift } from 'react-icons/fa';
 import { GiDiamondRing } from 'react-icons/gi';
 
 type Props = {
@@ -51,6 +51,10 @@ export function Presenter(props: Props) {
           <button onClick={() => props.router.push('/invitee_list')}>
             <FaThList className={styles.icon} />
             <div className={styles.title}>招待者一覧</div>
+          </button>
+          <button onClick={() => props.router.push('/gift')}>
+            <FaGift className={styles.icon} />
+            <div className={styles.title}>ご祝儀</div>
           </button>
           <button className={styles.btnLogOut} onClick={() => props.logout()}>
             <FaSignOutAlt className={styles.icon} />

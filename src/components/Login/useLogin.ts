@@ -29,7 +29,7 @@ export const useLogin = () => {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        body: params,
+        body: params
       })
         .then((response) => response.json())
         .then((data) => {

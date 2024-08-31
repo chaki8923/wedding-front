@@ -8,7 +8,7 @@ export const useSetCsrf = () => {
             credentials: 'include',
         }).catch((error) => {
             console.error('NoToken!!:', error);
-            router.push('/');
+            router.push('/signup');
         });
 
     return { setCsrf };

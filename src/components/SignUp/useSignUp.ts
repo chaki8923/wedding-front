@@ -1,5 +1,5 @@
+import { useSetCsrf } from './useSetCsrf';
 import { useUserState } from '@/atoms/userAtom';
-import { useSetCsrf } from '@/components/Login/useSetCsrf';
 import { SignUp } from '@/types/form';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo } from 'react';

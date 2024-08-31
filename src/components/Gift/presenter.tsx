@@ -1,15 +1,15 @@
-import { useState } from "react";
 import styles from './index.module.scss';
 import { useRouter } from "next/router";
+import { useState } from "react";
 
 export function Presenter() {
   const { push } = useRouter();
   const [price, setPrice] = useState<number>(); // 初期値を0に設定
-  const [comment, setComment] = useState<String>(); // 初期値を0に設定
+  const [comment, setComment] = useState<string>(); // 初期値を0に設定
 
   return (
     <>
-      <div align="center" className={styles.backgroundWrapper}>
+      <div className={styles.backgroundWrapper}>
         <div>
           <h1>Stripe Test購入画面</h1>
           <div>
@@ -24,12 +24,11 @@ export function Presenter() {
             <input
               type="text"
               value={comment}
-              onChange={(e) => setComment(String(e.target.value))} // 入力値を数値として状態に保存
+              onChange={(e) => setComment(e.target.value)} // 入力値を数値として状態に保存
               placeholder="メッセージを入力してください"
             />
           </div>
           <button
-            align="center"
             onClick={async () => {
               const response = await fetch("/api/checkout_api", {
                 method: "post",

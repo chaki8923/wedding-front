@@ -1,0 +1,23 @@
+.contentWrapper {
+    background-image: url('/leaf32.png');
+    background-size: 1200px 1200px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    min-height: 100vh;
+    padding-top: 130px;
+  }
+  
+
+  .backgroundWrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 140px;
+    align-items: center;
+    background-image: url('/leaf50.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 100vw; 
+    height: 100vh; 
+  }
+  

@@ -1,48 +1,49 @@
-import { useSetCsrf } from './useSetCsrf';
-import { useUserState } from '@/atoms/userAtom';
-import { SignUp } from '@/types/form';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo } from 'react';
-import { useCookies } from 'react-cookie';
+import { useSetCsrf } from './useSetCsrf'
+import { useUserState } from '@/atoms/userAtom'
+import { SignUp } from '@/types/form'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo } from 'react'
+import { useCookies } from 'react-cookie'
 
 export const useSignUp = () => {
-    const { setUser } = useUserState();
-    const { setCsrf } = useSetCsrf();
-    const router = useRouter();
-    const params = useMemo(() => new URLSearchParams(), []);
-    const [cookies, setUseCookies] = useCookies(['_csrf']);
+  const { setUser } = useUserState()
+  const { setCsrf } = useSetCsrf()
+  const router = useRouter()
+  const params = useMemo(() => new URLSearchParams(), [])
+  const [cookies, setUseCookies] = useCookies(['_csrf'])
 
-    useEffect(() => {
-        setUseCookies('_csrf', cookies._csrf);
-    }, [cookies._csrf, setUseCookies]);
+  useEffect(() => {
+    setUseCookies('_csrf', cookies._csrf)
+  }, [cookies._csrf, setUseCookies])
 
-    const signUp = useCallback(
-        async (Inputs: SignUp) => {
-            await setCsrf();
+  const signUp = useCallback(
+    async (Inputs: SignUp) => {
+      await setCsrf()
 
-            params.append('email', Inputs.email);
-            params.append('password', Inputs.password);
-            fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
-                headers: {
-                    'X-CSRF-TOKEN': cookies._csrf,
-                },
-                method: 'POST',
-                mode: 'cors',
-                credentials: 'include',
-                body: params,
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    setUser(data);
-                    router.push('/');
-                })
-                .catch((error) => {
-                    setUser(null);
-                    router.push('/sign_up');
-                });
+      params.append('email', Inputs.email)
+      params.append('password', Inputs.password)
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/signup`, {
+        headers: {
+          'X-CSRF-TOKEN': cookies._csrf,
         },
-        [cookies._csrf, params, router, setCsrf, setUser],
-    );
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        body: params,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data)
+          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
+          router.push('/timeLine')
+        })
+        .catch((error) => {
+          setUser(null)
+          router.push('/sign_up')
+        })
+    },
+    [cookies._csrf, params, router, setCsrf, setUser]
+  )
 
-    return { signUp };
-};
+  return { signUp }
+}

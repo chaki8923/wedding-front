@@ -27,8 +27,8 @@ export function Presenter({
   userId,
   router,
 }: Props) {
+
   useImagePreview('imageInput', 'imagePreview');
-  
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
       router.push('/invitation');

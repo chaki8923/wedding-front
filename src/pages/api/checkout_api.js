@@ -1,7 +1,7 @@
 import { stripe } from "../../lib/server";
 
 export default async function handler(req, res) {
-  const customer = await stripe.customers.retrieve(req.body.customer_id);
+  const customer = await stripe.customers.retrieve("cus_Qko6M6vLPrYILI");
   const session = await stripe.checkout.sessions.create({
     payment_method_types: ["card"],
     line_items: [
@@ -11,9 +11,9 @@ export default async function handler(req, res) {
           product_data: {
             name: "ご祝儀",
             images: ["https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTAKt8Kl1wsLG0CE6IGt_7NyPAo9lGRRZ30Fs2B19SXwOe3M8-V4Ee28lnjMpEFx862I-F66cg0PctGKv_UjClkVi_-_kpMwmCFuUfw022TsH3_7TXFdjNab82tVyNkM85uJyCvVNkjwQE/s1600/wedding_syukufuku.png"],
-            description: req.body.comment,
+            description:"ご祝儀",
           },
-          unit_amount: req.body.price,
+          unit_amount: 10000,
         },
         quantity: 1,
       },

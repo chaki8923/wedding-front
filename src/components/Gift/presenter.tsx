@@ -1,45 +1,53 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
 import styles from './index.module.scss';
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 export function Presenter() {
   const { push } = useRouter();
-  const [price, setPrice] = useState(""); // priceの状態を管理
-
-  const handlePriceChange = (e) => {
-    setPrice(e.target.value);
-  };
-
-  const handlePurchase = async () => {
-    const response = await fetch("/api/checkout_api", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        customer_id: "cus_Qko6M6vLPrYILI", // 顧客ID
-        payment_method_types: ["card"],
-        mode: "payment",
-        price: price
-      }),
-    });
-
-    const result = await response.json();
-    push(result.checkout_url);
-  };
+  const [price, setPrice] = useState<number>(); // 初期値を0に設定
+  const [comment, setComment] = useState<string>(); // 初期値を0に設定
 
   return (
-    <div className={styles.backgroundWrapper}>
-      <h1>Stripe Test購入画面</h1>
-      <input
-        type="number"
-        value={price}
-        onChange={handlePriceChange}
-        placeholder="金額を入力してください"
-      />
-      <button align="center" onClick={handlePurchase}>
-        ご祝儀を送る！
-      </button>
-    </div>
+    <>
+      <div className={styles.backgroundWrapper}>
+        <div>
+          <h1>Stripe Test購入画面</h1>
+          <div>
+            <input
+              type="text"
+              value={price}
+              onChange={(e) => setPrice(Number(e.target.value))} // 入力値を数値として状態に保存
+              placeholder="金額を入力してください"
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)} // 入力値を数値として状態に保存
+              placeholder="メッセージを入力してください"
+            />
+          </div>
+          <button
+            onClick={async () => {
+              const response = await fetch("/api/checkout_api", {
+                method: "post",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  customer_id: "cus_Qko6M6vLPrYILI",
+                  price: price, // 入力された価格を使用
+                  comment: comment,
+                }),
+              }).then((data) => data.json());
+              push(response.checkout_url);
+            }}
+          >
+            ご祝儀を贈る
+          </button>
+        </div>
+      </div>
+    </>
   );
 }

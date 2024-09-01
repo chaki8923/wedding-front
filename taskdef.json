@@ -1,5 +1,5 @@
 {
-    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:492343355553:task-definition/front-dev-task-definition:3",
+    "taskDefinitionArn": "arn:aws:ecs:ap-northeast-1:492343355553:task-definition/front-dev-task-definition:7",
     "containerDefinitions": [
         {
             "name": "front-container",
@@ -55,7 +55,7 @@
     "family": "front-dev-task-definition",
     "executionRoleArn": "arn:aws:iam::492343355553:role/front-dev-task-execution-role",
     "networkMode": "awsvpc",
-    "revision": 3,
+    "revision": 7,
     "volumes": [],
     "status": "ACTIVE",
     "requiresAttributes": [
@@ -106,7 +106,7 @@
     ],
     "cpu": "256",
     "memory": "512",
-    "registeredAt": "2024-08-25T08:21:58.309Z",
+    "registeredAt": "2024-08-30T10:53:10.919Z",
     "registeredBy": "arn:aws:iam::492343355553:user/hackathon-user",
     "tags": [
         {

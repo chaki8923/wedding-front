@@ -19,7 +19,7 @@ type Props = {
 };
 
 export function Presenter(props: Props) {
-  console.log("招待状詳細！！", props.data.showInvitee.id);
+  console.log("招待状詳細です！！", props.data.showInvitee.id);
   useImagePreview('imageInput', 'imagePreview');
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
@@ -55,6 +55,9 @@ export function Presenter(props: Props) {
       console.error('Error deleting invitee:', err);
     }
   };
+  if (!props.inv){
+    return <div>loading...</div>
+  }
   return (
     <>
       <div className={styles.contentWrapper}>

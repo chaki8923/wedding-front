@@ -19,6 +19,7 @@
 
 .card {
   width: 320px;
+  height: fit-content;
   padding: 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -46,7 +47,7 @@
 }
 
 .infoWrapper {
-  width: 100%;
+  // width: 100%;
   text-align: center;
 
   p {

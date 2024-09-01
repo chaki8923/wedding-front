@@ -316,7 +316,7 @@ export function Presenter(props: Props) {
             </div>
             <div className="text-gray-500 text-sm pb-3 flex items-center px-5">
               <FaLightbulb className="w-6 h-6 mr-2" />
-              招待者のメールアドレスをクリックすることで、宛先に追加することができます。
+              招待者のメールアドレスをクリックして、宛先に追加してください。
             </div>
             <div className="flex flex-col items-center w-full max-w-sm">
               <input

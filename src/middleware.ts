@@ -13,5 +13,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/send_mail', '/invitee', '/invitation', '/invitee_list', '/invitee_detail'],
+  matcher: ['/invitee', '/invitation', '/invitee_list', '/invitee_detail'],
 };

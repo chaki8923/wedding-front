@@ -20,8 +20,8 @@ export default async function handler(req, res) {
     ],
     mode: "payment",
     customer: customer.id,
-    success_url: `${process.env.NEXT_PUBLIC_FRONT_URL}/timeLine`,
-    cancel_url: `${process.env.NEXT_PUBLIC_FRONT_URL}/timeLine`,
+    success_url: "https://front.wedding-hackathon.com/timeLine",
+    cancel_url: "https://front.wedding-hackathon.com/timeLine",
   });
   return res.status(200).json({
     checkout_url: session.url,

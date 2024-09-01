@@ -15,7 +15,22 @@ export function InviteeList() {
   const { updateInvitee } = useUpdateInvitee()
 
   const invOnSubmit: SubmitHandler<InvForm> = async (data: any) => {
+<<<<<<< HEAD
+
+    const idKey = Object.keys(data).find((key) => key.startsWith("id_"));
+
+    if (!idKey) {
+      console.error("IDが取得できませんでした");
+      return;
+    }
+
+    // `id_` プレフィックスを除去して実際のIDを取得
+    const id = idKey.replace("id_", "");
+    console.log("取得したID:", id);
+
+=======
     const id = data['id']
+>>>>>>> fork/main
 
     if (!id) {
       console.error('IDが取得できませんでした')

@@ -75,153 +75,166 @@ export function Presenter(props: Props) {
   // 各 form に独立した useForm フックを使用
   const { register, handleSubmit, formState: { errors } } = useForm<Invitee>();
 
-  const onSubmit = (data: Invitee) => {        
+  const onSubmit = (data: Invitee) => {
+    console.log("input", data);
+
     const processedData = {
       ...data,
       id: data.id,
     };
     props.invOnSubmit(processedData);
   };
+
+  const handleButtonClick = (id: string) => {
+    // フォームIDを生成
+    const formId = `form-${id}`;
+    // 特定のフォームを取得して送信
+    const formElement = document.getElementById(formId) as HTMLFormElement;
+    if (formElement) {
+      console.log("submit");
+      
+      // formElement.requestSubmit(); // 特定のフォームのみを送信
+    }
+  };
   return (
     <>
       <div className={styles.contentWrapper}>
         {props.data.getInvitee.map((invitee) => {
-
           return (
             <div key={invitee.id} className={styles.infoWrapper} onClick={() => handleEmailClick(invitee.email)}>
-              <form onSubmit={handleSubmit((data) => onSubmit(data))}>
-            <input
-                  type='hidden'
-                  defaultValue={invitee.id}
-                  {...props.invRegister(`id` as keyof Invitee, { required: true })}
-                />
-
-              <div className={styles.card}>
-                {isEditing ? (
-                  <p>
-                    <label>
-                      出席:
-                      <input
-                        type='checkbox'
-                        {...register(`join_flag_${invitee.id}` as keyof Invitee)}
-                        defaultChecked={invitee.join_flag}
-                      />
-                    </label>
-                  </p>
-                ) : (
-                  <p onClick={handleEditClick}>出席 {invitee.join_flag ? '出席' : '欠席'}</p>
-                )}
-                {isEditing ? (
-                  <>
-                    <input
-                      type='text'
-                      placeholder='苗字'
-                      defaultValue={invitee.family_kj}
-                      {...register(`family_kj_${invitee.id}` as keyof Invitee, {
-                        required: false
-                      })}
-                    />
-                    <input
-                      type='text'
-                      placeholder='名前'
-                      defaultValue={invitee.first_kj}
-                      {...register(`first_kj_${invitee.id}` as keyof Invitee, {
-                        required: false
-                      })}
-                    />
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>
-                    氏名 {invitee.family_kj} {invitee.first_kj}
-                  </p>
-                )}
-                {isEditing ? (
-                  <>
-
-                    <input
-                      type='text'
-                      placeholder='みょうじ'
-                      defaultValue={invitee.family_kn}
-                      {...register(`family_kn_${invitee.id}` as keyof Invitee, {
-                        required: false
-                      })} />
-                    <input type='text'
-                      defaultValue={invitee.first_kn}
-                      placeholder='なまえ'
-                      {...register(`first_kn_${invitee.id}` as keyof Invitee, {
-                        required: false
-                      })} />
-
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>
-                    しめい {invitee.family_kn} {invitee.first_kn}
-                  </p>
-                )}
-                {isEditing ? (
-                  <>
-                    <input type='email' placeholder='email' defaultValue={invitee.email} {...register(`email_${invitee.id}` as keyof Invitee, {
-                      required: false
-                    })} />
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>email {invitee.email}</p>
-                )}
-                {isEditing ? (
-                  <>
-                    <input type='text' placeholder='郵便番号' defaultValue={invitee.zip_code} {...register(`zip_code_${invitee.id}` as keyof Invitee, {
-                      required: false
-                    })} />
-
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>〒 {invitee.zip_code}</p>
-                )}
-                {isEditing ? (
-                  <>
-                    <input type='text' placeholder='住所' defaultValue={invitee.address_text} {...register(`address_text_${invitee.id}` as keyof Invitee, {
-                      required: false
-                    })} />
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>住所 {invitee.address_text}</p>
-                )}
-                {isEditing ? (
-                  <>
-                    <input type='text' placeholder='アレルギー' defaultValue={invitee.allergy} {...register(`allergy_${invitee.id}` as keyof Invitee, { required: false })} />
-                  </>
-                ) : (
-                  <p onClick={handleEditClick}>アレルギー {invitee.allergy}</p>
-                )}
-                <img src={invitee.file_url} alt="" />
-                <input onClick={handleEditClick} type='file' id={`imageInput_${invitee.id}`} {...register(`file_url_${invitee.id}` as keyof Invitee, { required: false })} />
-                <img id={`imagePreview_${invitee.id}`} src="" alt="Image Preview" className={styles.imagePreview} />
-                {isEditing ? (
-                  <>
-                    <span onClick={handleCancel}>キャンセル</span>
-                  </>
-                ) :
-                  <button onClick={() => handleDelete(invitee.id)}>
-                    削除
-                  </button>
-                }
-                <input
-                  type='hidden'
-                  defaultValue={props.userId}
-                  {...register(`userId_${invitee.id}` as keyof Invitee, { required: true })}
-                />
+              <form id={`form-${invitee.id}`} onSubmit={handleSubmit((data) => onSubmit(data))}>
                 <input
                   type='hidden'
                   defaultValue={invitee.id}
                   {...register(`id_${invitee.id}` as keyof Invitee, { required: true })}
                 />
-           
-                <button className={styles.submitBtn} type='submit'>
-                  更新!!
-                </button>
 
-              </div >
-            </form>
+                <div className={styles.card}>
+                  {isEditing ? (
+                    <p>
+                      <label>
+                        出席:
+                        <input
+                          type='checkbox'
+                          {...register(`join_flag_${invitee.id}` as keyof Invitee)}
+                          defaultChecked={invitee.join_flag}
+                        />
+                      </label>
+                    </p>
+                  ) : (
+                    <p onClick={handleEditClick}>出席 {invitee.join_flag ? '出席' : '欠席'}</p>
+                  )}
+                  {isEditing ? (
+                    <>
+                      <input
+                        type='text'
+                        placeholder='苗字'
+                        defaultValue={invitee.family_kj}
+                        {...register(`family_kj_${invitee.id}` as keyof Invitee, {
+                          required: false
+                        })}
+                      />
+                      <input
+                        type='text'
+                        placeholder='名前'
+                        defaultValue={invitee.first_kj}
+                        {...register(`first_kj_${invitee.id}` as keyof Invitee, {
+                          required: false
+                        })}
+                      />
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>
+                      氏名 {invitee.family_kj} {invitee.first_kj}
+                    </p>
+                  )}
+                  {isEditing ? (
+                    <>
+
+                      <input
+                        type='text'
+                        placeholder='みょうじ'
+                        defaultValue={invitee.family_kn}
+                        {...register(`family_kn_${invitee.id}` as keyof Invitee, {
+                          required: false
+                        })} />
+                      <input type='text'
+                        defaultValue={invitee.first_kn}
+                        placeholder='なまえ'
+                        {...register(`first_kn_${invitee.id}` as keyof Invitee, {
+                          required: false
+                        })} />
+
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>
+                      しめい {invitee.family_kn} {invitee.first_kn}
+                    </p>
+                  )}
+                  {isEditing ? (
+                    <>
+                      <input type='email' placeholder='email' defaultValue={invitee.email} {...register(`email_${invitee.id}` as keyof Invitee, {
+                        required: false
+                      })} />
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>email {invitee.email}</p>
+                  )}
+                  {isEditing ? (
+                    <>
+                      <input type='text' placeholder='郵便番号' defaultValue={invitee.zip_code} {...register(`zip_code_${invitee.id}` as keyof Invitee, {
+                        required: false
+                      })} />
+
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>〒 {invitee.zip_code}</p>
+                  )}
+                  {isEditing ? (
+                    <>
+                      <input type='text' placeholder='住所' defaultValue={invitee.address_text} {...register(`address_text_${invitee.id}` as keyof Invitee, {
+                        required: false
+                      })} />
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>住所 {invitee.address_text}</p>
+                  )}
+                  {isEditing ? (
+                    <>
+                      <input type='text' placeholder='アレルギー' defaultValue={invitee.allergy} {...register(`allergy_${invitee.id}` as keyof Invitee, { required: false })} />
+                    </>
+                  ) : (
+                    <p onClick={handleEditClick}>アレルギー {invitee.allergy}</p>
+                  )}
+                  <img src={invitee.file_url} alt="" />
+                  <input onClick={handleEditClick} type='file' id={`imageInput_${invitee.id}`} {...register(`file_url_${invitee.id}` as keyof Invitee, { required: false })} />
+                  <img id={`imagePreview_${invitee.id}`} src="" alt="Image Preview" className={styles.imagePreview} />
+                  {isEditing ? (
+                    <>
+                      <span onClick={handleCancel}>キャンセル</span>
+                    </>
+                  ) :
+                    <button onClick={() => handleDelete(invitee.id)}>
+                      削除
+                    </button>
+                  }
+                  <input
+                    type='hidden'
+                    defaultValue={props.userId}
+                    {...register(`userId_${invitee.id}` as keyof Invitee, { required: true })}
+                  />
+                  <input
+                    type='hidden'
+                    defaultValue={invitee.id}
+                    {...register(`id_${invitee.id}` as keyof Invitee, { required: true })}
+                  />
+
+                  <button className={styles.submitBtn} type='button'>
+                    更新!!
+                  </button>
+
+                </div >
+              </form>
             </div>
           );
         })}
@@ -243,7 +256,7 @@ export function Presenter(props: Props) {
               {...props.register('to', {
                 required: false,
               })}
-             
+
             />
             {props.errors.to && (
               <span className="text-red-500 text-xs mb-4 w-full">

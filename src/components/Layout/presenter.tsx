@@ -62,12 +62,6 @@ export function Presenter(props: Props) {
             <FaClock className={styles.icon} />
             <div className={styles.title}>お知らせ</div>
           </button>
-          {isAdmin && (
-            <button onClick={() => props.router.push('/send_mail')}>
-              <FaEnvelope className={styles.icon} />
-              <div className={styles.title}>メール送信</div>
-            </button>
-          )}
           <button onClick={() => props.router.push('/upload')}>
             <FaUpload className={styles.icon} />
             <div className={styles.title}>画像アップロード</div>

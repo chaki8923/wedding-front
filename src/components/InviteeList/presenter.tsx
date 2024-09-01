@@ -328,7 +328,7 @@ export function Presenter(props: Props) {
                   required: false,
                 })}
               />
-              {props.errors.to && <span className="text-red-500 text-xs mb-4 w-full">Toは必須です</span>}
+              {props.errors.to && <span className="text-red-500 text-xs mb-4 w-full">宛先メールアドレスは必須です</span>}
 
               <input
                 type="text"
@@ -339,7 +339,7 @@ export function Presenter(props: Props) {
                   pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
                 })}
               />
-              {props.errors.from && <span className="text-red-500 text-xs mb-4 w-full">Fromは必須です</span>}
+              {props.errors.from && <span className="text-red-500 text-xs mb-4 w-full">差出人メールアドレスは必須です</span>}
 
               <input
                 type="text"
@@ -349,7 +349,7 @@ export function Presenter(props: Props) {
                   required: true,
                 })}
               />
-              {props.errors.subject && <span className="text-red-500 text-xs mb-4 w-full">Subjectは必須です</span>}
+              {props.errors.subject && <span className="text-red-500 text-xs mb-4 w-full">タイトルは必須です</span>}
 
               <input
                 type="text"

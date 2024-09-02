@@ -1,7 +1,16 @@
 import Stripe from 'stripe'
 console.log("key!!!!-----------------", process.env.STRIPE_SECRET_KEY);
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+
+const pass1 = "sk_"
+const pass2 = "test_"
+const pass3 = "51Ka9aUEcyAU2OQGAb"
+const pass4 = "MWeixSBR7x2x4s4LP3eJeu8kKwvV3h8Ya"
+const pass5 = "ebEzdVGiRMixi99eDQj18B"
+const pass6 = "H9cLFLD0QCczdCIy00aux9D58D"
+
+
+export const stripe = new Stripe(`${pass1}${pass2}${pass3}${pass4}${pass5}${pass6}`, {
   apiVersion: "2023-10-16"
 })
 

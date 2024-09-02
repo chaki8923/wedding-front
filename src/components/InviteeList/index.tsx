@@ -65,7 +65,6 @@ export function InviteeList() {
   if (!user) {
     return <span>UserId is not set...</span>
   }
-  console.log('data2', data)
 
   return (
     <>

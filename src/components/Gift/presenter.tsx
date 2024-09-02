@@ -25,7 +25,7 @@ export function Presenter() {
               type="text"
               value={comment}
               onChange={(e) => setComment(e.target.value)} // 入力値を数値として状態に保存
-              placeholder="メッセージを入力してください"
+              placeholder="素敵なメッセージを入力してください"
             />
           </div>
           <button

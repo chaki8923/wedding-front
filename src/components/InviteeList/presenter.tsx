@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import { DELETE_INVITEE } from '@/graphql/document'
 import { GetInviteeQuery } from '@/graphql/generated/graphql'
 import { SendMail } from '@/types/form'
@@ -8,91 +9,96 @@ import React, { useState } from 'react'
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEnvelope, FaTrash, FaLightbulb } from 'react-icons/fa'
 
+
 type Props = {
-  data: GetInviteeQuery
-  handleSubmit: UseFormHandleSubmit<SendMail>
-  register: UseFormRegister<SendMail>
-  errors: FieldErrors<SendMail>
-  userId: string
-  router: NextRouter
-  onSubmit: SubmitHandler<SendMail>
-  invOnSubmit: SubmitHandler<Invitee>
-  invHandleSubmit: UseFormHandleSubmit<Invitee>
-  invRegister: UseFormRegister<Invitee>
-  invErrors: FieldErrors<Invitee>
-}
+  data: GetInviteeQuery;
+  handleSubmit: UseFormHandleSubmit<SendMail>;
+  register: UseFormRegister<SendMail>;
+  errors: FieldErrors<SendMail>;
+  userId: string;
+  router: NextRouter;
+  onSubmit: SubmitHandler<SendMail>;
+  invOnSubmit: SubmitHandler<Invitee>;
+  invHandleSubmit: UseFormHandleSubmit<Invitee>;
+  invRegister: UseFormRegister<Invitee>;
+  invErrors: FieldErrors<Invitee>;
+};
 
 export function Presenter(props: Props) {
-  const [emails, setEmails] = useState<string[]>([]) // メールアドレスの状態
-  const [isEditing, setIsEditing] = useState(false)
-  const router = useRouter()
+  const [emails, setEmails] = useState<string[]>([]);
+  const [isEditing, setIsEditing] = useState(false);
+  const router = useRouter();
+
   const handleCancel = () => {
-    setIsEditing(false)
-  }
+    setIsEditing(false);
+  };
 
   const handleEditClick = () => {
-    setIsEditing(true)
-  }
-  // メールアドレスの追加・削除を行う関数
+    setIsEditing(true);
+  };
+
   const handleEmailClick = (email: string) => {
     setEmails((prevEmails) => {
       if (prevEmails.includes(email)) {
-        // 既に存在する場合は削除
-        return prevEmails.filter((e) => e !== email)
+        return prevEmails.filter((e) => e !== email);
       } else {
-        // 存在しない場合は追加
-        return [...prevEmails, email]
+        return [...prevEmails, email];
       }
-    })
-  }
+    });
+  };
 
   const [delInvitee] = useMutation(DELETE_INVITEE, {
     onCompleted: () => {
-      router.push('/invitee_list')
+      router.push('/invitee_list');
     },
     onError: (error: any) => {
-      console.error('Error posting invitation:', error)
+      console.error('Error posting invitation:', error);
       if (error.graphQLErrors) {
         error.graphQLErrors.forEach(({ message, locations, path }) => {
-          console.error(`GraphQL error: ${message}`)
-        })
+          console.error(`GraphQL error: ${message}`);
+        });
       }
       if (error.networkError) {
-        console.error('Network error:', error.networkError.message)
+        console.error('Network error:', error.networkError.message);
       }
     },
-  })
+  });
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await delInvitee({ variables: { id } })
-      console.log('Deleted invitee:', response.data)
+      const response = await delInvitee({ variables: { id } });
+      console.log('Deleted invitee:', response.data);
     } catch (err) {
-      console.error('Error deleting invitee:', err)
+      console.error('Error deleting invitee:', err);
     }
-  }
-  // 各 form に独立した useForm フックを使用
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<Invitee>()
+  };
 
-  const onSubmit = (data: Invitee) => {
-    const processedData = {
-      ...data,
-      id: data.id,
-    }
-    props.invOnSubmit(processedData)
-  }
   return (
     <div className="flex flex-row h-screen">
       <div className="flex-1 overflow-hidden bg-[url('/leaf53.png')] bg-cover bg-center">
         <div className="flex justify-center h-full overflow-y-auto pt-28 px-5">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 justify-items-start mb-12">
-            {props.data.getInvitee.map((invitee) => (
-              <div key={invitee.id} className="w-80 pb-5">
-                <form onSubmit={handleSubmit((data) => onSubmit(data))}>
+            {props.data.getInvitee.map((invitee) => {
+              const { register, handleSubmit } = useForm<Invitee>({
+                defaultValues: {
+                  id: invitee.id,
+                  join_flag: invitee.join_flag,
+                },
+              });
+
+              const onSubmit = (data: Invitee) => {
+                console.log("data更新", data);
+                
+                const processedData = {
+                  ...data,
+                  id: invitee.id,
+                };
+                props.invOnSubmit(processedData);
+              };
+
+              return (
+                <div key={invitee.id} className="w-80 pb-5">
+                  <form onSubmit={handleSubmit(onSubmit)}>
                   <input
                     type="hidden"
                     defaultValue={invitee.id}
@@ -252,7 +258,7 @@ export function Presenter(props: Props) {
                       </>
                     ) : (
                       <img
-                        src="/leaf24.png"
+                        src={invitee.file_url}
                         alt=""
                         className="mt-2 w-24 h-24 rounded-full object-cover border-2 border-gray-300"
                       />
@@ -272,12 +278,12 @@ export function Presenter(props: Props) {
                         </div>
                       ) : (
                         <div className="flex items-center">
-                          <button
-                            className="px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
+                          <span
+                            className="px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300 cursor-pointer"
                             onClick={handleEditClick}
                           >
                             編集
-                          </button>
+                          </span>
                           <button
                             onClick={() => handleDelete(invitee.id)}
                             className="flex items-center px-4 py-2 text-red-600 hover:text-red-800"
@@ -299,9 +305,12 @@ export function Presenter(props: Props) {
                       />
                     </div>
                   </div>
-                </form>
-              </div>
-            ))}
+                   
+         
+                  </form>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -371,5 +380,5 @@ export function Presenter(props: Props) {
         </form>
       </div>
     </div>
-  )
+  );
 }

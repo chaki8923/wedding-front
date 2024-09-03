@@ -14,12 +14,10 @@ export function InviteeDetail() {
   const router = useRouter();
   const { user, setUser } = useUserState();
   const { uuid, inv_id } = router.query;
-  console.log("inv_id", inv_id);
   
   const { updateInvitee } = useUpdateInvitee();
 
   const onSubmit: SubmitHandler<InvForm> = async (data: any) => {
-    console.log("update_data!!", data);
     const id = data.id; 
     const processedData = {
       id: id,

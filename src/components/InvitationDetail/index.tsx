@@ -7,13 +7,6 @@ import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 
-
-const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
-
-  console.log("update_data!!",data);
-
-}
-
 export function InvitationDetail() {
   const router = useRouter();
   const { user, setUser } = useUserState();

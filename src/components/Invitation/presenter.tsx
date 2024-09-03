@@ -28,7 +28,7 @@ export function Presenter({
   router,
 }: Props) {
 
-  useImagePreview('imageInput', 'imagePreview');
+  
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
       router.push('/invitation');
@@ -55,8 +55,8 @@ export function Presenter({
     }
   };
 
+  useImagePreview('imageInput', 'imagePreview');
   if (data === undefined) return <span>Loading...</span>;
-
   return (
     <div className={styles.backgroundWrapper}>
       <form className="flex flex-col items-center w-full max-w-sm mt-28" onSubmit={handleSubmit(onSubmit)}>
@@ -93,10 +93,10 @@ export function Presenter({
             className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
             {...register('comment', { required: true })}
           />
-          <div className="w-full">
+          <div className={`${styles.imageWrap} w-full`}>
             <label
               htmlFor="imageInput"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -123,7 +123,7 @@ export function Presenter({
               />
             </label>
             {errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview"  className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
         </div>
         <input
@@ -137,20 +137,18 @@ export function Presenter({
       </form>
 
       {data.getInvitation.map((invitation) => (
-        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
-          <div className={styles.contentWrapper}>
-            <div className={styles.card}>
-              <img src={invitation.file_url} alt="" />
-              <p>タイトル: {invitation.title}</p>
-              <p>開催日: {invitation.event_date}</p>
-              <p>コメント: {invitation.comment}</p>
-              <p>uuid: {invitation.uuid}</p>
-              <button onClick={() => handleDelete(invitation.id)}>
-                削除
-              </button>
-            </div>
+        <div className={styles.contentWrapper}>
+          <div className={styles.card}>
+            <img src={invitation.file_url} alt="" />
+            <p>タイトル: {invitation.title}</p>
+            <p>開催日: {invitation.event_date}</p>
+            <p>コメント: {invitation.comment}</p>
+            <p>uuid: {invitation.uuid}</p>
+            <button onClick={() => handleDelete(invitation.id)}>
+              削除
+            </button>
           </div>
-        </Link>
+        </div>
       ))}
     </div>
   );

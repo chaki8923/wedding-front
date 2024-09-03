@@ -7,3 +7,15 @@
     padding-top: 130px;
   }
   
+  .imageWrap{
+    position: relative;
+  }
+  
+  .imagePreview{
+    position: absolute;
+    left: 50%;
+    bottom: 25%;
+    transform: translate(-50%);
+    height: 30%;
+    width: auto;
+  }

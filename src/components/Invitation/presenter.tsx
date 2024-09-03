@@ -28,7 +28,7 @@ export function Presenter({
   router,
 }: Props) {
 
-  
+
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
       router.push('/invitation');
@@ -122,7 +122,7 @@ export function Presenter({
               />
             </label>
             {errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
-            <img id="imagePreview" src="" alt="Image Preview"  className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
+            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
         </div>
         <input
@@ -136,21 +136,19 @@ export function Presenter({
       </form>
 
       <hr style={{ borderBottom: '4px solid #3b5a32' }} className="w-full my-8" />
-      
+
       <div className={styles.invitationsContainer}>
         {data.getInvitation.map((invitation) => (
-          <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
-            <div className={styles.card}>
-              <img src={invitation.file_url} alt="" />
-              <p>タイトル: {invitation.title}</p>
-              <p>開催日: {invitation.event_date}</p>
-              <p>コメント: {invitation.comment}</p>
-              <p>uuid: {invitation.uuid}</p>
-              <button onClick={() => handleDelete(invitation.id)}>
-                削除
-              </button>
-            </div>
-          </Link>
+          <div className={styles.card}>
+            <img src={invitation.file_url} alt="" />
+            <p>タイトル: {invitation.title}</p>
+            <p>開催日: {invitation.event_date}</p>
+            <p>コメント: {invitation.comment}</p>
+            <p>uuid: {invitation.uuid}</p>
+            <button onClick={() => handleDelete(invitation.id)}>
+              削除
+            </button>
+          </div>
         ))}
       </div>
     </div>

@@ -87,7 +87,6 @@ export function Presenter(props: Props) {
               });
 
               const onSubmit = (data: Invitee) => {
-                console.log("data更新", data);
                 
                 const processedData = {
                   ...data,
@@ -105,7 +104,7 @@ export function Presenter(props: Props) {
                     {...props.invRegister(`id` as keyof Invitee, { required: true })}
                   />
 
-                  <div className="w-full h-fit p-4 border border-gray-300 rounded-lg shadow-md bg-[#f2ecdb] flex flex-col text-sm">
+                  <div className="w-full h-fit p-4 border border-gray-300 rounded-lg shadow-md bg-[#f2ecdb] flex flex-col text-sm break-all">
                     {isEditing ? (
                       <p>
                         <label className="flex items-center">

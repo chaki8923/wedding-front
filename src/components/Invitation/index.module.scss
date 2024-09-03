@@ -12,6 +12,19 @@
   min-height: 100vh; 
 }
 
+.imageWrap{
+  position: relative;
+}
+
+.imagePreview{
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  height: 90%;
+  width: auto;
+}
+
 .loginForm {
   background-color: transparent; 
   padding: 40px;

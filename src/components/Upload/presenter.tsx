@@ -72,7 +72,7 @@ export function Presenter(props: Props) {
             </div>
             {props.errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
 
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
           <button
             className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"

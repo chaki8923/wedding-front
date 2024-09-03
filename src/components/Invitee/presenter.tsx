@@ -85,10 +85,10 @@ export function Presenter(props: Props) {
               {...props.register('allergy', { required: true })}
             />
           </div>
-          <div className="w-full">
+          <div className={`${styles.imageWrap} w-full`}>
             <label
               htmlFor="imageInput"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -115,7 +115,7 @@ export function Presenter(props: Props) {
               />
             </label>
             {props.errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview"   className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
         </div>
         <input

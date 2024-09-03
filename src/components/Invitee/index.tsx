@@ -20,7 +20,6 @@ export function Invitee() {
   } = useForm<InvForm>();
 
   const onSubmit: SubmitHandler<InvForm> = async (data: any) => {    
-    console.log("data!!",data);
     createInvitee(data);
   }
 

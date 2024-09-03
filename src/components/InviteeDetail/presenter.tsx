@@ -19,7 +19,6 @@ type Props = {
 };
 
 export function Presenter(props: Props) {
-  console.log("招待状詳細です！！", props.data.showInvitee.id);
   useImagePreview('imageInput', 'imagePreview');
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
@@ -50,7 +49,6 @@ export function Presenter(props: Props) {
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitee({ variables: { id } });
-      console.log('Deleted invitee:', response.data);
     } catch (err) {
       console.error('Error deleting invitee:', err);
     }

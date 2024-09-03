@@ -9,8 +9,6 @@ export const useUpdateInvitee = () => {
   const router = useRouter();
   const [updInvitee, { loading, error }] = useMutation(UPDATE_INVITEE, {
     onCompleted: () => {
-      console.log("更新完了！！");
-      
       router.push('/invitee_list');
     },
     onError: (error: any) => {

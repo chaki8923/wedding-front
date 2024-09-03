@@ -16,7 +16,6 @@ type Props = {
 };
 
 export function Presenter(props: Props) {
-  console.log("招待状詳細！！", props.data.showInvitation.id);
   return (
     <>
       <div className={styles.contentWrapper}>

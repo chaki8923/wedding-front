@@ -49,7 +49,6 @@ export function Presenter({
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitation({ variables: { id } });
-      console.log('Deleted invitee:', response.data);
     } catch (err) {
       console.error('Error deleting invitee:', err);
     }

@@ -67,7 +67,6 @@ export function Presenter(props: Props) {
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitee({ variables: { id } });
-      console.log('Deleted invitee:', response.data);
     } catch (err) {
       console.error('Error deleting invitee:', err);
     }

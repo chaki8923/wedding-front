@@ -4,6 +4,7 @@ import { SendMail } from '@/types/form';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useCookies } from 'react-cookie';
+import { toast, Zoom } from 'react-toastify';
 
 export const useMail = () => {
   const { setUser } = useUserState();
@@ -35,11 +36,33 @@ export const useMail = () => {
       })
         .then((response) => response.json())
         .then((data) => {
+          toast.success('招待状を送信しました。', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+            });
           setUser(data);
           router.push('/timeLine');
         })
         .catch((error) => {
           console.error('メールエラー:', error);
+          toast.error('招待状送信に失敗しました。', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
           setUser(null);
           router.push('/');
         });

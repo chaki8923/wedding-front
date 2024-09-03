@@ -139,7 +139,7 @@ export function Presenter({
 
       <div className={styles.invitationsContainer}>
         {data.getInvitation.map((invitation) => (
-          <div className={styles.card}>
+          <div className={styles.card}  key={invitation.id}>
             <img src={invitation.file_url} alt="" />
             <p>タイトル: {invitation.title}</p>
             <p>開催日: {invitation.event_date}</p>

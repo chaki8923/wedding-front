@@ -3,8 +3,11 @@ import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import { CookiesProvider } from 'react-cookie';
+import { ToastContainer, toast } from 'react-toastify';
 import { RecoilRoot } from 'recoil';
+import 'react-toastify/dist/ReactToastify.css';
 import '@/styles/globals.scss';
+import 'flowbite/dist/flowbite.css';
 
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
@@ -21,6 +24,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <CookiesProvider>
       <RecoilRoot>
         <ApolloClientProvider>
+          <ToastContainer/>
           <Component {...pageProps} />
         </ApolloClientProvider>
       </RecoilRoot>

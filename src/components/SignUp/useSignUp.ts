@@ -35,10 +35,6 @@ export const useSignUp = () => {
       })
         .then((response) => response.json())
         .then((data) => {
-          setUser(data)
-          setIsSubmitting(false)
-          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
-          router.push('/timeLine')
           toast.success('新規登録に成功しました', {
             position: "top-right",
             autoClose: 5000,
@@ -50,11 +46,12 @@ export const useSignUp = () => {
             theme: "light",
             transition: Zoom,
           });
+          setUser(data)
+          setIsSubmitting(false)
+          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
+          router.push('/timeLine')
         })
         .catch((error) => {
-          setUser(null)
-          setIsSubmitting(false)
-          router.push('/sign_up')
           toast.error('新規登録に失敗しました', {
             position: "top-center",
             autoClose: 5000,
@@ -66,6 +63,8 @@ export const useSignUp = () => {
             theme: "light",
             transition: Zoom,
           });
+          setUser(null)
+          setIsSubmitting(false)
         })
     },
     [cookies._csrf, params, router, setCsrf, setUser]

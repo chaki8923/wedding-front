@@ -5643,7 +5643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flowbite@npm:^2.0.0, flowbite@npm:latest":
+"flowbite@npm:^2.0.0, flowbite@npm:^2.5.1":
   version: 2.5.1
   resolution: "flowbite@npm:2.5.1"
   dependencies:
@@ -10041,7 +10041,7 @@ __metadata:
     eslint: 8.35.0
     eslint-config-next: 13.2.3
     eslint-config-prettier: ^8.7.0
-    flowbite: latest
+    flowbite: ^2.5.1
     flowbite-react: latest
     graphql: ^16.8.1
     graphql-request: ^5.2.0

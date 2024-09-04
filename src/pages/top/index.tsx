@@ -27,7 +27,7 @@ export default function Home() {
                         priority
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-4">Wedding Gateway</h1>
+                        <h1 className="text-4xl md:text-7xl font-bold mb-4">Wedding Gateway</h1>
                         <p className="text-base sm:text-base md:text-2xl mb-8">思い出を共有し、祝福を届ける結婚式招待サービス</p>
                     </div>
                 </div>

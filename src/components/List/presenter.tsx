@@ -8,24 +8,24 @@ type Props = {
 };
 
 const avatars = [
-  '/peep-11.png',
-  '/peep-13.png',
-  '/peep-17.png',
-  '/peep-19.png',
-  '/peep-23.png',
-  '/peep-32.png',
-  '/peep-34.png',
-  '/peep-37.png',
-  '/peep-46.png',
-  '/peep-51.png',
-  '/peep-61.png',
+  // '/peep-11.png',
+  // '/peep-13.png',
+  // '/peep-17.png',
+  // '/peep-19.png',
+  // '/peep-23.png',
+  // '/peep-32.png',
+  // '/peep-34.png',
+  // '/peep-37.png',
+  // '/peep-46.png',
+  // '/peep-51.png',
+  // '/peep-61.png',
   '/peep-76.png',
   '/peep-78.png',
-  '/peep-87.png',
-  '/peep-92.png',
-  '/peep-94.png',
-  '/peep-99.png',
-  '/peep-103.png',
+  // '/peep-87.png',
+  // '/peep-92.png',
+  // '/peep-94.png',
+  // '/peep-99.png',
+  // '/peep-103.png',
 ];
 
 const getRandomAvatar = () => {
@@ -56,7 +56,7 @@ export function Presenter(props: Props) {
       <div className="flex items-center justify-between px-5 md:px-8 mt-28 mb-6">
         <div className="flex items-center">
           <FaClock className="text-2xl text-green-800 mr-2" />
-          <h2 className="text-2xl font-bold text-green-800">お知らせ</h2>
+          <h2 className="text-2xl font-bold text-green-800">新郎新婦からのお知らせ</h2>
         </div>
         <div>
           <button
@@ -77,7 +77,6 @@ export function Presenter(props: Props) {
               {getRandomAvatar()}
               <div className="flex flex-col flex-grow">
                 <div className="flex flex-col mb-2">
-                  <h3 className="font-semibold text-gray-800 text-lg">{message.user.name}</h3>
                   <p className="text-xs text-gray-500 font-mono">{formatDate(message.created_at)}</p>
                 </div>
                 <div className="bg-green-100 p-4 rounded-lg shadow-inner overflow-hidden">

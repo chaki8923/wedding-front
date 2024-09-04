@@ -4,6 +4,7 @@ import { Login } from '@/types/form'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { toast, Zoom } from 'react-toastify';
 
 export const useLogin = () => {
   const { setUser } = useUserState()
@@ -38,11 +39,33 @@ export const useLogin = () => {
           setIsSubmitting(false)
           document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
           router.push('/timeLine')
+          toast.success('ログインに成功しました', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
         })
         .catch((error) => {
           setUser(null)
           setIsSubmitting(false)
           router.push('/')
+          toast.error('ログインに失敗しました', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
         })
     },
     [cookies._csrf, params, router, setCsrf, setUser]

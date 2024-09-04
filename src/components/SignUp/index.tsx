@@ -10,7 +10,7 @@ export function SignUp() {
         formState: { errors },
         watch
     } = useForm<SignUpForm>();
-    const { signUp } = useSignUp();
+    const { signUp, isSubmitting } = useSignUp();
     const onSubmit: SubmitHandler<SignUpForm> = async (data: any) => {
 
         signUp(data);
@@ -22,7 +22,7 @@ export function SignUp() {
                 onSubmit={onSubmit}
                 register={register}
                 errors={errors}
-                watch={watch}
+                isSubmitting={isSubmitting}
             />
         </>
     );

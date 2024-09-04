@@ -2,8 +2,9 @@ import { useSetCsrf } from './useSetCsrf'
 import { useUserState } from '@/atoms/userAtom'
 import { SignUp } from '@/types/form'
 import { useRouter } from 'next/router'
-import { useCallback, useEffect, useMemo } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useCookies } from 'react-cookie'
+import { toast, Zoom } from 'react-toastify';
 
 export const useSignUp = () => {
   const { setUser } = useUserState()
@@ -11,6 +12,7 @@ export const useSignUp = () => {
   const router = useRouter()
   const params = useMemo(() => new URLSearchParams(), [])
   const [cookies, setUseCookies] = useCookies(['_csrf'])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
     setUseCookies('_csrf', cookies._csrf)
@@ -34,16 +36,40 @@ export const useSignUp = () => {
         .then((response) => response.json())
         .then((data) => {
           setUser(data)
+          setIsSubmitting(false)
           document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
           router.push('/timeLine')
+          toast.success('新規登録に成功しました', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
         })
         .catch((error) => {
           setUser(null)
+          setIsSubmitting(false)
           router.push('/sign_up')
+          toast.error('新規登録に失敗しました', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
         })
     },
     [cookies._csrf, params, router, setCsrf, setUser]
   )
 
-  return { signUp }
+  return { signUp, isSubmitting }
 }

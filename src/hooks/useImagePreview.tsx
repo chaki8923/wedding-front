@@ -1,6 +1,8 @@
 import { useEffect } from 'react';
 
 function useImagePreview(inputId: string, previewId: string) {
+  console.log("入った");
+  
   useEffect(() => {
     const imageInput = document.getElementById(inputId) as HTMLInputElement;
     const imagePreview = document.getElementById(previewId) as HTMLImageElement;

@@ -28,7 +28,8 @@ export function Presenter(props: Props) {
           </div>
           <div className="flex flex-col items-center w-full max-w-sm">
             <input
-              type="text"
+              type="hidden"
+              value="aaaaaaaaa"
               placeholder="コメントを入力してください"
               className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
               {...props.register('comment', {

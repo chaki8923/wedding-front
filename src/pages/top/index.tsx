@@ -6,7 +6,7 @@ export default function Home() {
         <div className="min-h-screen bg-gray-50">
             <div className="relative">
                 <Image
-                    src="/lp.jpg?height=1080&width=1920"
+                    src="/lp.jpg?height=1100&width=1920"
                     alt="Wedding background"
                     width={1920}
                     height={1080}
@@ -14,8 +14,8 @@ export default function Home() {
                     priority
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-                    <h1 className="text-5xl md:text-7xl font-bold mb-4">Wedding Gate</h1>
-                    <p className="text-xl md:text-2xl mb-8">思い出を共有し、祝福を届ける結婚式招待サービス</p>
+                    <h1 className="text-5xl md:text-7xl font-bold mb-4">Wedding Gateway</h1>
+                    <p className="text-base sm:text-base md:text-2xl mb-8">思い出を共有し、祝福を届ける結婚式招待サービス</p>
                 </div>
             </div>
 
@@ -55,13 +55,13 @@ export default function Home() {
                 </div>
 
                 <div className="mt-16 text-center">
-                    <Link href="/" className="bg-green-800 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
-                        今すぐ始める
+                    <Link href="/" className="bg-green-800 hover:bg-green-700 text-white font-bold py-4 px-12 rounded-full transition duration-300 ease-in-out transform hover:scale-105 shadow-lg">
+                        今すぐはじめる
                     </Link>
                 </div>
             </main>
 
-            <footer className="bg-green-900 text-white py-8 mt-16">
+            <footer className="bg-green-900 text-white py-8">
                 <div className="container mx-auto px-4 text-center">
                     <p>&copy; 2024 Wedding Gate. All rights reserved.</p>
                 </div>

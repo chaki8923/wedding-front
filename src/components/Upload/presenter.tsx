@@ -40,12 +40,12 @@ export function Presenter(props: Props) {
             />
             {props.errors.comment && <span className="text-red-500 text-xs mb-4 w-full">コメントは必須です</span>}
 
-            <div className="flex items-center justify-center w-full">
+            <div className={`${styles.imageWrap} flex items-center justify-center w-full`}>
               <label
                 htmlFor="dropzone-file"
                 className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
               >
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <div className={`flex flex-col items-center justify-center pt-5 pb-6`}>
                   <svg
                     className="w-8 h-8 mb-4 text-gray-500"
                     aria-hidden="true"
@@ -72,10 +72,10 @@ export function Presenter(props: Props) {
                   })}
                 />
               </label>
+            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
             </div>
             {props.errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
 
-            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
          <Button className="mt-4" type="submit" color="gray">
         <HiCloudDownload className="mr-3 h-5 w-5" />

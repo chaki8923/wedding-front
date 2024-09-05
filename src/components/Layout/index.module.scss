@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background-image: url('/Navbar_leaf.jpeg'); 
+  background-image: url('/Template1.png'); 
   background-size: cover; 
   background-repeat: no-repeat; 
   background-position: center;
@@ -31,13 +31,17 @@
   font-size: 1.4rem;
   font-weight: bold;
   color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .iconLogo {
   font-size: 1.8rem;
-  margin-right: 8px;
   color: #3b5a32;
+}
+
+.logoImage {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
 .navLinks {
@@ -48,7 +52,6 @@
 .navLinks button {
   font-size: 15px;
   color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -91,7 +94,7 @@
 }
 
 .title {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-align: center;
 }
@@ -111,8 +114,8 @@
 }
 
 .btnLogOut:hover {
-  background-color: #ff5c5c;
-  color: white;
+  background-color: rgba(200, 200, 200, 0.8);
+  color: #4b4a4a; 
 }
 
 .hamburger {
@@ -125,57 +128,127 @@
   z-index: 101; 
 }
 
+.closeButton {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #3b5a32;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 102;
+}
+
+
 @media (max-width: 768px) {
+  .closeButton {
+    padding: 0 !important;
+    align-items:flex-end !important; 
+    justify-content: flex-end !important;
+    display: flex !important;
+    font-size: 1.5rem !important;
+    color: #3b5a32 !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    z-index: 102 !important;
+  }
+
   .header {
+    background-image: url('/image.png'); 
     background-color: #f2ecdb; 
-    background-image: none; 
     margin-bottom: 0; 
     padding-bottom: 12px; 
+    padding-top: 12px;
+    padding-right: 0;
+    height: 60px;
   }
 
   .hamburger {
     display: block;
+    order: -1;
+  }
+
+  .hideOnSmall {
+    display: none !important;
   }
 
   .navLinks {
-    display: none;
-  }
-
-  .navLinksOpen {
     display: flex;
     flex-direction: column;
-    position: absolute;
-    top: calc(100% + 4px); 
-    left: 0;
-    width: 98%;
-    background-image: url('/Navbar_leaf.jpeg'); 
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 75%;
+    height: 100vh;
+    background-image: url('/Template1.png'); 
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    padding: 10px 0;
-    z-index: 100; 
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    z-index: 99;
+    border-right: 2px solid #3b5a32;
+    border-bottom: 2px solid #3b5a32;
+    border-left: none;
+    border-top: none;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    transition: none;
   }
 
-  .navLinksOpen button {
+  .navLinksOpen {
+    left: 0;
+    transition: left 0.3s ease-in-out;
+  }
+
+  .navLinksClosing {
+    left: -100%;
+  }
+
+  .navLinks button, .navLinksOpen button {
     flex-direction: row;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 0px;
+    width: 100%;
+    justify-content: flex-start;
   }
 
-  .navLinksOpen .icon {
+  .navLinks .icon, .navLinksOpen .icon {
     margin-right: 10px;
   }
 
+  .title {
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+  } 
+
   .logo {
-    display: none;
+    position: fixed;
+    right:0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
   }
 
   .btnLogOut {
+    width: 100%;
+    justify-content: center;
+    position: absolute;
+    top: 80%;
+    left: 0;
+    right: 0;
     margin-left: auto;
+    margin-right: auto;
   }
 
-  .navLinksOpen button:after {
+  .navLinks button:after, .navLinksOpen button:after {
     display: none;
   }
 }

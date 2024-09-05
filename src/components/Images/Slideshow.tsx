@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import styles from './Slideshow.module.scss';
 import { GetImagesQuery } from '@/graphql/generated/graphql';
+import React, { useState, useEffect } from 'react';
 
 type SlideshowProps = {
   images: GetImagesQuery['getImages'];
@@ -54,9 +54,8 @@ export const Slideshow: React.FC<SlideshowProps> = ({
               key={image.id}
               src={image.file_url}
               alt={image.comment}
-              className={`${styles.thumbnail} ${
-                index === currentIndex ? styles.activeThumbnail : ''
-              }`}
+              className={`${styles.thumbnail} ${index === currentIndex ? styles.activeThumbnail : ''
+                }`}
               onClick={() => setCurrentIndex(index)}
             />
           ))}

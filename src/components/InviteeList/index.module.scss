@@ -17,16 +17,53 @@
   max-height: 100%;
 }
 
+.mailForm{
+  margin-top: 77px;
+}
+
+
+.invitationsContainer {
+  display: flex;
+  // grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.invitationId{
+  cursor: pointer;
+}
+
+.check{
+  display: none;
+  width: 160px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.selected {
+  display: block;
+}
+
+
+
 .card {
-  width: 320px;
+  position: relative;
+  width: 160px;
+  height: fit-content;
   padding: 16px;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  background-color: #f2ecdb; 
+  background-color: #d1fae5; 
   display: flex;
   flex-direction: column;
   align-items: center;
+  cursor: pointer;
 }
 
 
@@ -46,7 +83,7 @@
 }
 
 .infoWrapper {
-  width: 100%;
+  // width: 100%;
   text-align: center;
 
   p {

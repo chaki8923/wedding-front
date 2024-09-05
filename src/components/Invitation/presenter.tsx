@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import Link from "next/link";
 import { NextRouter } from 'next/router';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { toast, Zoom } from 'react-toastify';
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Invitation>;
@@ -27,8 +28,9 @@ export function Presenter({
   userId,
   router,
 }: Props) {
+
   useImagePreview('imageInput', 'imagePreview');
-  
+
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
       router.push('/invitation');
@@ -49,13 +51,11 @@ export function Presenter({
   const handleDelete = async (id: string) => {
     try {
       const response = await delInvitation({ variables: { id } });
-      console.log('Deleted invitee:', response.data);
     } catch (err) {
       console.error('Error deleting invitee:', err);
     }
   };
 
-  if (data === undefined) return <span>Loading...</span>;
 
   return (
     <div className={styles.backgroundWrapper}>
@@ -69,34 +69,70 @@ export function Presenter({
           {errors.userId && <span>※Please login again</span>}
         </div>
         <div className="flex flex-col items-center w-full">
-          <input
-            type='text'
-            placeholder='タイトル'
-            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            {...register('title', { required: true })}
-          />
-          <input
-            type='date'
-            placeholder='開催日'
-            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            {...register('event_date', { required: true })}
-          />
-          <input
-            type='text'
-            placeholder='開催場所'
-            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            {...register('place', { required: true })}
-          />
-          <input
-            type='text'
-            placeholder='コメント'
-            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-            {...register('comment', { required: true })}
-          />
-          <div className="w-full">
+          <div className="relative w-full mb-4">
+            <input
+              type="text"
+              id="title"
+              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+              placeholder=" "
+              {...register('title', { required: true })}
+            />
+            <label
+              htmlFor="title"
+              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+            >
+              タイトル
+            </label>
+          </div>
+          <div className="relative w-full mb-4">
+            <input
+              type="date"
+              id="event_date"
+              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+              placeholder=" "
+              {...register('event_date', { required: true })}
+            />
+            <label
+              htmlFor="event_date"
+              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+            >
+              開催日
+            </label>
+          </div>
+          <div className="relative w-full mb-4">
+            <input
+              type="text"
+              id="place"
+              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+              placeholder=" "
+              {...register('place', { required: true })}
+            />
+            <label
+              htmlFor="place"
+              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+            >
+              開催場所
+            </label>
+          </div>
+          <div className="relative w-full mb-4">
+            <input
+              type="text"
+              id="comment"
+              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+              placeholder=" "
+              {...register('comment', { required: true })}
+            />
+            <label
+              htmlFor="comment"
+              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+            >
+              コメント
+            </label>
+          </div>
+          <div className={`${styles.imageWrap} w-full`}>
             <label
               htmlFor="imageInput"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-green-100 hover:bg-green-200`}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -123,7 +159,7 @@ export function Presenter({
               />
             </label>
             {errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
         </div>
         <input
@@ -131,27 +167,27 @@ export function Presenter({
           defaultValue={userId}
           {...register('userId', { required: true })}
         />
-        <button className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300" type='submit'>
+        <button className="p-2 px-12 tracking-wide mt-4 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition duration-300" type='submit'>
           登録
         </button>
       </form>
 
-      {data.getInvitation.map((invitation) => (
-        <Link href={`invitation_detail?uuid=${invitation.uuid}`} key={invitation.id}>
-          <div className={styles.contentWrapper}>
-            <div className={styles.card}>
-              <img src={invitation.file_url} alt="" />
-              <p>タイトル: {invitation.title}</p>
-              <p>開催日: {invitation.event_date}</p>
-              <p>コメント: {invitation.comment}</p>
-              <p>uuid: {invitation.uuid}</p>
-              <button onClick={() => handleDelete(invitation.id)}>
-                削除
-              </button>
-            </div>
+      <hr style={{ borderBottom: '4px solid #3b5a32' }} className="w-full my-8" />
+
+      <div className={styles.invitationsContainer}>
+        {data.getInvitation.map((invitation) => (
+          <div className={styles.card}  key={invitation.id}>
+            <img src={invitation.file_url} alt="" />
+            <p>タイトル: {invitation.title}</p>
+            <p>開催日: {invitation.event_date}</p>
+            <p>コメント: {invitation.comment}</p>
+            <p className={styles.invitationId}>招待状id<br></br> {invitation.uuid}</p>
+            <button onClick={() => handleDelete(invitation.id)}>
+              削除
+            </button>
           </div>
-        </Link>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

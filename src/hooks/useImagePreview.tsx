@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 
 function useImagePreview(inputId: string, previewId: string) {
+  console.log("入った");
+  
   useEffect(() => {
     const imageInput = document.getElementById(inputId) as HTMLInputElement;
     const imagePreview = document.getElementById(previewId) as HTMLImageElement;
-
+    
     const handleImageChange = (event: Event) => {
       const files = (event.target as HTMLInputElement).files;
       if (files && files.length > 0) {

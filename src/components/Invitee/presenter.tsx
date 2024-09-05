@@ -29,66 +29,140 @@ export function Presenter(props: Props) {
           {props.errors.first_kn && <span>なまえ is required</span>}
         </div>
         <div className="flex flex-col items-center w-full">
-          <div className="flex w-full space-x-4">
-            <input
-              type='text'
-              placeholder='苗字'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('family_kj', { required: true })}
-            />
-            <input
-              type='text'
-              placeholder='名前'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('first_kj', { required: true })}
-            />
+          <div className="flex mb-4 flex-col w-full space-y-4">
+            <div className="flex w-full space-x-4">
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="family_kj"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('family_kj', { required: true })}
+                />
+                <label
+                  htmlFor="family_kj"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  苗字
+                </label>
+              </div>
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="first_kj"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('first_kj', { required: true })}
+                />
+                <label
+                  htmlFor="first_kj"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  名前
+                </label>
+              </div>
+            </div>
+            <div className="flex w-full space-x-4">
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="family_kn"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('family_kn', { required: true })}
+                />
+                <label
+                  htmlFor="family_kn"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  みょうじ
+                </label>
+              </div>
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="first_kn"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('first_kn', { required: true })}
+                />
+                <label
+                  htmlFor="first_kn"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  なまえ
+                </label>
+              </div>
+            </div>
+            <div className="flex w-full space-x-4">
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="zip_code"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('zip_code', { required: true })}
+                />
+                <label
+                  htmlFor="zip_code"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  郵便番号
+                </label>
+              </div>
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="address_text"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('address_text', { required: true })}
+                />
+                <label
+                  htmlFor="address_text"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  住所
+                </label>
+              </div>
+            </div>
+            <div className="flex w-full space-x-4">
+              <div className="relative w-1/2">
+                <input
+                  type='email'
+                  id="email"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('email', { required: true })}
+                />
+                <label
+                  htmlFor="email"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  メール
+                </label>
+              </div>
+              <div className="relative w-1/2">
+                <input
+                  type='text'
+                  id="allergy"
+                  className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
+                  placeholder=" "
+                  {...props.register('allergy', { required: true })}
+                />
+                <label
+                  htmlFor="allergy"
+                  className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
+                >
+                  アレルギー
+                </label>
+              </div>
+            </div>
           </div>
-          <div className="flex w-full space-x-4">
-            <input
-              type='text'
-              placeholder='みょうじ'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('family_kn', { required: true })}
-            />
-            <input
-              type='text'
-              placeholder='なまえ'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('first_kn', { required: true })}
-            />
-          </div>
-          <div className="flex w-full space-x-4">
-            <input
-              type='text'
-              placeholder='郵便番号'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('zip_code', { required: true })}
-            />
-            <input
-              type='text'
-              placeholder='住所'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('address_text', { required: true })}
-            />
-          </div>
-          <div className="flex w-full space-x-4">
-            <input
-              type='email'
-              placeholder='メール'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('email', { required: true })}
-            />
-            <input
-              type='text'
-              placeholder='アレルギー'
-              className="w-1/2 p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-              {...props.register('allergy', { required: true })}
-            />
-          </div>
-          <div className="w-full">
+          <div className={`${styles.imageWrap} w-full`}>
             <label
               htmlFor="imageInput"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-green-100 hover:bg-green-200`}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -115,7 +189,7 @@ export function Presenter(props: Props) {
               />
             </label>
             {props.errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview"   className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
         </div>
         <input
@@ -123,7 +197,7 @@ export function Presenter(props: Props) {
           defaultValue={props.userId}
           {...props.register('userId', { required: true })}
         />
-        <button className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300" type='submit'>
+        <button className="p-2 px-12 tracking-wide mt-4 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition duration-300" type='submit'>
           登録
         </button>
       </form>

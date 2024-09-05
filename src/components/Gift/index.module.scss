@@ -1,0 +1,54 @@
+.backgroundWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url('/leaf50.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 100vw;
+  height: 100vh;
+  padding: 20px;
+}
+
+.formContainer {
+  background-image: url('/gift6.png'); 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; 
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+
+.title {
+  font-size: 26px;
+  margin-bottom: 4px;
+  color: #2c3e50;
+  font-weight: 600;
+  padding: 8px 8px;
+  border-radius: 8px; 
+}
+
+
+.inputWrapper {
+  margin-bottom: 24px;
+}
+
+.inputField {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #c0c0c0;
+  border-radius: 8px;
+  font-size: 16px;
+  color: #333333;
+  background-color: #f9fafb;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+

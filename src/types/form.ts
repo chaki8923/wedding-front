@@ -4,6 +4,12 @@ export type Login = {
   token: string;
 };
 
+export type SignUp = {
+  email: string;
+  password: string;
+  token: string;
+};
+
 export type Create = {
   userId: string;
   text: string;

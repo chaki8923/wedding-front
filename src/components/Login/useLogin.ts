@@ -1,27 +1,29 @@
-import { useUserState } from '@/atoms/userAtom';
-import { useSetCsrf } from '@/components/Login/useSetCsrf';
-import { Login } from '@/types/form';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo } from 'react';
-import { useCookies } from 'react-cookie';
+import { useUserState } from '@/atoms/userAtom'
+import { useSetCsrf } from '@/components/Login/useSetCsrf'
+import { Login } from '@/types/form'
+import { useRouter } from 'next/router'
+import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCookies } from 'react-cookie'
+import { toast, Zoom } from 'react-toastify';
 
 export const useLogin = () => {
-  const { setUser } = useUserState();
-  const { setCsrf } = useSetCsrf();
-  const router = useRouter();
-  const params = useMemo(() => new URLSearchParams(), []);
-  const [cookies, setUseCookies] = useCookies(['_csrf']);
+  const { setUser } = useUserState()
+  const { setCsrf } = useSetCsrf()
+  const router = useRouter()
+  const params = useMemo(() => new URLSearchParams(), [])
+  const [cookies, setUseCookies] = useCookies(['_csrf'])
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   useEffect(() => {
-    setUseCookies('_csrf', cookies._csrf);
-  }, [cookies._csrf, setUseCookies]);
+    setUseCookies('_csrf', cookies._csrf)
+  }, [cookies._csrf, setUseCookies])
 
   const login = useCallback(
     async (Inputs: Login) => {
-      await setCsrf();
-
-      params.append('email', Inputs.email);
-      params.append('password', Inputs.password);
+      setIsSubmitting(true)
+      await setCsrf()
+      params.append('email', Inputs.email)
+      params.append('password', Inputs.password)
       fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
         headers: {
           'X-CSRF-TOKEN': cookies._csrf,
@@ -29,20 +31,45 @@ export const useLogin = () => {
         method: 'POST',
         mode: 'cors',
         credentials: 'include',
-        body: params,
+        body: params
       })
         .then((response) => response.json())
         .then((data) => {
-          setUser(data);
-          router.push('/timeLine');
+          setUser(data)
+          setIsSubmitting(false)
+          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
+          router.push('/timeLine')
+          toast.success('ログインに成功しました', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
         })
         .catch((error) => {
-          setUser(null);
-          router.push('/');
-        });
+          setUser(null)
+          setIsSubmitting(false)
+          router.push('/')
+          toast.error('ログインに失敗しました', {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+          });
+        })
     },
-    [cookies._csrf, params, router, setCsrf, setUser],
-  );
+    [cookies._csrf, params, router, setCsrf, setUser]
+  )
 
-  return { login };
-};
+  return { login, isSubmitting }
+}

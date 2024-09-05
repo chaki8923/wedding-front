@@ -4,14 +4,25 @@ import { UPDATE_INVITEE } from '@/graphql/document';
 import { Invitee } from '@/types/form';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { toast, Zoom } from 'react-toastify';
 
 export const useUpdateInvitee = () => {
   const router = useRouter();
   const [updInvitee, { loading, error }] = useMutation(UPDATE_INVITEE, {
     onCompleted: () => {
-      console.log("更新完了！！");
-      
-      router.push('/invitee_list');
+      toast.success('出席を更新しました', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Zoom,
+        });
+
+      router.push('/timeLine');
     },
     onError: (error: any) => {
       console.error('招待者更新エラー', error);

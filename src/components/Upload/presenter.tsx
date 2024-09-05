@@ -1,10 +1,12 @@
 import styles from './index.module.scss';
 import useImagePreview from '@/hooks/useImagePreview';
 import { Upload } from '@/types/form';
+import { Button } from "flowbite-react";
 import { NextRouter } from 'next/router';
 import React from 'react';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
 import { FaUpload } from 'react-icons/fa';
+import { HiCloudDownload } from "react-icons/hi";
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Upload>;
@@ -28,7 +30,8 @@ export function Presenter(props: Props) {
           </div>
           <div className="flex flex-col items-center w-full max-w-sm">
             <input
-              type="text"
+              type="hidden"
+              value="aaaaaaaaa"
               placeholder="コメントを入力してください"
               className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
               {...props.register('comment', {
@@ -72,14 +75,13 @@ export function Presenter(props: Props) {
             </div>
             {props.errors.file_url && <span className="text-red-500 text-xs mb-4 w-full">ファイルは必須です</span>}
 
-            <img id="imagePreview" src="" alt="Image Preview" className="w-full max-w-xs h-auto mt-4" />
+            <img id="imagePreview" src="" alt="Image Preview" className={`${styles.imagePreview} w-full max-w-xs h-auto mt-4`} />
           </div>
-          <button
-            className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
-            type="submit"
-          >
-            アップロード
-          </button>
+         <Button className="mt-4" type="submit" color="gray">
+        <HiCloudDownload className="mr-3 h-5 w-5" />
+        アップロード
+      </Button>
+       
         </div>
       </form>
     </div>

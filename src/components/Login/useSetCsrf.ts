@@ -3,7 +3,8 @@ import { useRouter } from 'next/router';
 export const useSetCsrf = () => {
   const router = useRouter();
   const setCsrf = () =>
-    fetch(`http://localhost:8081/csrf-cookie`, {
+    // fetch(`https://localhost:8080/csrf-cookie`, {
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/csrf-cookie`, {
       mode: 'cors',
       credentials: 'include',
     }).catch((error) => {

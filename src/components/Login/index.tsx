@@ -9,9 +9,8 @@ export function Login() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginForm>();
-  const { login } = useLogin();
-  const onSubmit: SubmitHandler<LoginForm> = async (data: any) => {
-    
+  const { login, isSubmitting } = useLogin();
+  const onSubmit: SubmitHandler<LoginForm> = (data: any) => {
     login(data);
   }
   return (
@@ -21,6 +20,7 @@ export function Login() {
         onSubmit={onSubmit}
         register={register}
         errors={errors}
+        isSubmitting={isSubmitting}
       />
     </>
   );

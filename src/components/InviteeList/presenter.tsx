@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import styles from './index.module.scss';
 import { DELETE_INVITEE } from '@/graphql/document'
 import { GetInviteeQuery } from '@/graphql/generated/graphql'
+import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { SendMail } from '@/types/form'
 import { Invitee } from '@/types/form'
 import { useMutation } from '@apollo/client'
@@ -8,6 +10,7 @@ import { NextRouter, useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEnvelope, FaTrash, FaLightbulb } from 'react-icons/fa'
+import { toast, Zoom } from 'react-toastify';
 
 
 type Props = {
@@ -22,12 +25,19 @@ type Props = {
   invHandleSubmit: UseFormHandleSubmit<Invitee>;
   invRegister: UseFormRegister<Invitee>;
   invErrors: FieldErrors<Invitee>;
+  invitationData: GetInvitationQuery
 };
+
+
 
 export function Presenter(props: Props) {
   const [emails, setEmails] = useState<string[]>([]);
+  const [invitationId, setInvitationId] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
+
+  console.log("招待状！", props.invitationData);
+
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -45,6 +55,10 @@ export function Presenter(props: Props) {
         return [...prevEmails, email];
       }
     });
+  };
+
+  const handleInvitationIdlClick = (id: string) => {
+    setInvitationId(id)
   };
 
   const [delInvitee] = useMutation(DELETE_INVITEE, {
@@ -72,7 +86,30 @@ export function Presenter(props: Props) {
     }
   };
 
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('コピーしました', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+
+      })
+      .catch((err) => {
+        console.error('コピーに失敗しました: ', err);
+      });
+  };
+
+
   return (
+    <>
     <div className="flex flex-row h-screen">
       <div className="flex-1 overflow-hidden bg-[url('/leaf53.png')] bg-cover bg-center">
         <div className="flex justify-center h-full overflow-y-auto pt-28 px-5">
@@ -361,6 +398,7 @@ export function Presenter(props: Props) {
               <input
                 type="text"
                 placeholder="招待状ID"
+                value={invitationId}
                 className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
                 {...props.register('body', {
                   required: true,
@@ -376,7 +414,15 @@ export function Presenter(props: Props) {
             </button>
           </div>
         </form>
+      <div className={styles.invitationsContainer}>
+        {props.invitationData.getInvitation.map((invitation) => (
+          <div onClick={() => handleInvitationIdlClick(invitation.uuid)} className={styles.card}  key={invitation.id}>
+            <img src={invitation.file_url} alt="" />
+          </div>
+        ))}
+      </div>
       </div>
     </div>
+      </>
   );
 }

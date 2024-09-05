@@ -1,5 +1,6 @@
 import { useUpdateInvitee } from '../InviteeDetail/useUpdateInvitee'
 import { useGetInvitee } from './useGetInvitee'
+import { useGetInvitation } from '@/components/Invitation/useCreateInvitation';
 import { useUserState } from '@/atoms/userAtom'
 import { Presenter } from '@/components/InviteeList/presenter'
 import { useMail } from '@/components/Mail/useMail'
@@ -12,6 +13,7 @@ export function InviteeList() {
   const { user, setUser } = useUserState()
   const router = useRouter()
   const { loading, data, error } = useGetInvitee()
+  const { loading: invitationLoading, data: invitationData, error: invitationError } = useGetInvitation();
   const { updateInvitee } = useUpdateInvitee()
 
   const invOnSubmit: SubmitHandler<InvForm> = async (data: any) => {
@@ -21,6 +23,9 @@ export function InviteeList() {
       console.error('IDが取得できませんでした')
       return
     }
+
+    console.log("invitationData", invitationData);
+    
 
     const processedData = {
       id: id,
@@ -56,10 +61,14 @@ export function InviteeList() {
     sendMail(data)
   }
 
-  if (loading) <span>Loading...</span>
+  if (loading || invitationLoading) <span>Loading...</span>
   if (error) {
     setUser(null)
     router.push('/')
+  }
+
+  if(!invitationData){
+    return <>Loading</>
   }
 
   if (!user) {
@@ -73,6 +82,7 @@ export function InviteeList() {
           data={data}
           router={router}
           handleSubmit={handleSubmit}
+          invitationData={invitationData}
           register={register}
           errors={errors}
           userId={user.userId}

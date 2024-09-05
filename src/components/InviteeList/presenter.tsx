@@ -1,6 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
+import styles from './index.module.scss';
 import { DELETE_INVITEE } from '@/graphql/document'
 import { GetInviteeQuery } from '@/graphql/generated/graphql'
+import { GetInvitationQuery } from '@/graphql/generated/graphql';
 import { SendMail } from '@/types/form'
 import { Invitee } from '@/types/form'
 import { useMutation } from '@apollo/client'
@@ -8,6 +10,7 @@ import { NextRouter, useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEnvelope, FaTrash, FaLightbulb } from 'react-icons/fa'
+import { toast, Zoom } from 'react-toastify';
 
 
 type Props = {
@@ -22,12 +25,19 @@ type Props = {
   invHandleSubmit: UseFormHandleSubmit<Invitee>;
   invRegister: UseFormRegister<Invitee>;
   invErrors: FieldErrors<Invitee>;
+  invitationData: GetInvitationQuery
 };
+
+
 
 export function Presenter(props: Props) {
   const [emails, setEmails] = useState<string[]>([]);
+  const [invitationId, setInvitationId] = useState<string>('');
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
+
+  console.log("招待状！", props.invitationData);
+
 
   const handleCancel = () => {
     setIsEditing(false);
@@ -45,6 +55,10 @@ export function Presenter(props: Props) {
         return [...prevEmails, email];
       }
     });
+  };
+
+  const handleInvitationIdlClick = (id: string) => {
+    setInvitationId(id)
   };
 
   const [delInvitee] = useMutation(DELETE_INVITEE, {
@@ -72,313 +86,344 @@ export function Presenter(props: Props) {
     }
   };
 
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('コピーしました', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+        });
+
+      })
+      .catch((err) => {
+        console.error('コピーに失敗しました: ', err);
+      });
+  };
+
+
   return (
-    <div className="flex flex-row h-screen">
-      <div className="flex-1 overflow-hidden bg-[url('/leaf53.png')] bg-cover bg-center">
-        <div className="flex justify-center h-full overflow-y-auto pt-28 px-5">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 justify-items-start mb-12">
-            {props.data.getInvitee.map((invitee) => {
-              const { register, handleSubmit } = useForm<Invitee>({
-                defaultValues: {
-                  id: invitee.id,
-                  join_flag: invitee.join_flag,
-                },
-              });
+    <>
+      <div className="flex flex-row h-screen">
+        <div className="flex-1 overflow-hidden bg-[url('/leaf53.png')] bg-cover bg-center">
+          <div className="flex justify-center h-full overflow-y-auto pt-28 px-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 justify-items-start mb-12">
+              {props.data.getInvitee.map((invitee) => {
+                const { register, handleSubmit } = useForm<Invitee>({
+                  defaultValues: {
+                    id: invitee.id,
+                    join_flag: invitee.join_flag,
+                  },
+                });
 
-              const onSubmit = (data: Invitee) => {
-                
-                const processedData = {
-                  ...data,
-                  id: invitee.id,
+                const onSubmit = (data: Invitee) => {
+
+                  const processedData = {
+                    ...data,
+                    id: invitee.id,
+                  };
+                  props.invOnSubmit(processedData);
                 };
-                props.invOnSubmit(processedData);
-              };
 
-              return (
-                <div key={invitee.id} className="w-80 pb-5">
-                  <form onSubmit={handleSubmit(onSubmit)}>
-                  <input
-                    type="hidden"
-                    defaultValue={invitee.id}
-                    {...props.invRegister(`id` as keyof Invitee, { required: true })}
-                  />
-
-                  <div className="w-full h-fit p-4 border border-gray-300 rounded-lg shadow-md bg-[#f2ecdb] flex flex-col text-sm break-all">
-                    {isEditing ? (
-                      <p>
-                        <label className="flex items-center">
-                          出席:
-                          <input
-                            type="checkbox"
-                            {...register(`join_flag_${invitee.id}` as keyof Invitee)}
-                            defaultChecked={invitee.join_flag}
-                            className="ml-2"
-                          />
-                        </label>
-                      </p>
-                    ) : (
-                      <p className="flex flex-row items-center">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">出席</p>{' '}
-                        {invitee.join_flag ? '出席' : '欠席'}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <>
-                        <input
-                          type="text"
-                          placeholder="苗字"
-                          defaultValue={invitee.family_kj}
-                          {...register(`family_kj_${invitee.id}` as keyof Invitee, {
-                            required: false,
-                          })}
-                          className="mt-2 p-2 border rounded"
-                        />
-                        <input
-                          type="text"
-                          placeholder="名前"
-                          defaultValue={invitee.first_kj}
-                          {...register(`first_kj_${invitee.id}` as keyof Invitee, {
-                            required: false,
-                          })}
-                          className="mt-2 p-2 border rounded"
-                        />
-                      </>
-                    ) : (
-                      <p className="flex flex-row items-center mt-1.5">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">氏名</p>
-                        {invitee.family_kj} {invitee.first_kj}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <>
-                        <input
-                          type="text"
-                          placeholder="みょうじ"
-                          defaultValue={invitee.family_kn}
-                          {...register(`family_kn_${invitee.id}` as keyof Invitee, {
-                            required: false,
-                          })}
-                          className="mt-2 p-2 border rounded"
-                        />
-                        <input
-                          type="text"
-                          defaultValue={invitee.first_kn}
-                          placeholder="なまえ"
-                          {...register(`first_kn_${invitee.id}` as keyof Invitee, {
-                            required: false,
-                          })}
-                          className="mt-2 p-2 border rounded"
-                        />
-                      </>
-                    ) : (
-                      <p className="flex flex-row items-center mt-1.5">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">しめい</p>
-                        {invitee.family_kn} {invitee.first_kn}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <input
-                        type="email"
-                        placeholder="email"
-                        defaultValue={invitee.email}
-                        {...register(`email_${invitee.id}` as keyof Invitee, {
-                          required: false,
-                        })}
-                        className="mt-2 p-2 border rounded"
-                      />
-                    ) : (
-                      <p
-                        className="flex flex-row items-center mt-1.5 cursor-copy"
-                        onClick={() => handleEmailClick(invitee.email)}
-                      >
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">Email</p>
-                        <p className="cursor-copy">{invitee.email}</p>
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        placeholder="郵便番号"
-                        defaultValue={invitee.zip_code}
-                        {...register(`zip_code_${invitee.id}` as keyof Invitee, {
-                          required: false,
-                        })}
-                        className="mt-2 p-2 border rounded"
-                      />
-                    ) : (
-                      <p className="flex flex-row items-center mt-1.5">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">〒</p>{' '}
-                        {invitee.zip_code}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        placeholder="住所"
-                        defaultValue={invitee.address_text}
-                        {...register(`address_text_${invitee.id}` as keyof Invitee, {
-                          required: false,
-                        })}
-                        className="mt-2 p-2 border rounded"
-                      />
-                    ) : (
-                      <p className="flex flex-row items-center mt-1.5">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">住所</p>{' '}
-                        {invitee.address_text}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <input
-                        type="text"
-                        placeholder="アレルギー"
-                        defaultValue={invitee.allergy}
-                        {...register(`allergy_${invitee.id}` as keyof Invitee, { required: false })}
-                        className="mt-2 p-2 border rounded"
-                      />
-                    ) : (
-                      <p className="flex flex-row items-center mt-1.5">
-                        <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">
-                          アレルギー
-                        </p>{' '}
-                        {invitee.allergy}
-                      </p>
-                    )}
-                    {isEditing ? (
-                      <>
-                        <input
-                          onClick={handleEditClick}
-                          type="file"
-                          id={`imageInput_${invitee.id}`}
-                          {...register(`file_url_${invitee.id}` as keyof Invitee, { required: false })}
-                          className="mt-2"
-                        />
-                        <img id={`imagePreview_${invitee.id}`} src="" alt="Image Preview" />
-                      </>
-                    ) : (
-                      <img
-                        src={invitee.file_url}
-                        alt=""
-                        className="mt-2 w-24 h-24 rounded-full object-cover border-2 border-gray-300"
-                      />
-                    )}
-                    <div className="mt-2">
-                      {isEditing ? (
-                        <div className="flex items-center">
-                          <button
-                            className="mr-1 px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
-                            type="submit"
-                          >
-                            更新
-                          </button>
-                          <span onClick={handleCancel} className="cursor-pointer text-blue-500">
-                            キャンセル
-                          </span>
-                        </div>
-                      ) : (
-                        <div className="flex items-center">
-                          <span
-                            className="px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300 cursor-pointer"
-                            onClick={handleEditClick}
-                          >
-                            編集
-                          </span>
-                          <button
-                            onClick={() => handleDelete(invitee.id)}
-                            className="flex items-center px-4 py-2 text-red-600 hover:text-red-800"
-                          >
-                            <FaTrash className="mr-2" />
-                            <span>削除</span>
-                          </button>
-                        </div>
-                      )}
-                      <input
-                        type="hidden"
-                        defaultValue={props.userId}
-                        {...register(`userId_${invitee.id}` as keyof Invitee, { required: true })}
-                      />
+                return (
+                  <div key={invitee.id} className="w-80 pb-5">
+                    <form onSubmit={handleSubmit(onSubmit)}>
                       <input
                         type="hidden"
                         defaultValue={invitee.id}
-                        {...register(`id_${invitee.id}` as keyof Invitee, { required: true })}
+                        {...props.invRegister(`id` as keyof Invitee, { required: true })}
                       />
-                    </div>
+
+                      <div className="w-full h-fit p-4 border border-gray-300 rounded-lg shadow-md bg-[#f2ecdb] flex flex-col text-sm break-all">
+                        {isEditing ? (
+                          <p>
+                            <label className="flex items-center">
+                              出席:
+                              <input
+                                type="checkbox"
+                                {...register(`join_flag_${invitee.id}` as keyof Invitee)}
+                                defaultChecked={invitee.join_flag}
+                                className="ml-2"
+                              />
+                            </label>
+                          </p>
+                        ) : (
+                          <p className="flex flex-row items-center">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">出席</p>{' '}
+                            {invitee.join_flag ? '出席' : '欠席'}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="苗字"
+                              defaultValue={invitee.family_kj}
+                              {...register(`family_kj_${invitee.id}` as keyof Invitee, {
+                                required: false,
+                              })}
+                              className="mt-2 p-2 border rounded"
+                            />
+                            <input
+                              type="text"
+                              placeholder="名前"
+                              defaultValue={invitee.first_kj}
+                              {...register(`first_kj_${invitee.id}` as keyof Invitee, {
+                                required: false,
+                              })}
+                              className="mt-2 p-2 border rounded"
+                            />
+                          </>
+                        ) : (
+                          <p className="flex flex-row items-center mt-1.5">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">氏名</p>
+                            {invitee.family_kj} {invitee.first_kj}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <>
+                            <input
+                              type="text"
+                              placeholder="みょうじ"
+                              defaultValue={invitee.family_kn}
+                              {...register(`family_kn_${invitee.id}` as keyof Invitee, {
+                                required: false,
+                              })}
+                              className="mt-2 p-2 border rounded"
+                            />
+                            <input
+                              type="text"
+                              defaultValue={invitee.first_kn}
+                              placeholder="なまえ"
+                              {...register(`first_kn_${invitee.id}` as keyof Invitee, {
+                                required: false,
+                              })}
+                              className="mt-2 p-2 border rounded"
+                            />
+                          </>
+                        ) : (
+                          <p className="flex flex-row items-center mt-1.5">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">しめい</p>
+                            {invitee.family_kn} {invitee.first_kn}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <input
+                            type="email"
+                            placeholder="email"
+                            defaultValue={invitee.email}
+                            {...register(`email_${invitee.id}` as keyof Invitee, {
+                              required: false,
+                            })}
+                            className="mt-2 p-2 border rounded"
+                          />
+                        ) : (
+                          <p
+                            className="flex flex-row items-center mt-1.5 cursor-copy"
+                            onClick={() => handleEmailClick(invitee.email)}
+                          >
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">Email</p>
+                            <p className="cursor-copy">{invitee.email}</p>
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <input
+                            type="text"
+                            placeholder="郵便番号"
+                            defaultValue={invitee.zip_code}
+                            {...register(`zip_code_${invitee.id}` as keyof Invitee, {
+                              required: false,
+                            })}
+                            className="mt-2 p-2 border rounded"
+                          />
+                        ) : (
+                          <p className="flex flex-row items-center mt-1.5">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">〒</p>{' '}
+                            {invitee.zip_code}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <input
+                            type="text"
+                            placeholder="住所"
+                            defaultValue={invitee.address_text}
+                            {...register(`address_text_${invitee.id}` as keyof Invitee, {
+                              required: false,
+                            })}
+                            className="mt-2 p-2 border rounded"
+                          />
+                        ) : (
+                          <p className="flex flex-row items-center mt-1.5">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">住所</p>{' '}
+                            {invitee.address_text}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <input
+                            type="text"
+                            placeholder="アレルギー"
+                            defaultValue={invitee.allergy}
+                            {...register(`allergy_${invitee.id}` as keyof Invitee, { required: false })}
+                            className="mt-2 p-2 border rounded"
+                          />
+                        ) : (
+                          <p className="flex flex-row items-center mt-1.5">
+                            <p className="w-24 mr-2 text-center bg-gray-300 border p-2 rounded-md font-semibold">
+                              アレルギー
+                            </p>{' '}
+                            {invitee.allergy}
+                          </p>
+                        )}
+                        {isEditing ? (
+                          <>
+                            <input
+                              onClick={handleEditClick}
+                              type="file"
+                              id={`imageInput_${invitee.id}`}
+                              {...register(`file_url_${invitee.id}` as keyof Invitee, { required: false })}
+                              className="mt-2"
+                            />
+                            <img id={`imagePreview_${invitee.id}`} src="" alt="Image Preview" />
+                          </>
+                        ) : (
+                          <img
+                            src={invitee.file_url}
+                            alt=""
+                            className="mt-2 w-24 h-24 rounded-full object-cover border-2 border-gray-300"
+                          />
+                        )}
+                        <div className="mt-2">
+                          {isEditing ? (
+                            <div className="flex items-center">
+                              <button
+                                className="mr-1 px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
+                                type="submit"
+                              >
+                                更新
+                              </button>
+                              <span onClick={handleCancel} className="cursor-pointer text-blue-500">
+                                キャンセル
+                              </span>
+                            </div>
+                          ) : (
+                            <div className="flex items-center">
+                              <span
+                                className="px-4 py-1 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300 cursor-pointer"
+                                onClick={handleEditClick}
+                              >
+                                編集
+                              </span>
+                              <button
+                                onClick={() => handleDelete(invitee.id)}
+                                className="flex items-center px-4 py-2 text-red-600 hover:text-red-800"
+                              >
+                                <FaTrash className="mr-2" />
+                                <span>削除</span>
+                              </button>
+                            </div>
+                          )}
+                          <input
+                            type="hidden"
+                            defaultValue={props.userId}
+                            {...register(`userId_${invitee.id}` as keyof Invitee, { required: true })}
+                          />
+                          <input
+                            type="hidden"
+                            defaultValue={invitee.id}
+                            {...register(`id_${invitee.id}` as keyof Invitee, { required: true })}
+                          />
+                        </div>
+                      </div>
+
+
+                    </form>
                   </div>
-                   
-         
-                  </form>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* メール送信フォーム */}
+        <div className="flex items-center justify-center min-h-screen bg-center bg-no-repeat" style={{ backgroundImage: "url('/gift1.png')" }}>
+          <div className="w-full max-w-md p-6 bg-white bg-opacity-80 border-4 border-slate-500 rounded-lg shadow-lg">
+            <form onSubmit={props.handleSubmit(props.onSubmit)}>
+              <div className="flex flex-col items-center">
+                <div className="text-gray-600 text-2xl pb-4 flex items-center">
+                  <FaEnvelope className="mr-2 text-3xl" />
+                  招待状送信
                 </div>
-              );
-            })}
+                <div className="text-gray-500 text-sm pb-4 flex items-center px-4">
+                  <FaLightbulb className="w-12 h-12 mr-3 text-yellow-500" />
+                  招待者のメールアドレスをクリックして、宛先に追加してください。（再度クリックすることで、宛先から消去できます。）
+                </div>
+                <div className="flex flex-col items-center w-full max-w-md space-y-4">
+                  <input
+                    type="text"
+                    placeholder="宛先メールアドレス"
+                    value={emails.join(', ')}
+                    className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                    {...props.register('to', {
+                      required: false,
+                    })}
+                  />
+                  {props.errors.to && <span className="text-red-500 text-xs">宛先メールアドレスは必須です</span>}
+
+                  <input
+                    type="text"
+                    placeholder="差出人メールアドレス"
+                    className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                    {...props.register('from', {
+                      required: false,
+                      pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    })}
+                  />
+                  {props.errors.from && <span className="text-red-500 text-xs">差出人メールアドレスは必須です</span>}
+
+                  <input
+                    type="text"
+                    placeholder="タイトル"
+                    className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                    {...props.register('subject', {
+                      required: true,
+                    })}
+                  />
+                  {props.errors.subject && <span className="text-red-500 text-xs">タイトルは必須です</span>}
+
+                  <input
+                    type="text"
+                    placeholder="招待状ID"
+                    className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                    {...props.register('body', {
+                      required: true,
+                    })}
+                  />
+                  {props.errors.body && <span className="text-red-500 text-xs">招待状IDは必須です</span>}
+                </div>
+                <button
+                  className="mt-6 p-2 px-12 text-base border-gray-400 border-2 bg-white text-gray-800 rounded-md cursor-pointer hover:bg-gray-200 transition"
+                  type="submit"
+                >
+                  送信
+                </button>
+              </div>
+            </form>
+            <div className={styles.invitationsContainer}>
+              {props.invitationData.getInvitation.map((invitation) => (
+                <div onClick={() => handleInvitationIdlClick(invitation.uuid)} className={styles.card} key={invitation.id}>
+                  <img src={invitation.file_url} alt="" />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
-
-      {/* メール送信フォーム */}
-      <div className="flex items-center justify-center min-h-screen bg-center bg-no-repeat" style={{ backgroundImage: "url('/gift1.png')" }}>
-        <div className="w-full max-w-md p-6 bg-white bg-opacity-80 border-4 border-slate-500 rounded-lg shadow-lg">
-          <form onSubmit={props.handleSubmit(props.onSubmit)}>
-            <div className="flex flex-col items-center">
-              <div className="text-gray-600 text-2xl pb-4 flex items-center">
-                <FaEnvelope className="mr-2 text-3xl" />
-                招待状送信
-              </div>
-              <div className="text-gray-500 text-sm pb-4 flex items-center px-4">
-                <FaLightbulb className="w-12 h-12 mr-3 text-yellow-500" />
-                招待者のメールアドレスをクリックして、宛先に追加してください。（再度クリックすることで、宛先から消去できます。）
-              </div>
-              <div className="flex flex-col items-center w-full max-w-md space-y-4">
-                <input
-                  type="text"
-                  placeholder="宛先メールアドレス"
-                  value={emails.join(', ')}
-                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
-                  {...props.register('to', {
-                    required: false,
-                  })}
-                />
-                {props.errors.to && <span className="text-red-500 text-xs">宛先メールアドレスは必須です</span>}
-
-                <input
-                  type="text"
-                  placeholder="差出人メールアドレス"
-                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
-                  {...props.register('from', {
-                    required: false,
-                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  })}
-                />
-                {props.errors.from && <span className="text-red-500 text-xs">差出人メールアドレスは必須です</span>}
-
-                <input
-                  type="text"
-                  placeholder="タイトル"
-                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
-                  {...props.register('subject', {
-                    required: true,
-                  })}
-                />
-                {props.errors.subject && <span className="text-red-500 text-xs">タイトルは必須です</span>}
-
-                <input
-                  type="text"
-                  placeholder="招待状ID"
-                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
-                  {...props.register('body', {
-                    required: true,
-                  })}
-                />
-                {props.errors.body && <span className="text-red-500 text-xs">招待状IDは必須です</span>}
-              </div>
-              <button
-                className="mt-6 p-2 px-12 text-base border-gray-400 border-2 bg-white text-gray-800 rounded-md cursor-pointer hover:bg-gray-200 transition"
-                type="submit"
-              >
-                送信
-              </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    </>
   );
 }

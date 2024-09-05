@@ -1,36 +1,39 @@
-import { Slideshow } from './Slideshow';
-import styles from './index.module.scss';
 import { GetImagesQuery } from '@/graphql/generated/graphql';
 import { NextRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
-  data: GetImagesQuery;
+  data: GetImagesQuery["getImages"];
   router: NextRouter;
 };
 
 export function Presenter(props: Props) {
-  const [isSlideshow, setIsSlideshow] = useState(true);
+
+  const [randomHeights, setRandomHeights] = useState<number[]>([]);
+
+  useEffect(() => {
+    // クライアントサイドでランダムな高さを生成
+    const heights = props.data.map(() => Math.floor(Math.random() * 30) + 20);
+    setRandomHeights(heights);
+  }, [props.data]);
 
   return (
-    <div className={styles.fullPageWrapper}>
-      <div className={styles.viewToggle}>
-        <button onClick={() => setIsSlideshow(!isSlideshow)}>
-          {isSlideshow ? 'Show Grid' : 'Show Slideshow'}
-        </button>
+    <div className="relative flex flex-col justify-center items-center pt-24 p-4">
+      <div className="grid grid-cols-[repeat(2,_minmax(200px,_1fr))] gap-2 auto-rows-[1px] sm:grid-cols-[repeat(2,_minmax(200px,_1fr))] xl:grid-cols-[repeat(3,_minmax(400px,_1fr))]">
+        {props.data.map(({ id, file_url, comment }, index) => (
+          <div
+            key={id}
+            className="relative"
+            style={{ gridRowEnd: `span ${randomHeights[index]}` }}
+          >
+            <img
+              className="h-full w-full object-cover rounded-lg"
+              src={file_url}
+              alt={comment}
+            />
+          </div>
+        ))}
       </div>
-
-      {isSlideshow ? (
-        <Slideshow images={props.data.getImages} autoPlay={true} autoPlayInterval={5000} />
-      ) : (
-        <div className={styles.contentWrapper}>
-          {props.data.getImages.map((image) => (
-            <div key={image.id} className={styles.imageWrapper}>
-              <img src={image.file_url} alt={image.comment} />
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 }

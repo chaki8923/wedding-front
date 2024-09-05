@@ -35,9 +35,6 @@ export function Presenter(props: Props) {
   const [isEditing, setIsEditing] = useState(false);
   const router = useRouter();
 
-  console.log("招待状！", props.invitationData);
-
-
   const handleCancel = () => {
     setIsEditing(false);
   };
@@ -78,6 +75,7 @@ export function Presenter(props: Props) {
   });
 
   const handleDelete = async (id: string) => {
+    
     try {
       const response = await delInvitee({ variables: { id } });
     } catch (err) {
@@ -299,13 +297,13 @@ export function Presenter(props: Props) {
                               >
                                 編集
                               </span>
-                              <button
+                              <span
                                 onClick={() => handleDelete(invitee.id)}
                                 className="flex items-center px-4 py-2 text-red-600 hover:text-red-800"
                               >
                                 <FaTrash className="mr-2" />
                                 <span>削除</span>
-                              </button>
+                              </span>
                             </div>
                           )}
                           <input

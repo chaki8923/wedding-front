@@ -90,7 +90,7 @@ export function Presenter(props: Props) {
 
   return (
     <>
-      <div className="flex flex-row h-screen bg-[url('/leaf53.png')]">
+      <div className="flex flex-row bg-[url('/leaf53.png')]">
         <div className="flex-1 overflow-hidden  bg-cover bg-center">
           <div className="flex justify-center h-full overflow-y-auto pt-28 px-5">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-5 justify-items-start mb-12">
@@ -331,7 +331,7 @@ export function Presenter(props: Props) {
         </div>
 
         {/* メール送信フォーム */}
-        <div className="pt-[220px] flex items-center justify-center min-h-screen bg-center bg-no-repeat" style={{ backgroundImage: "url('/gift1.png')" }}>
+        <div className={`${styles.mailForm }flex items-center justify-center min-h-screen bg-center bg-no-repeat`} style={{ backgroundImage: "url('/gift1.png')" }}>
           <div className="w-full max-w-md p-6 bg-white bg-opacity-80 border-4 border-slate-500 rounded-lg shadow-lg">
             <form onSubmit={props.handleSubmit(props.onSubmit)}>
               <div className="flex flex-col items-center">

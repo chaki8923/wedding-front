@@ -77,10 +77,20 @@ export function Presenter(props: Props) {
               <span className="sr-only">メニューを閉じる</span>
             </button>
           )}
+          <button onClick={() => handleNavigation('/timeLine')}>
+            <FaClock className={styles.icon} />
+            <div className={styles.title}>お知らせ</div>
+          </button>
           {isAdmin && (
             <button onClick={() => handleNavigation('/invitee')}>
               <FaUsers className={styles.icon} />
               <div className={styles.title}>招待者</div>
+            </button>
+          )}
+          {isAdmin && (
+            <button onClick={() => handleNavigation('/invitee_list')}>
+              <FaThList className={styles.icon} />
+              <div className={styles.title}>招待者一覧</div>
             </button>
           )}
           {isAdmin && (
@@ -89,24 +99,10 @@ export function Presenter(props: Props) {
               <div className={styles.title}>招待状</div>
             </button>
           )}
-          <button onClick={() => handleNavigation('/timeLine')}>
-            <FaClock className={styles.icon} />
-            <div className={styles.title}>お知らせ</div>
-          </button>
-          <button onClick={() => handleNavigation('/upload')}>
-            <FaUpload className={styles.icon} />
-            <div className={styles.title}>画像アップロード</div>
-          </button>
           <button onClick={() => handleNavigation('/images')}>
             <FaImages className={styles.icon} />
             <div className={styles.title}>ギャラリー</div>
           </button>
-          {isAdmin && (
-            <button onClick={() => handleNavigation('/invitee_list')}>
-              <FaThList className={styles.icon} />
-              <div className={styles.title}>招待者一覧</div>
-            </button>
-          )}
           {isAdmin && (
             <button onClick={() => handleNavigation('/gift')}>
               <FaGift className={styles.icon} />

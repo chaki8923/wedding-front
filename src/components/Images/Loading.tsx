@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 
 export function Loading() {
@@ -10,8 +11,8 @@ export function Loading() {
     }, []);
 
     return (
-        <div className="relative flex flex-col justify-center items-center pt-24 p-4">
-            <div className="grid grid-cols-[repeat(2,_minmax(200px,_0.3fr))] gap-2 auto-rows-[1px] sm:grid-cols-[repeat(2,_minmax(200px,_1fr))] xl:grid-cols-[repeat(3,_minmax(400px,_1fr))]">
+        <div className="relative flex flex-col justify-center items-center sm:gap-4 pt-24 p-4">
+            <div className="gap-2 grid grid-cols-[repeat(1,_minmax(400px,_1fr))] sm:gap-4 xl:auto-rows-[1px] xl:grid xl:grid-cols-[repeat(3,_minmax(400px,_1fr))]">
                 {Array.from({ length: 12 }).map((_, i) => (
                     <div
                         key={i}
@@ -20,11 +21,16 @@ export function Loading() {
                     >
                         <div
                             className="h-full w-full object-cover rounded-lg bg-gray-200 animate-pulse"
-
                         />
                     </div>
                 ))}
             </div>
+            <Link
+                href="/upload"
+                className="fixed bottom-4 px-4 py-2.5 bg-green-800 text-sm text-center text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-700"
+            >
+                写真をアップロードする
+            </Link>
         </div>
     )
 

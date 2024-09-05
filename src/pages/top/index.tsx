@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import Link from "next/link";
 
 export default function Home() {
@@ -18,17 +17,16 @@ export default function Home() {
             </Head>
             <div className="min-h-screen bg-gray-50">
                 <div className="relative">
-                    <Image
-                        src="/lp.jpg?height=1100&width=1920"
+                    <img
+                        src="/lp.jpg"
                         alt="Wedding background"
                         width={1920}
                         height={1100}
                         className="w-full h-screen object-cover"
-                        priority
                     />
                     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
                         <h1 className="text-4xl md:text-7xl font-bold mb-4">Wedding Gateway</h1>
-                        <p className="text-base sm:text-base md:text-2xl mb-8">思い出を共有し、祝福を届ける結婚式招待サービス</p>
+                        <p className="text-base sm:text-base p-4 md:text-2xl mb-8 text-center">招待状作成からご祝儀の送信、アルバムの共有まで、あなたの結婚式をサポート</p>
                     </div>
                 </div>
 

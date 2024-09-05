@@ -1,36 +1,33 @@
-import { Slideshow } from './Slideshow';
-import styles from './index.module.scss';
 import { GetImagesQuery } from '@/graphql/generated/graphql';
 import { NextRouter } from 'next/router';
-import React, { useState } from 'react';
+import React from 'react';
 
 type Props = {
-  data: GetImagesQuery;
+  data: GetImagesQuery["getImages"];
   router: NextRouter;
 };
 
 export function Presenter(props: Props) {
-  const [isSlideshow, setIsSlideshow] = useState(true);
 
   return (
-    <div className={styles.fullPageWrapper}>
-      <div className={styles.viewToggle}>
-        <button onClick={() => setIsSlideshow(!isSlideshow)}>
-          {isSlideshow ? 'Show Grid' : 'Show Slideshow'}
-        </button>
-      </div>
-
-      {isSlideshow ? (
-        <Slideshow images={props.data.getImages} autoPlay={true} autoPlayInterval={5000} />
-      ) : (
-        <div className={styles.contentWrapper}>
-          {props.data.getImages.map((image) => (
-            <div key={image.id} className={styles.imageWrapper}>
-              <img src={image.file_url} alt={image.comment} />
+    <div className="relative p-2 w-full flex flex-col justify-center font-serif items-center bg-center pt-24 pb-5">
+      <div className="w-5/12">
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-2 auto-rows-[1px]">
+          {props.data.map(({ id, file_url, comment }) => (
+            <div
+              key={id}
+              className="relative"
+              style={{ gridRowEnd: `span ${Math.floor(Math.random() * 50) + 20}` }}
+            >
+              <img
+                className="h-full w-full object-cover rounded-lg"
+                src={file_url}
+                alt={comment}
+              />
             </div>
           ))}
         </div>
-      )}
+      </div>
     </div>
   );
 }

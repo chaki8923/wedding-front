@@ -62,10 +62,10 @@ export function Presenter(props: Props) {
         <div className={styles.card}>
           <img src={props.inv.showInvitation.file_url} alt="" />
           <div className={styles.invitationDeyail}>
-            <p >タイトル:{props.inv.showInvitation.title}</p>
-            <p>開催日:{props.inv.showInvitation.event_date}</p>
             <p>{props.data.showInvitee.family_kj}{props.data.showInvitee.first_kj} 様へ</p>
-            <p>コメント:{props.inv.showInvitation.comment}</p>
+            <p>{props.inv.showInvitation.comment}</p>
+            <p>開催日:{props.inv.showInvitation.event_date}</p>
+            <p>場所:{props.inv.showInvitation.place}</p>
             <form onSubmit={props.handleSubmit((data) => props.onSubmit(data))}>
               <div>
                 <label>
@@ -78,9 +78,9 @@ export function Presenter(props: Props) {
                   className={styles.checkBox}
                 />
               </div>
-              <button className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
+              <button className="mt-[40px] p-2 px-12 tracking-wide border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
                 type='submit'>
-                これで更新する
+                出欠を確定する
               </button>
               <div className={styles.none}>
                 {isEditing ? (

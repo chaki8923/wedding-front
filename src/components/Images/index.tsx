@@ -18,7 +18,7 @@ export function ImageList() {
   if (data.getImages.length === 0) {
     return (
       <div className="relative p-2 w-full flex flex-col justify-center font-serif items-center bg-center pt-24 pb-5">
-        <div className="w-5/12 text-center">
+        <div className="w-full text-center">
           画像をアップロードしてください。
         </div>
       </div>

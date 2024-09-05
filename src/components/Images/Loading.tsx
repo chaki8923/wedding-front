@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React, { useEffect, useState } from 'react';
 
 export function Loading() {
@@ -24,6 +25,12 @@ export function Loading() {
                     </div>
                 ))}
             </div>
+            <Link
+                href="/upload"
+                className="fixed bottom-4 px-4 py-2.5 bg-green-800 text-sm text-center text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-700"
+            >
+                写真をアップロードする
+            </Link>
         </div>
     )
 

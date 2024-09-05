@@ -1,4 +1,5 @@
 import { GetImagesQuery } from '@/graphql/generated/graphql';
+import Link from "next/link";
 import { NextRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
@@ -34,6 +35,12 @@ export function Presenter(props: Props) {
           </div>
         ))}
       </div>
+      <Link
+        href="/upload"
+        className="fixed bottom-4 px-4 py-2.5 bg-green-800 text-sm text-center text-white rounded-full shadow-lg flex items-center justify-center hover:bg-green-700"
+      >
+        写真をアップロードする
+      </Link>
     </div>
   );
 }

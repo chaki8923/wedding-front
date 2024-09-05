@@ -68,7 +68,13 @@ export function Presenter(props: Props) {
       <nav className={styles.nav}>
         <div className={styles.logo}>
           <GiDiamondRing className={styles.iconLogo} />
-          <span className={styles.logoText}>Wedding Gateway</span>
+          <img
+            src="/Logo3.png"
+            alt="Wedding Gateway Logo"
+            width={150}
+            height={80}
+            className={styles.logoImage}
+          />
         </div>
         <div className={`${styles.navLinks} ${menuOpen ? styles.navLinksOpen : ''}`}>
           {menuOpen && (
@@ -101,7 +107,7 @@ export function Presenter(props: Props) {
           )}
           <button onClick={() => handleNavigation('/images')}>
             <FaImages className={styles.icon} />
-            <div className={styles.title}>ギャラリー</div>
+            <div className={styles.title}>アルバム</div>
           </button>
           {isAdmin && (
             <button onClick={() => handleNavigation('/gift')}>

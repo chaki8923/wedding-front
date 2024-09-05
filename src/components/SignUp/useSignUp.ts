@@ -34,8 +34,8 @@ export const useSignUp = () => {
         body: params,
       })
         .then((response) => response.json())
-        .then((data) => {
-          toast.success('新規登録に成功しました', {
+        .then(async (data) => {
+          await toast.success('新規登録に成功しました', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: true,
@@ -51,8 +51,8 @@ export const useSignUp = () => {
           document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
           router.push('/timeLine')
         })
-        .catch((error) => {
-          toast.error('新規登録に失敗しました', {
+        .catch(async (error) => {
+          await toast.error('新規登録に失敗しました', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: true,

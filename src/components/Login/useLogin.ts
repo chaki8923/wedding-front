@@ -34,11 +34,8 @@ export const useLogin = () => {
         body: params
       })
         .then((response) => response.json())
-        .then((data) => {
-          setUser(data)
-          setIsSubmitting(false)
-          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
-          toast.success('ログインに成功しました', {
+        .then(async (data) => {
+          await toast.success('ログインに成功しました', {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: true,
@@ -49,12 +46,13 @@ export const useLogin = () => {
             theme: "light",
             transition: Zoom,
           });
+          setUser(data)
+          setIsSubmitting(false)
+          document.cookie = `weddingUserId=${data.userId}; path=/; max-age=2592000; SameSite=Strict; Secure`
           router.push('/timeLine')
         })
-        .catch((error) => {
-          setUser(null)
-          setIsSubmitting(false)
-          toast.error('ログインに失敗しました', {
+        .catch(async (error) => {
+          await toast.error('ログインに失敗しました', {
             position: "top-center",
             autoClose: 5000,
             hideProgressBar: true,
@@ -65,6 +63,8 @@ export const useLogin = () => {
             theme: "light",
             transition: Zoom,
           });
+          setUser(null)
+          setIsSubmitting(false)
         })
     },
     [cookies._csrf, params, router, setCsrf, setUser]

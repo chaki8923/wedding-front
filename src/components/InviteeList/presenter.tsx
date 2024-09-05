@@ -399,6 +399,7 @@ export function Presenter(props: Props) {
                   <input
                     type="text"
                     placeholder="招待状ID"
+                    value={invitationId}
                     className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
                     {...props.register('body', {
                       required: true,

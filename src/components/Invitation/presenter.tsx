@@ -29,27 +29,7 @@ export function Presenter({
   router,
 }: Props) {
 
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        toast.success('コピーしました', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Zoom,
-          });
-  
-      })
-      .catch((err) => {
-        console.error('コピーに失敗しました: ', err);
-      });
-  };
-
+  useImagePreview('imageInput', 'imagePreview');
 
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
     onCompleted: () => {
@@ -76,8 +56,7 @@ export function Presenter({
     }
   };
 
-  useImagePreview('imageInput', 'imagePreview');
-  if (data === undefined) return <span>Loading...</span>;
+
   return (
     <div className={styles.backgroundWrapper}>
       <form className="flex flex-col items-center w-full max-w-sm mt-28" onSubmit={handleSubmit(onSubmit)}>
@@ -166,7 +145,7 @@ export function Presenter({
             <p>タイトル: {invitation.title}</p>
             <p>開催日: {invitation.event_date}</p>
             <p>コメント: {invitation.comment}</p>
-            <p className={styles.invitationId} onClick={() => handleCopy(invitation.uuid)}>招待状id<br></br> {invitation.uuid}</p>
+            <p className={styles.invitationId}>招待状id<br></br> {invitation.uuid}</p>
             <button onClick={() => handleDelete(invitation.id)}>
               削除
             </button>

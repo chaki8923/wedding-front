@@ -25,6 +25,9 @@ export function Invitation() {
   if (!user) {
     return <span>UserId is not set...</span>;
   }
+  if (!data) {
+    return <span>Loading...</span>;
+  }
 
   if (loading) <span>Adding Messages...</span>;
   if (error) {

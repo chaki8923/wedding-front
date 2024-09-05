@@ -109,12 +109,10 @@ export function Presenter(props: Props) {
             <FaImages className={styles.icon} />
             <div className={styles.title}>アルバム</div>
           </button>
-          {isAdmin && (
-            <button onClick={() => handleNavigation('/gift')}>
-              <FaGift className={styles.icon} />
-              <div className={styles.title}>ご祝儀</div>
-            </button>
-          )}
+          <button onClick={() => handleNavigation('/gift')}>
+            <FaGift className={styles.icon} />
+            <div className={styles.title}>ご祝儀</div>
+          </button>
           <button className={styles.btnLogOut} onClick={() => {
             closeMenu();
             props.logout();

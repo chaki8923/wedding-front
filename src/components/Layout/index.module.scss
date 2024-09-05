@@ -161,11 +161,13 @@
     background-color: #f2ecdb; 
     margin-bottom: 0; 
     padding-bottom: 12px; 
+    padding-right: 0;
     height: 60px;
   }
 
   .hamburger {
     display: block;
+    order: -1;
   }
 
   .hideOnSmall {
@@ -196,7 +198,7 @@
     transition: none;
   }
 
- .navLinksOpen {
+  .navLinksOpen {
     left: 0;
     transition: left 0.3s ease-in-out;
   }
@@ -218,13 +220,18 @@
   }
 
   .title {
-  font-size: 15px;
-  font-weight: 600;
-  text-align: center;
-}
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+  } 
 
   .logo {
-    display: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
   }
 
   .btnLogOut {

@@ -7,6 +7,7 @@ import { useMutation } from '@apollo/client';
 import Link from "next/link";
 import { NextRouter } from 'next/router';
 import { FieldErrors, SubmitHandler, UseFormHandleSubmit, UseFormRegister } from 'react-hook-form';
+import { toast, Zoom } from 'react-toastify';
 
 type Props = {
   handleSubmit: UseFormHandleSubmit<Invitation>;
@@ -27,6 +28,27 @@ export function Presenter({
   userId,
   router,
 }: Props) {
+
+  const handleCopy = (text) => {
+    navigator.clipboard.writeText(text)
+      .then(() => {
+        toast.success('コピーしました', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          transition: Zoom,
+          });
+  
+      })
+      .catch((err) => {
+        console.error('コピーに失敗しました: ', err);
+      });
+  };
 
 
   const [delInvitation, { loading, error }] = useMutation(DELETE_INVITATION, {
@@ -144,7 +166,7 @@ export function Presenter({
             <p>タイトル: {invitation.title}</p>
             <p>開催日: {invitation.event_date}</p>
             <p>コメント: {invitation.comment}</p>
-            <p>uuid: {invitation.uuid}</p>
+            <p className={styles.invitationId} onClick={() => handleCopy(invitation.uuid)}>招待状id<br></br> {invitation.uuid}</p>
             <button onClick={() => handleDelete(invitation.id)}>
               削除
             </button>

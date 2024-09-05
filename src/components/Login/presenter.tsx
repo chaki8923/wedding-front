@@ -14,7 +14,7 @@ type Props = {
 export function Presenter(props: Props) {
 
   return (
-    <div className="relative w-full h-screen flex flex-col justify-center font-serif	items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf19.png')" }}>
+    <div className="relative w-full h-screen flex flex-col justify-center items-center bg-center  bg-no-repeat" style={{ backgroundImage: "url('/leaf19.png')" }}>
 
       <form className="flex flex-col items-center p-8 max-w-sm w-full mt-8 text-center" onSubmit={props.handleSubmit(props.onSubmit)}>
         <div className={`w-full ${props.errors.email ? "" : "mb-4"}`}>

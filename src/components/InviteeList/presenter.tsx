@@ -10,7 +10,6 @@ import { NextRouter, useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { FieldErrors, UseFormHandleSubmit, UseFormRegister, SubmitHandler, useForm } from 'react-hook-form'
 import { FaEnvelope, FaTrash, FaLightbulb } from 'react-icons/fa'
-import { toast, Zoom } from 'react-toastify';
 
 
 type Props = {
@@ -58,7 +57,7 @@ export function Presenter(props: Props) {
   };
 
   const handleInvitationIdlClick = (id: string) => {
-    setInvitationId(id)
+    setInvitationId(id);
   };
 
   const [delInvitee] = useMutation(DELETE_INVITEE, {
@@ -86,26 +85,7 @@ export function Presenter(props: Props) {
     }
   };
 
-  const handleCopy = (text) => {
-    navigator.clipboard.writeText(text)
-      .then(() => {
-        toast.success('コピーしました', {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          transition: Zoom,
-        });
-
-      })
-      .catch((err) => {
-        console.error('コピーに失敗しました: ', err);
-      });
-  };
+  
 
 
   return (
@@ -417,8 +397,11 @@ export function Presenter(props: Props) {
             </form>
             <div className={styles.invitationsContainer}>
               {props.invitationData.getInvitation.map((invitation) => (
-                <div onClick={() => handleInvitationIdlClick(invitation.uuid)} className={styles.card} key={invitation.id}>
+                <div onClick={() => handleInvitationIdlClick(invitation.uuid)}
+                className={`${styles.card}`}
+                 key={invitation.id}>
                   <img src={invitation.file_url} alt="" />
+                  <img className={`${styles.check} ${invitationId === invitation.uuid ? styles.selected : ''}`} src="./check.png" alt="" />
                 </div>
               ))}
             </div>

@@ -31,9 +31,23 @@
   cursor: pointer;
 }
 
+.check{
+  display: none;
+  width: 160px;
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.selected {
+  display: block;
+}
+
 
 
 .card {
+  position: relative;
   width: 160px;
   height: fit-content;
   padding: 16px;

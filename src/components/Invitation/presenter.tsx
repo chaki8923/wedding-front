@@ -69,70 +69,34 @@ export function Presenter({
           {errors.userId && <span>※Please login again</span>}
         </div>
         <div className="flex flex-col items-center w-full">
-          <div className="relative w-full mb-4">
-            <input
-              type="text"
-              id="title"
-              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
-              placeholder=" "
-              {...register('title', { required: true })}
-            />
-            <label
-              htmlFor="title"
-              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-            >
-              タイトル
-            </label>
-          </div>
-          <div className="relative w-full mb-4">
-            <input
-              type="date"
-              id="event_date"
-              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
-              placeholder=" "
-              {...register('event_date', { required: true })}
-            />
-            <label
-              htmlFor="event_date"
-              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-            >
-              開催日
-            </label>
-          </div>
-          <div className="relative w-full mb-4">
-            <input
-              type="text"
-              id="place"
-              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
-              placeholder=" "
-              {...register('place', { required: true })}
-            />
-            <label
-              htmlFor="place"
-              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-            >
-              開催場所
-            </label>
-          </div>
-          <div className="relative w-full mb-4">
-            <input
-              type="text"
-              id="comment"
-              className="block rounded-t-lg px-2.5 pb-2.5 pt-5 w-full text-sm text-green-800 bg-green-100 border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-green-800 peer"
-              placeholder=" "
-              {...register('comment', { required: true })}
-            />
-            <label
-              htmlFor="comment"
-              className="absolute text-sm text-green-800 duration-300 transform -translate-y-4 scale-75 top-4 z-10 origin-[0] start-2.5 peer-focus:text-green-800 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-4"
-            >
-              コメント
-            </label>
-          </div>
+          <input
+            type='text'
+            placeholder='タイトル'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('title', { required: true })}
+          />
+          <input
+            type='date'
+            placeholder='開催日'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('event_date', { required: true })}
+          />
+          <input
+            type='text'
+            placeholder='開催場所'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('place', { required: true })}
+          />
+          <input
+            type='text'
+            placeholder='コメント'
+            className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
+            {...register('comment', { required: true })}
+          />
           <div className={`${styles.imageWrap} w-full`}>
             <label
               htmlFor="imageInput"
-              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-green-100 hover:bg-green-200`}
+              className={`${styles.imageWrap}image-wrap flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}
             >
               <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
@@ -167,7 +131,7 @@ export function Presenter({
           defaultValue={userId}
           {...register('userId', { required: true })}
         />
-        <button className="p-2 px-12 tracking-wide mt-4 bg-green-700 text-white px-4 py-2 rounded-lg hover:bg-green-800 transition duration-300" type='submit'>
+        <button className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300" type='submit'>
           登録
         </button>
       </form>

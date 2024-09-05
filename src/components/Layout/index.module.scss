@@ -6,7 +6,7 @@
   left: 0;
   width: 100%;
   z-index: 100;
-  background-image: url('/Navbar_leaf.jpeg'); 
+  background-image: url('/Template1.png'); 
   background-size: cover; 
   background-repeat: no-repeat; 
   background-position: center;
@@ -31,13 +31,17 @@
   font-size: 1.4rem;
   font-weight: bold;
   color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
 }
 
 .iconLogo {
   font-size: 1.8rem;
-  margin-right: 8px;
   color: #3b5a32;
+}
+
+.logoImage {
+  max-height: 40px;
+  width: auto;
+  object-fit: contain;
 }
 
 .navLinks {
@@ -48,7 +52,6 @@
 .navLinks button {
   font-size: 15px;
   color: #333;
-  font-family: 'Noto Sans JP', sans-serif;
   font-weight: 500;
   cursor: pointer;
   position: relative;
@@ -111,8 +114,8 @@
 }
 
 .btnLogOut:hover {
-  background-color: #ff5c5c;
-  color: white;
+  background-color: rgba(200, 200, 200, 0.8);
+  color: #4b4a4a; 
 }
 
 .hamburger {
@@ -184,10 +187,10 @@
     border-right: 2px solid #3b5a32;
     border-bottom: 2px solid #3b5a32;
     border-left: none;
-    border-top: none; // 上部の境界線を削除
+    border-top: none;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
-    transition: none; // アニメーションを削除
+    transition: none;
   }
 
  .navLinksOpen {

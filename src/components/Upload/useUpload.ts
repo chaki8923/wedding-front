@@ -12,7 +12,7 @@ export const useUpload = () => {
 
   const [postFile, { loading, error }] = useMutation(UPLOAD_FILE, {
     onCompleted: () => {
-      toast.success('ギャラリーに追加されました。', {
+      toast.success('アルバムに追加されました。', {
         position: "top-right",
         autoClose: 5000,
         hideProgressBar: true,

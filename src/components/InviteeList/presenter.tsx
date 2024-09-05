@@ -314,68 +314,70 @@ export function Presenter(props: Props) {
       </div>
 
       {/* メール送信フォーム */}
-      <div className="w-1/4 overflow-y-auto border-4 border-slate-500">
-        <form className="mt-28" onSubmit={props.handleSubmit(props.onSubmit)}>
-          <div className="flex flex-col items-center">
-            <div className="text-gray-600 text-xl pb-5 flex items-center">
-              <FaEnvelope className="mr-2" />
-              招待状送信
-            </div>
-            <div className="text-gray-500 text-sm pb-3 flex items-center px-5">
-              <FaLightbulb className="w-12 h-12 mr-2" />
-              招待者のメールアドレスをクリックして、宛先に追加してください。（再度クリックすることで、宛先から消去できます。）
-            </div>
-            <div className="flex flex-col items-center w-full max-w-sm">
-              <input
-                type="text"
-                placeholder="宛先メールアドレス"
-                value={emails.join(', ')}
-                className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-                {...props.register('to', {
-                  required: false,
-                })}
-              />
-              {props.errors.to && <span className="text-red-500 text-xs mb-4 w-full">宛先メールアドレスは必須です</span>}
+      <div className="flex items-center justify-center min-h-screen bg-center bg-no-repeat" style={{ backgroundImage: "url('/gift1.png')" }}>
+        <div className="w-full max-w-md p-6 bg-white bg-opacity-80 border-4 border-slate-500 rounded-lg shadow-lg">
+          <form onSubmit={props.handleSubmit(props.onSubmit)}>
+            <div className="flex flex-col items-center">
+              <div className="text-gray-600 text-2xl pb-4 flex items-center">
+                <FaEnvelope className="mr-2 text-3xl" />
+                招待状送信
+              </div>
+              <div className="text-gray-500 text-sm pb-4 flex items-center px-4">
+                <FaLightbulb className="w-12 h-12 mr-3 text-yellow-500" />
+                招待者のメールアドレスをクリックして、宛先に追加してください。（再度クリックすることで、宛先から消去できます。）
+              </div>
+              <div className="flex flex-col items-center w-full max-w-md space-y-4">
+                <input
+                  type="text"
+                  placeholder="宛先メールアドレス"
+                  value={emails.join(', ')}
+                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                  {...props.register('to', {
+                    required: false,
+                  })}
+                />
+                {props.errors.to && <span className="text-red-500 text-xs">宛先メールアドレスは必須です</span>}
 
-              <input
-                type="text"
-                placeholder="差出人メールアドレス"
-                className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-                {...props.register('from', {
-                  required: false,
-                  pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                })}
-              />
-              {props.errors.from && <span className="text-red-500 text-xs mb-4 w-full">差出人メールアドレスは必須です</span>}
+                <input
+                  type="text"
+                  placeholder="差出人メールアドレス"
+                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                  {...props.register('from', {
+                    required: false,
+                    pattern: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  })}
+                />
+                {props.errors.from && <span className="text-red-500 text-xs">差出人メールアドレスは必須です</span>}
 
-              <input
-                type="text"
-                placeholder="タイトル"
-                className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-                {...props.register('subject', {
-                  required: true,
-                })}
-              />
-              {props.errors.subject && <span className="text-red-500 text-xs mb-4 w-full">タイトルは必須です</span>}
+                <input
+                  type="text"
+                  placeholder="タイトル"
+                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                  {...props.register('subject', {
+                    required: true,
+                  })}
+                />
+                {props.errors.subject && <span className="text-red-500 text-xs">タイトルは必須です</span>}
 
-              <input
-                type="text"
-                placeholder="招待状ID"
-                className="w-full p-3 mb-4 bg-transparent text-base border-b border-gray-400 outline-none"
-                {...props.register('body', {
-                  required: true,
-                })}
-              />
-              {props.errors.body && <span className="text-red-500 text-xs mb-4 w-full">招待状IDは必須です</span>}
+                <input
+                  type="text"
+                  placeholder="招待状ID"
+                  className="w-full p-4 bg-transparent text-base border-b border-gray-400 outline-none focus:border-gray-600 transition"
+                  {...props.register('body', {
+                    required: true,
+                  })}
+                />
+                {props.errors.body && <span className="text-red-500 text-xs">招待状IDは必須です</span>}
+              </div>
+              <button
+                className="mt-6 p-2 px-12 text-base border-gray-400 border-2 bg-white text-gray-800 rounded-md cursor-pointer hover:bg-gray-200 transition"
+                type="submit"
+              >
+                送信
+              </button>
             </div>
-            <button
-              className="p-2 px-12 tracking-wide mt-4 border-gray-400 border-2 bg-white text-base rounded-md cursor-pointer hover:bg-gray-300"
-              type="submit"
-            >
-              送信
-            </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

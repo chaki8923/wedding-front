@@ -79,7 +79,7 @@ export function Presenter({ data, router }: Props) {
                   <p className="text-xs text-gray-500 font-mono">{formatDate(message.created_at)}</p>
                 </div>
                 <div className="bg-green-100 p-4 rounded-lg shadow-inner overflow-hidden">
-                  <p className="text-xs text-gray-700 whitespace-pre-wrap break-words">{message.text}</p>
+                  <p className="text-xs sm:text-base text-gray-700 whitespace-pre-wrap break-words">{message.text}</p>
                 </div>
               </div>
             </div>

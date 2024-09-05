@@ -87,19 +87,19 @@ export function Presenter(props: Props) {
               <div className={styles.title}>お知らせ</div>
             </button>
             {isAdmin && (
-              <button onClick={() => handleNavigation('/invitee')} className={styles.hideOnSmall}>
+              <button onClick={() => handleNavigation('/invitee')}>
                 <FaUsers className={styles.icon} />
                 <div className={styles.title}>招待者</div>
               </button>
             )}
             {isAdmin && (
-              <button onClick={() => handleNavigation('/invitee_list')} className={styles.hideOnSmall}>
+              <button onClick={() => handleNavigation('/invitee_list')}>
                 <FaThList className={styles.icon} />
                 <div className={styles.title}>招待者一覧</div>
               </button>
             )}
             {isAdmin && (
-              <button onClick={() => handleNavigation('/invitation')} className={styles.hideOnSmall}>
+              <button onClick={() => handleNavigation('/invitation')}>
                 <FaEnvelope className={styles.icon} />
                 <div className={styles.title}>招待状</div>
               </button>
@@ -131,24 +131,24 @@ export function Presenter(props: Props) {
           )}
         </nav>
       </header>
-      <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 sm:block md:hidden">
+      <div className="fixed z-50 w-full h-16 max-w-lg -translate-x-1/2 bg-white border border-gray-300 rounded-full bottom-4 left-1/2 sm:block md:hidden">
         <div className="grid h-full max-w-lg grid-cols-5 mx-auto">
           <button
             data-tooltip-target="tooltip-home"
             type="button"
-            className={`inline-flex flex-col items-center justify-center pl-2 rounded-s-full hover:bg-gray-50 group ${
-              isActive('/timeLine') ? 'bg-gray-100' : ''
+            className={`inline-flex flex-col items-center justify-center pl-2 rounded-s-full group ${
+              isActive('/timeLine') ? 'bg-gray-200' : ''
             }`}
             onClick={() => handleNavigation('/timeLine')}
           >
             <FaClock
               className={`w-5 h-5 mb-0.5 ${
-                isActive('/timeLine') ? 'text-green-700' : 'text-gray-500 group-hover:text-green-700'
+                isActive('/timeLine') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600'
               }`}
             />
             <p
               className={`text-xs ${
-                isActive('/timeLine') ? 'text-green-700' : 'text-gray-700 group-hover:text-green-700'
+                isActive('/timeLine') ? 'text-green-600' : 'text-gray-700 group-hover:text-green-600'
               }`}
             >
               お知らせ
@@ -157,18 +157,18 @@ export function Presenter(props: Props) {
           <button
             data-tooltip-target="tooltip-home"
             type="button"
-            className={`inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 group ${
-              isActive('/gift') ? 'bg-gray-100' : ''
+            className={`inline-flex flex-col items-center justify-center px-1 group ${
+              isActive('/gift') ? 'bg-gray-200' : ''
             }`}
             onClick={() => handleNavigation('/gift')}
           >
             <FaGift
               className={`w-5 h-5 mb-0.5 ${
-                isActive('/gift') ? 'text-green-700' : 'text-gray-500 group-hover:text-green-700'
+                isActive('/gift') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600'
               }`}
             />
             <p
-              className={`text-xs ${isActive('/gift') ? 'text-green-700' : 'text-gray-700 group-hover:text-green-700'}`}
+              className={`text-xs ${isActive('/gift') ? 'text-green-600' : 'text-gray-700 group-hover:text-green-600'}`}
             >
               ご祝儀
             </p>
@@ -204,19 +204,19 @@ export function Presenter(props: Props) {
           <button
             data-tooltip-target="tooltip-home"
             type="button"
-            className={`inline-flex flex-col items-center justify-center px-1 hover:bg-gray-50 dark:hover:bg-gray-800 group ${
-              isActive('/images') ? 'bg-gray-100' : ''
+            className={`inline-flex flex-col items-center justify-center px-1 dark:hover:bg-gray-800 group ${
+              isActive('/images') ? 'bg-gray-200' : ''
             }`}
             onClick={() => handleNavigation('/images')}
           >
             <FaImages
               className={`w-5 h-5 mb-0.5 ${
-                isActive('/images') ? 'text-green-700' : 'text-gray-500 group-hover:text-green-700'
+                isActive('/images') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600'
               }`}
             />
             <p
               className={`text-xs ${
-                isActive('/images') ? 'text-green-700' : 'text-gray-700 group-hover:text-green-700'
+                isActive('/images') ? 'text-green-600' : 'text-gray-700 group-hover:text-green-600'
               }`}
             >
               アルバム
@@ -225,19 +225,19 @@ export function Presenter(props: Props) {
           <button
             data-tooltip-target="tooltip-home"
             type="button"
-            className={`inline-flex flex-col items-center justify-center pr-2 rounded-s-full hover:bg-gray-50 dark:hover:bg-gray-800 group ${
-              isActive('/terms_of_service') ? 'bg-gray-100' : ''
+            className={`inline-flex flex-col items-center justify-center pr-2 rounded-s-full dark:hover:bg-gray-800 group ${
+              isActive('/terms_of_service') ? 'bg-gray-200' : ''
             }`}
             onClick={() => handleNavigation('/terms_of_service')}
           >
             <FaFileContract
               className={`w-5 h-5 mb-0.5 ${
-                isActive('/terms_of_service') ? 'text-green-700' : 'text-gray-500 group-hover:text-green-700'
+                isActive('/terms_of_service') ? 'text-green-600' : 'text-gray-500 group-hover:text-green-600'
               }`}
             />
             <p
               className={`text-xs ${
-                isActive('/terms_of_service') ? 'text-green-700' : 'text-gray-700 group-hover:text-green-700'
+                isActive('/terms_of_service') ? 'text-green-600' : 'text-gray-700 group-hover:text-green-600'
               }`}
             >
               利用規約

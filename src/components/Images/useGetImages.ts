@@ -1,4 +1,3 @@
-import { GetImagesQuery } from '@/graphql/generated/graphql';
 import { GET_IMAGES } from '@/graphql/document';
 import { useQuery } from '@apollo/client';
 

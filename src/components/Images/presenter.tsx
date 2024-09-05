@@ -1,6 +1,6 @@
 import { GetImagesQuery } from '@/graphql/generated/graphql';
 import { NextRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 type Props = {
   data: GetImagesQuery["getImages"];
@@ -9,24 +9,30 @@ type Props = {
 
 export function Presenter(props: Props) {
 
+  const [randomHeights, setRandomHeights] = useState<number[]>([]);
+
+  useEffect(() => {
+    // クライアントサイドでランダムな高さを生成
+    const heights = props.data.map(() => Math.floor(Math.random() * 30) + 20);
+    setRandomHeights(heights);
+  }, [props.data]);
+
   return (
-    <div className="relative p-2 w-full flex flex-col justify-center font-serif items-center bg-center pt-24 pb-5">
-      <div className="w-5/12">
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-2 auto-rows-[1px]">
-          {props.data.map(({ id, file_url, comment }) => (
-            <div
-              key={id}
-              className="relative"
-              style={{ gridRowEnd: `span ${Math.floor(Math.random() * 50) + 20}` }}
-            >
-              <img
-                className="h-full w-full object-cover rounded-lg"
-                src={file_url}
-                alt={comment}
-              />
-            </div>
-          ))}
-        </div>
+    <div className="relative flex flex-col justify-center items-center pt-24 p-4">
+      <div className="grid grid-cols-[repeat(2,_minmax(200px,_1fr))] gap-2 auto-rows-[1px] sm:grid-cols-[repeat(2,_minmax(200px,_1fr))] xl:grid-cols-[repeat(3,_minmax(400px,_1fr))]">
+        {props.data.map(({ id, file_url, comment }, index) => (
+          <div
+            key={id}
+            className="relative"
+            style={{ gridRowEnd: `span ${randomHeights[index]}` }}
+          >
+            <img
+              className="h-full w-full object-cover rounded-lg"
+              src={file_url}
+              alt={comment}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

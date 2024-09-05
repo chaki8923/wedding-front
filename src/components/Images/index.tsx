@@ -1,4 +1,4 @@
-import { GetImagesQuery } from '@/graphql/generated/graphql';
+import { Loading } from './Loading';
 import { useGetImages } from './useGetImages';
 import { useUserState } from '@/atoms/userAtom';
 import { Presenter } from '@/components/Images/presenter';
@@ -12,24 +12,7 @@ export function ImageList() {
   const { data, loading, error } = useGetImages();
 
   if (loading || data === undefined) return (
-    <div className="relative p-2 w-full flex flex-col justify-center font-serif items-center bg-center pt-24 pb-5">
-      <div className="w-5/12">
-        <div className="grid grid-cols-[repeat(auto-fill,_minmax(200px,_1fr))] gap-2 auto-rows-[1px] sm:grid-cols-[repeat(auto-fill,_minmax(10px,_1fr))] xl:grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))]">
-          {Array.from({ length: 12 }).map((_, i) => (
-            <div
-              key={i}
-              className="relative"
-              style={{ gridRowEnd: `span ${Math.floor(Math.random() * 50) + 20}` }}
-            >
-              <div
-                className="h-full w-full object-cover rounded-lg bg-gray-200 animate-pulse"
-
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
+    <Loading />
   )
 
   if (data.getImages.length === 0) {

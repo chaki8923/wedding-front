@@ -65,7 +65,7 @@ export function InviteeDetail() {
   }
 
   if (!user) {
-    return <span>UserId is not set...</span>;
+    return <span></span>;
   }
 
   return <>{inviteeData && <Presenter

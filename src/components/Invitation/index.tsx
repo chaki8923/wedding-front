@@ -23,7 +23,7 @@ export function Invitation() {
   }
 
   if (!user) {
-    return <span>UserId is not set...</span>;
+    return <span></span>;
   }
   if (!data) {
     return <span>Loading...</span>;

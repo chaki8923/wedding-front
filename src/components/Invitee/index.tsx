@@ -24,7 +24,7 @@ export function Invitee() {
   }
 
   if (!user) {
-    return <span>UserId is not set...</span>;
+    return <span></span>;
   }
 
   return (

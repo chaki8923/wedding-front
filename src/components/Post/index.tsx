@@ -23,7 +23,7 @@ export function Post() {
   }
 
   if (!user) {
-    return <span>UserId is not set...</span>;
+    return <span></span>;
   }
 
   if (loading) <span>Adding Messages...</span>;
